@@ -25,6 +25,8 @@ def seed_servers():
         Server(
             name='Lofi Beats', owner_id=7, server_img="https://i1.sndcdn.com/avatars-IWAQUb2WuP9Z5hAv-03A2tA-t500x500.jpg"
             ),
+        Server(
+            name='Valorant', owner_id=8, server_img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoYNRUt4AApmSYdfcXAxr_-OKztgHFGZ7bzA&usqp=CAU"),
     ]
 
     for server in demo_servers:

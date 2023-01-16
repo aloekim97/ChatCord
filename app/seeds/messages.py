@@ -5,43 +5,43 @@ from datetime import datetime
 def seed_messages():
     demo_messages = [
         Message(
-            user_id='Coding-Debug',
+            user_id=1,
             channel_id=1,
             message="hey is anyone able to look at my code? I just can't get it to run",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='Gamer-Lounge',
+            user_id=2,
             channel_id=2,
             message="yoo who wants to rank flex right now?",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='Must-Watch',
+            user_id=3,
             channel_id=3,
             message="hey did anyone watch the new Avatar movie? Is it worth watching?",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='Best-Hike-Trails',
+            user_id=4,
             channel_id=4,
             message="Anyone free this weekend to hike around Crystal Springs?",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='Discussion',
+            user_id=5,
             channel_id=5,
             message="omg supes are crazy! I can't wait for the next season.",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='build-support',
+            user_id=6,
             channel_id=6,
             message="What's the best switches for a deeper low pitched sound signature?",
             created_at=datetime.now(),
             ),
         Message(
-            user_id='Chill-Zone',
+            user_id=7,
             channel_id=7,
             message="I have a test tmr at 8 AM wish me luck.",
             created_at=datetime.now(),

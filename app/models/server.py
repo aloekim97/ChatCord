@@ -1,6 +1,12 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
+member_list = db.Table(
+    "members_list",
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
+    db.Column("server_id", db.Integer, db.ForeignKey("servers.id"), primary_key=True),
+)
+
 class Server(db.Model):
     __tablename__ = 'servers'
 
@@ -14,6 +20,7 @@ class Server(db.Model):
 
     owner = db.relationship("User", back_populates="server")
     channel = db.relationship("Channel", back_populates="server")
+    members = db.relationship("User", secondary=member_list, back_populates="servers")
 
     def to_dict(self):
         return {
