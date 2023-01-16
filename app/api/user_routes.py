@@ -23,3 +23,13 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:userId>/servers')
+# @login_required
+def get_user_channels(userId):
+    user = User.query.get(userId)
+    print('this is the user', user.servers)
+    servers = user.servers
+    res = [server.to_dict() for server in servers]
+    print(res)
+    return jsonify(res)
