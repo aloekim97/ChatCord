@@ -18,6 +18,6 @@ class Channel(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'server': self.server,
-            'message': [msg.to_dict() for msg in self.message]
+            'server': self.server_id,
+            # 'message': [msg.to_dict() for msg in self.message]
         }
