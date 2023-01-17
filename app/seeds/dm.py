@@ -1,37 +1,37 @@
-from app.models import db, DirectMessage, environment, SCHEMA, add_prefix_for_prod
+from app.models import db, DirectMessage, environment, SCHEMA
 
 def seed_dms():
     demo_chat=[
         DirectMessage(
-            sender_Id=1,
-            reciever_Id=2
+            sender_id=1,
+            reciever_id=2
         ),
         DirectMessage(
-            sender_Id=2,
-            reciever_Id=3
+            sender_id=2,
+            reciever_id=3
         ),
         DirectMessage(
-            sender_Id=4,
-            reciever_Id=5
+            sender_id=4,
+            reciever_id=5
         ),
         DirectMessage(
-            sender_Id=5,
-            reciever_Id=6
+            sender_id=5,
+            reciever_id=6
         ),
         DirectMessage(
-            sender_Id=7,
-            reciever_Id=8
+            sender_id=7,
+            reciever_id=8
         )
     ]
     for chat in demo_chat:
         db.session.add(chat)
     db.session.commit()
 
-def undo_messages():
+def undo_dms():
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.dm RESTART IDENTITY CASCADE;")
+            f"TRUNCATE table {SCHEMA}.direct_message RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM dm")
+        db.session.execute("DELETE FROM direct_message")
 
     db.session.commit()

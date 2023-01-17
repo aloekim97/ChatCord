@@ -11,6 +11,7 @@ from .api.server_routes import server_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.channels_routes import channel_routes
+from .api.directMsg_routes import dm_routes
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -32,6 +33,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
+app.register_blueprint(dm_routes, url_prefix='/api/dm')
+
 db.init_app(app)
 Migrate(app, db)
 
