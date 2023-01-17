@@ -34,6 +34,7 @@
     border: 1px solid orange;
     display: flex;
     height: 34px;
+    justify-content: space-between;
 }
 
 .channel-img{
@@ -44,4 +45,24 @@
 .channel-label{
     display: flex;
     align-items: center;
+    width: auto;
+}
+
+.channel-icon-border{
+    display: flex;
+    align-items: center;
+}
+
+
+.channel-edit-button{
+    border: 1px none black;
+    cursor:pointer;
+}
+
+.channel-droplist{
+    display: block;
+}
+
+.channel-droplist2{
+    display: none;
 }
