@@ -11,6 +11,7 @@ class DirectMessage(db.Model):
 
     sendUser = db.relationship("User", back_populates='dmSender', foreign_keys=[sender_id])
     receiveUser = db.relationship("User", back_populates='dmReceiver', foreign_keys=[receiver_id])
+    message = db.relationship('DmContent', cascade='all, delete')
 
     def to_dict(self):
         return {
