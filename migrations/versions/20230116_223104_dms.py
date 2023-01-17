@@ -21,11 +21,11 @@ def upgrade():
     op.create_table('direct_message',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
-    sa.Column('reciever_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['reciever_id'], ['users.id'], ),
+    sa.Column('receiver_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('sender_id', 'reciever_id')
+    sa.UniqueConstraint('sender_id', 'receiver_id')
     )
     # ### end Alembic commands ###
 

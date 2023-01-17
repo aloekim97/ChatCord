@@ -4,23 +4,23 @@ def seed_dms():
     demo_chat=[
         DirectMessage(
             sender_id=1,
-            reciever_id=2
+            receiver_id=2
         ),
         DirectMessage(
             sender_id=2,
-            reciever_id=3
+            receiver_id=3
         ),
         DirectMessage(
             sender_id=4,
-            reciever_id=5
+            receiver_id=5
         ),
         DirectMessage(
             sender_id=5,
-            reciever_id=6
+            receiver_id=6
         ),
         DirectMessage(
             sender_id=7,
-            reciever_id=8
+            receiver_id=8
         )
     ]
     for chat in demo_chat:
