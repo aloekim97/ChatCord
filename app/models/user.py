@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     server = db.relationship("Server", uselist=False, back_populates="owner")
     message = db.relationship("Message", back_populates="user")
     servers = db.relationship("Server", secondary=member_list, back_populates="members")
+    dmSender = db.relationship("DirectMessage", back_populates="sendUser")
+    dmReciever = db.relationship("DirectMessage", back_populates="RecieveUser")
 
     @property
     def password(self):
