@@ -8,6 +8,7 @@ import ServerPage from "./components/ServerIndexItem";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import SplashPage from "./components/SplashPage";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 
@@ -29,7 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <ServerPage loaded={loaded} />
+      {/* <ServerPage loaded={loaded} /> */}
       {loaded && (
         <Switch>
           <Route path="/login" exact={true}>
@@ -45,7 +46,7 @@ function App() {
             <User />
           </ProtectedRoute>
           <Route path="/" exact={true}>
-            <h1>My Home Page</h1>
+            <SplashPage />
           </Route>
           <Route path="/servers/:serverId/test" exact={true}>
             <ChannelIndex />
