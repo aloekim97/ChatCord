@@ -2,14 +2,14 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from ..models import db, Server
 from ..forms import ServerForm
-from auth_routes import validation_errors_to_error_messages
+from .auth_routes import validation_errors_to_error_messages
 
 
-servers = Blueprint("servers", __name__, "/servers")
+server_routes = Blueprint("servers", __name__)
 
 
 # get all servers
-@servers.route("")
+@server_routes.route("")
 @login_required
 def all_servers():
     servers = Server.query.all()
@@ -17,7 +17,7 @@ def all_servers():
 
 
 # add new server
-@servers.route('/new', methods=["POST"])
+@server_routes.route('/new', methods=["POST"])
 @login_required
 def new_server():
     form = ServerForm()
@@ -40,7 +40,7 @@ def new_server():
 
 
 # Get / Edit / Delete server
-@servers.route("/<int:id>", methods=["GET", "PUT", "DELETE"])
+@server_routes.route("/<int:id>", methods=["GET", "PUT", "DELETE"])
 @login_required
 def server_action(id):
     server = Server.query.get(id)
