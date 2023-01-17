@@ -19,28 +19,7 @@ def get_single_channel(id):
     channel = Channel.query.get(id)
     return channel.to_dict()
 
-
-@channel_routes.route('/<int:id>/help', methods=["GET","POST"])
-def create_channel(id):
-    form = ChannelForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    if form.validate_on_submit():
-        serv = Server().query.get(id)
-        channel = Channel(
-            name=form.data['name'],
-            server=serv
-        )
-        print('this is channel',channel.server)
-        # print('this is server', serv)
-        db.session.add(channel)
-        db.session.commit()
-        return channel.to_dict()
-    print('not in if')
-    return 'hi2'
-
-
-@channel_routes.route('/help/<int:channelId>', methods=["PUT"])
+@channel_routes.route('/<int:channelId>', methods=["PUT"])
 def edit_channel(channelId):
     channel = Channel.query.get(channelId)
     print('this is the chan', channel)
@@ -55,7 +34,7 @@ def edit_channel(channelId):
     return 'bad data'
 
 
-@channel_routes.route('/help/<int:id>', methods=["DELETE"])
+@channel_routes.route('/<int:id>', methods=["DELETE"])
 def delete_channel(id):
     channel = Channel.query.get(id)
     if channel:

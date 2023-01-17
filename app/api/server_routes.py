@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from ..models import db, Server
-from ..forms import ServerForm
+from ..models import db, Server, Channel
+from ..forms import ServerForm, ChannelForm
 from .auth_routes import validation_errors_to_error_messages
 
 
@@ -78,3 +78,22 @@ def server_action(id):
 
     else:
         return {"errors": "Server not found"}, 404
+
+
+@server_routes.route('/<int:id>', methods=["GET","POST"])
+def create_channel(id):
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        serv = Server().query.get(id)
+        channel = Channel(
+            name=form.data['name'],
+            server=serv
+        )
+        print('this is channel',channel.server)
+        # print('this is server', serv)
+        db.session.add(channel)
+        db.session.commit()
+        return channel.to_dict()
+    return 'hi2'
