@@ -1,0 +1,58 @@
+.server-page-container {
+    height: 100vh;
+    display: flex;
+    background-color: #2f3135;
+}
+
+
+.left-side-servers {
+    width: 70px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #212122
+}
+
+.server-title {
+    width: 60px;
+    color: white;
+}
+
+.dm-prof-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.border-container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.border-break {
+    width: 37px;
+    border: 1px solid rgb(73, 73, 73);
+}
+
+.serverList {
+    padding-top: 10px;
+}
+
+.server-img-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.server-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.server-img:hover{
+    cursor: pointer;
+}

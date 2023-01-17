@@ -16,10 +16,19 @@ function ServerPage() {
   return (
     <div className="server-page-container">
       <div className="left-side-servers">
-        <div className="server-title">ChatCord</div>
+        <div className="dm-prof-link">
+          <img
+            className="server-img"
+            src="https://i.pinimg.com/236x/d8/00/7e/d8007e6361ddd2eea97eb17e72335570.jpg"
+            alt="dm profile img"
+          ></img>
+        </div>
+        <div className="border-container">
+          <div className="border-break"></div>
+        </div>
         <div className="serverList">
           {serversArr.map((server) => (
-            <div key={server.id}>
+            <div className="server-img-container" key={server.id}>
               <img
                 className="server-img"
                 src={server.serverImg}
