@@ -80,7 +80,7 @@ def server_action(id):
         return {"errors": "Server not found"}, 404
 
 
-@server_routes.route('/<int:id>', methods=["GET","POST"])
+@server_routes.route('/<int:id>', methods=["POST"])
 def create_channel(id):
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -95,5 +95,6 @@ def create_channel(id):
         # print('this is server', serv)
         db.session.add(channel)
         db.session.commit()
-        return channel.to_dict()
-    return 'hi2'
+        return channel.to_dict() , 201
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
