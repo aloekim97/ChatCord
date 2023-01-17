@@ -1,0 +1,20 @@
+.nav-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+}
+
+.nav-bar-items {
+    list-style: none;
+}
+
+.nav-logo {
+    height: 50px;
+    width: 200px;
+}
