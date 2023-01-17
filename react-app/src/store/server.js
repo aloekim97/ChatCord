@@ -46,12 +46,11 @@ const deleteServer = (serverId) => {
 
 // Action Thunks
 export const getAllServersThunk = () => async (dispatch) => {
-    const response = await fetch("/api/servers");
+    const response = await fetch(`/api/servers`);
 
     if (response.ok) {
         const servers = await response.json();
         dispatch(getAllServers(servers));
-        return servers;
     }
 }
 
@@ -114,7 +113,11 @@ export const deleteServerThunk = (serverId) => async (dispatch) => {
     }
 }
 
-const initialState = { allServers: {}, singleServer: {} };
+const initialState = {
+    allServers: {},
+    singleServer: {},
+};
+
 const serverReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
@@ -123,14 +126,14 @@ const serverReducer = (state = initialState, action) => {
                 allServers: {},
                 singleServer: {},
             };
-            action.servers.forEach(server => {
-                newState.allServers[server.id] = server
+            action.servers.servers.forEach((server) => {
+                newState.allServers[server.id] = server;
             });
             return newState;
         }
         case GET_ONE_SERVER: {
-            newState = { allServers: { allServers: { ...state.allServers }, singleServer: { ...state.singleServer } } }
-            newState.singleServer = { ...action.server };
+            newState = { ...state, singleServer: {} };
+            newState.singleServer = action.server;
             return newState;
         }
         case CREATE_SERVER: {
