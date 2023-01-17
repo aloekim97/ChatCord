@@ -38,7 +38,7 @@ function ServerPage() {
           ))}
         </div>
       </div>
-      <div className="left-side-channels"> channels info </div>
+      {/* <div className="left-side-channels"> channels info </div> */}
     </div>
   );
 }
