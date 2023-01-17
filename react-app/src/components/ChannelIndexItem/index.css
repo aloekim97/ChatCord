@@ -60,9 +60,31 @@
 }
 
 .channel-droplist{
-    display: block;
+    list-style: none;
+    padding: 0;
 }
 
 .channel-droplist2{
     display: none;
+}
+
+.channel-button-container{
+    border: 1px none black;
+    cursor:pointer;
+    display: flex;
+    gap: 5px;
+}
+
+.channel-button-container:hover{
+    font-weight: bold;
+}
+
+.channel-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-channel-button{
+    cursor:pointer;
+    border: 1px none black;
 }

@@ -59,9 +59,15 @@ function ChannelIndex(){
                     Server Name
                 </div>
                 <>
-                    <button className="channel-button-container" onClick={openMenu}>
-                        TEXT CHANNELS
-                    </button>
+                    <div className="channel-buttons">
+                        <button className="channel-button-container" onClick={openMenu}>
+                            {showMenu ? <i class="fa-solid fa-sort-down"></i> : <i class="fa-solid fa-caret-right"></i> }
+                            TEXT CHANNELS
+                        </button>
+                        <button className="create-channel-button">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
                     <ul className={ulClassName} ref={ulRef}>
                         <>
                             {

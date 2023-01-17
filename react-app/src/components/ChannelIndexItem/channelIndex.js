@@ -3,7 +3,7 @@ import './index.css';
 function ChannelDisplay({channel}){
     console.log('we got to the display component')
     return(
-        <li>
+        <li className=''>
             <div className="channel-border">
                 <div className='channel-icon-border'>
                     <i class="fa-solid fa-hashtag"></i>
