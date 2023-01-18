@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
-import { fetchChannels } from "../../store/channel";
+import { fetchChannels, fetchOneChannel, offLoadChannels } from "../../store/channel";
 import { getOneServerThunk } from "../../store/server";
 import './index.css';
 import ChannelDisplay from "./channelIndex";
@@ -10,6 +10,7 @@ import OpenModalMenuItem from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelsForm";
 import { getAllServersThunk } from "../../store/server";
 import EditServerModal from "../EditServerModal";
+import MessageIndex from "../ChannelMessageIndexItem";
 
 function ChannelIndex(){
 
@@ -17,7 +18,7 @@ function ChannelIndex(){
     const channelsObj = useSelector(state => state.channel)
     const serverObj = useSelector(state => state.server.singleServer)
     const userObj = useSelector(state => state.session.user)
-    const {serverId} = useParams()
+    const {serverId, channelId} = useParams()
     const [showMenu, setShowMenu] = useState(false);
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
@@ -27,30 +28,36 @@ function ChannelIndex(){
         setShowMenu(!showMenu);
     };
 
-    console.log('we are in thesesese components')
 
     useEffect(() => {
+        dispatch(offLoadChannels())
         dispatch(fetchChannels(serverId));
+        dispatch(fetchOneChannel(channelId))
         // dispatch(getAllServersThunk())
         dispatch(getOneServerThunk(serverId))
         // setMembers(serverObj.members)
-    }, [dispatch, serverId]);
+
+    }, [dispatch, serverId, channelId]);
 
     const closeMenu = () => setShowMenu(false);
 
 
-    if (Object.keys(channelsObj).length < 1 ){
+    if (Object.keys(serverObj).length < 1 ){
         return null
     }
 
-    console.log('this is state', showMenu)
-    console.log('this is the server', serverObj)
-
+    // console.log('this is state', showMenu)
+    // console.log('this is the server', serverObj)
+    // console.log('hi, just checking on the channels obj', channelsObj)
+    // const channels = Object.values(serverObj.channel)
     const channels = Object.values(channelsObj.server)
+    const currChannel = channelsObj.singleChannel
+    const messages = currChannel.message
+    console.log('this is the currChannel', channels)
     const members = serverObj.members
     // if (serverObj && serverObj.members.length > 0)
-    console.log('the channels in the component',channels)
-    console.log('the members',members)
+    // console.log('the channels in the component',channels)
+    // console.log('the members',members)
     const ulClassName = (showMenu ? 'channel-droplist' : 'channel-droplist2');
 
     const handleSubmit = async (e) => {
@@ -73,7 +80,7 @@ function ChannelIndex(){
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
                         <i class="fa-solid fa-hashtag"></i>
-                        Channel Name
+                        {currChannel.name}
                     </div>
                     <div>
                         Search Placeholder
@@ -100,7 +107,7 @@ function ChannelIndex(){
                             <>
                                 {
                                     channels.map(channel => (
-                                        <ChannelDisplay channel={channel} isEdit={isEdit}/>
+                                        <ChannelDisplay channelId={channelId} serverId={serverId} channel={channel} isEdit={isEdit}/>
                                     ))
                                 }
                             </>
@@ -129,9 +136,9 @@ function ChannelIndex(){
                 </div>
             </div>
             <div className="messages-container">
-                <div className="message-content">
-
-                </div>
+                {messages.length > 0? messages.map(message => (
+                    <MessageIndex message={message} />
+                )) : <div>Hello</div>}
                 <form className="create-messages-form" onSubmit={handleSubmit}>
                     <label>
                         <input
@@ -144,7 +151,7 @@ function ChannelIndex(){
                 </form>
             </div>
             <div className="members-container">
-                <div className="members-online-status">Online - 1</div>
+                <div className="members-online-status">Members - {members.length}</div>
                 {
                     members && members.map(member => (
                         <MembersDisplay member={member} />

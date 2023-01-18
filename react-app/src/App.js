@@ -60,7 +60,7 @@ function App() {
           <Route path="/@me" exact={true}>
             <DmBar />
           </Route>
-          <Route path="/servers/:serverId/test" exact={true}>
+          <Route path="/servers/:serverId/:channelId" exact={true}>
             <ChannelIndex />
           </Route>
         </Switch>

@@ -1,0 +1,12 @@
+.message-content{
+    display: flex;
+    gap: 20px;
+    padding: 10px 10px;
+    margin: 17px 0px 0px;
+}
+
+
+.message-profile-name{
+    display: flex;
+    gap: 10px;
+}
