@@ -25,6 +25,37 @@
     list-style: none;
 }
 
+.nav-bar-btn {
+    list-style: none;
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 2rem;
+    width: 54px;
+    height: 24px;
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-bar-btn a {
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.nav-bar-btn a:hover {
+    color: rgb(64,78,237);
+}
+
+.login-signup-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 140px;
+}
+
 .nav-logo {
     height: 40px;
     width: 150px;

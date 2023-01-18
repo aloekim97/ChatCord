@@ -48,6 +48,10 @@
     color: rgb(64,78,237);
 }
 
+.splash-btn:hover {
+    box-shadow: 1px 7px 7px rgba(20, 20, 20, 0.233);
+}
+
 
 .splash-page-middle {
     display: flex;
