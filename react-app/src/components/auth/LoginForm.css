@@ -1,0 +1,111 @@
+.login-signup-form-page {
+   width: 100vw;
+   height: 100vh;
+   background-image: url("https://images.alphacoders.com/129/1291249.png");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   position: absolute;
+   background-color: rgb(97,112,252);
+}
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 550px;
+    margin-top: 300px;
+    border: 1px solid black;
+    border-radius: 3%;
+    border-color: rgb(97,112,252);
+    background-color:rgb(54,57,63);
+}
+
+.login-form-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form-title {
+    padding-top: 20px;
+    color: white;
+}
+
+.login-form-text {
+    color: rgb(184, 184, 184);
+}
+
+.login-errors {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.login-form-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+}
+
+.login-input {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.login-form-sub-btn {
+    margin-top: 20px;
+    width: 100%;
+    height: 42px;
+    background-color: rgb(88,101,242);
+    border-width: 0;
+    color: white;
+    font-size: 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.login-form-sub-btn:hover {
+    cursor: pointer;
+    background-color: rgb(71, 82, 207);
+}
+
+.login-label {
+    color: rgb(185,187,190);
+    padding: 0;
+    margin-top: 10px;
+}
+
+.login-text-box {
+    background-color: black;
+    color: white;
+    width: 400px;
+    height: 42px;
+    font-size: 20px;
+    border-width: 0;
+    border-color: black;
+}
+
+.login-form-register {
+    display: flex;
+    margin-top: 20px;
+}
+
+.register {
+    padding-left: 10px;
+    color: rgb(5,164,228);
+    text-decoration: none;
+}
+
+input:focus {
+	outline: none;
+}
