@@ -1,0 +1,17 @@
+.edit-container{
+    width: 100vw;
+    /* height: 40vw; */
+}
+
+/* #modal-content{
+    display: none;
+} */
+
+
+.deleteButton{
+    border-color: red;
+    background-color: red;
+    border-radius: 5px;
+    padding: 2px 16px;
+    cursor:pointer;
+}

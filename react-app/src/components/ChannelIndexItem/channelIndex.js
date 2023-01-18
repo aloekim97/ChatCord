@@ -1,6 +1,9 @@
 import './index.css';
+import OpenModalMenuItem from "../OpenModalButton";
+import EditModal from '../EditModal';
 
-function ChannelDisplay({channel}){
+
+function ChannelDisplay({channel, isEdit}){
     console.log('we got to the display component')
     return(
         <li className=''>
@@ -12,7 +15,10 @@ function ChannelDisplay({channel}){
                     {channel.name}
                 </div>
                 <button className='channel-edit-button'>
-                    <i class="fa-solid fa-gear"></i>
+                    <OpenModalMenuItem
+                                itemText={<i class="fa-solid fa-gear"></i>}
+                                modalComponent={<EditModal isEdit={isEdit} channel={channel} channelId={channel.id} />}
+                    />
                 </button>
             </div>
         </li>

@@ -1,0 +1,45 @@
+.form-footer{
+    display: flex;
+    /* width: 95%; */
+    justify-content: flex-end;
+    gap: 15px;
+    height: 38px;
+    padding: 16px;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+label input{
+    padding: 10px 10px 10px 28px;
+    border-radius: 5px;
+    border-style: none;
+    background-color: #101213;
+}
+
+.cancelButton{
+    border: 1px none black;
+    border-width: 20%;
+    cursor:pointer;
+}
+
+.submitButton{
+    border-color: blue;
+    background-color: blue;
+    border-radius: 5px;
+    padding: 2px 16px;
+    cursor:pointer;
+}
+
+.create-form-header{
+    display: flex;
+    height: 48px;
+    padding: 16px;
+    /* width: 23%; */
+}
+
+#create-channel-h1{
+    margin: 0;
+}
