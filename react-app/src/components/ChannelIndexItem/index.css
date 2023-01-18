@@ -2,7 +2,7 @@
     border: 1px solid red;
     display: flex;
     width: 95vw;
-    height: auto;
+    height: 99vh;
     padding-left: 4%;
 }
 
@@ -13,6 +13,7 @@
 .channels-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border: 1px solid green;
     padding-top: 48px;
     width: 13%;
@@ -26,6 +27,7 @@
     width: 73%;
     height: auto;
     padding-top: 48px;
+    justify-content: space-between;
 }
 
 .members-container{
@@ -73,9 +75,17 @@
 .server-name-section{
     display: flex;
     width: 12%;
+    height: 100%;
     justify-content: space-between;
+    align-items: center;
     cursor:pointer;
-    margin: 0px 10px;
+    /* margin: 0px 10px; */
+    padding: 0px 10px;
+    /* border-radius: 5px; */
+}
+
+.server-name-section:hover{
+    background-color: gray;
 }
 
 .member-index-container{
@@ -105,8 +115,8 @@
 }
 
 .profile-pic{
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     object-fit: cover;
     border-radius: 100px;
 }
@@ -155,11 +165,47 @@
 
 .channel-buttons{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    /* justify-content: space-between; */
     padding: 24px 0px 0px 0px;
+}
+
+.channel-buttons2{
+    display: flex;
+    justify-content: space-between;
+    /* padding: 24px 0px 0px 0px; */
 }
 
 .create-channel-button{
     cursor:pointer;
     border: 1px none black;
+}
+
+
+.channels-profile-container{
+    display: flex;
+    /* position: absolute; */
+    /* position: fixed; */
+    width: 95%;
+    /* gap: 10px; */
+    padding: 0px 0px 0px 5px;
+    height: 52px;
+}
+
+.profile-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    cursor:pointer;
+    border-radius: 5px;
+}
+
+.profile-container:hover{
+    background-color: gray;
+}
+
+.profile-data-container{
+    display: flex;
+    flex-direction: column;
 }
