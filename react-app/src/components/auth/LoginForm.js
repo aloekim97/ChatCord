@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   return (
     <div className="login-signup-form-page">
-      <div className="login-form-container">
+      <div className="login-signup-form-container">
         <form className="login-form" onSubmit={onLogin}>
           <div className="login-form-top">
             <h2 className="login-form-title">Welcome back!</h2>
@@ -41,40 +41,40 @@ const LoginForm = () => {
               We're so excited to see you again!
             </p>
           </div>
-          <div className="login-errors">
+          <div className="login-signup-errors">
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div className="login-form-bottom">
-            <div className="login-input">
-              <label className="login-label" htmlFor="email">
+          <div className="login-signup-form-bottom">
+            <div className="login-signup-input">
+              <label className="login-signup-label" htmlFor="email">
                 EMAIL
               </label>
               <input
                 name="email"
                 type="text"
-                className="login-text-box"
+                className="login-signup-text-box"
                 value={email}
                 onChange={updateEmail}
               />
             </div>
-            <div className="login-input">
-              <label className="login-label" htmlFor="password">
+            <div className="login-signup-input">
+              <label className="login-signup-label" htmlFor="password">
                 PASSWORD
               </label>
               <input
                 name="password"
                 type="password"
-                className="login-text-box"
+                className="login-signup-text-box"
                 value={password}
                 onChange={updatePassword}
               />
-              <button className="login-form-sub-btn" type="submit">
+              <button className="login-signup-form-sub-btn" type="submit">
                 Log In
               </button>
               <button
-                className="login-form-sub-btn"
+                className="login-signup-form-sub-btn"
                 type="submit"
                 onClick={() => {
                   setEmail("demo@aa.io");

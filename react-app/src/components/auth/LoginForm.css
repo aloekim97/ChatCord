@@ -9,7 +9,7 @@
    background-color: rgb(97,112,252);
 }
 
-.login-form-container {
+.login-signup-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,25 +43,25 @@
     color: rgb(184, 184, 184);
 }
 
-.login-errors {
+.login-signup-errors {
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.login-form-bottom {
+.login-signup-form-bottom {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 400px;
 }
 
-.login-input {
+.login-signup-input {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
 }
 
-.login-form-sub-btn {
+.login-signup-form-sub-btn {
     margin-top: 20px;
     width: 100%;
     height: 42px;
@@ -74,18 +74,18 @@
     font-weight: 500;
 }
 
-.login-form-sub-btn:hover {
+.login-signup-form-sub-btn:hover {
     cursor: pointer;
     background-color: rgb(71, 82, 207);
 }
 
-.login-label {
+.login-signup-label {
     color: rgb(185,187,190);
     padding: 0;
     margin-top: 10px;
 }
 
-.login-text-box {
+.login-signup-text-box {
     background-color: black;
     color: white;
     width: 400px;
