@@ -1,0 +1,9 @@
+.bar-next-to-servers{
+    display: flex;
+    flex-direction: column;
+    padding-left: 70px;
+}
+
+.dm{
+    padding-top: 15px;
+}

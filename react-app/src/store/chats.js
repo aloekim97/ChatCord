@@ -25,9 +25,8 @@ export const getChats = () => async (dispatch) => {
     const res = await fetch('/api/dm')
 
     if (res.ok) {
-        const chatList = await res.json()
-        dispatch(LOAD_CHATS(chatList))
-        return chatList
+        const chats = await res.json()
+        dispatch(loadChats(chats))
     }
 }
 
@@ -59,12 +58,13 @@ export const deleteChatThunk = (chatId) => async (dispatch) => {
     }
 }
 
+
 //REDUCER
 const chatReducer = (state = {}, action) => {
     let newState = {};
     switch(action.type) {
         case LOAD_CHATS: {
-            action.chats.forEach(chat => {
+            action.chats.chats.forEach((chat)=> {
                 newState[chat.id] = chat
             })
             return newState

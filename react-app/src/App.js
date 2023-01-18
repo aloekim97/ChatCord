@@ -11,7 +11,7 @@ import User from "./components/User";
 import SplashPage from "./components/SplashPage";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
-import DmBar from './components/Message/allDms'
+import DmBar from "./components/Message/allDms";
 
 function App() {
   const [loaded, setLoaded] = useState(false);

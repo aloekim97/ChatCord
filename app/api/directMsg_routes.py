@@ -4,6 +4,7 @@ from ..models import db, DirectMessage, User, DmContent
 from ..forms import MessageForm
 from datetime import datetime
 from .auth_routes import validation_errors_to_error_messages
+from sqlalchemy import or_
 
 
 
@@ -12,16 +13,16 @@ dm_routes = Blueprint("dm", __name__)
 
 # all messages
 @dm_routes.route("")
-# @login_required
+@login_required
 def index():
-    user = User.query.get(1)
-    chats = [chat.to_dict() for chat in DirectMessage.query.filter(user.id == 1)]
+    chats = [chat.to_dict() for chat in DirectMessage.query.filter(or_(current_user.id == DirectMessage.receiver_id, current_user.id == DirectMessage.sender_id)).all()]
+    # chats = DirectMessage.query.all()
 
     return {"chats": chats}
 
 # specific dm
 @dm_routes.route('/<int:chat_id>')
-# @login_required
+@login_required
 def get_one_chat(chat_id):
     chat = DirectMessage.query.get(chat_id)
     return {"chat_id": chat.to_dict()}
