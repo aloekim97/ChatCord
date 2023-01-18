@@ -16,21 +16,32 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li className="nav-bar-items">
-          <NavLink className="about-us" to="/about" exact={true} activeClassName="active">
+          <NavLink
+            className="about-us"
+            to="/about"
+            exact={true}
+            activeClassName="active"
+          >
             About Us
           </NavLink>
         </li>
         <div className="login-signup-nav">
-          <li className="nav-bar-btn splash-btn">
-            <NavLink to="/login" exact={true} activeClassName="active">
-              Login
-            </NavLink>
-          </li>
-          <li className="nav-bar-btn splash-btn">
-            <NavLink to="/sign-up" exact={true} activeClassName="active">
-              Sign Up
-            </NavLink>
-          </li>
+          <NavLink
+            to="/login"
+            exact={true}
+            activeClassName="active"
+            className="nav-bar-btn splash-btn"
+          >
+            Log In
+          </NavLink>
+          <NavLink
+            to="/sign-up"
+            exact={true}
+            activeClassName="active"
+            className="nav-bar-btn splash-btn"
+          >
+            Sign Up
+          </NavLink>
         </div>
       </ul>
     </nav>

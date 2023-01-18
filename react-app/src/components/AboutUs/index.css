@@ -1,0 +1,79 @@
+.about-us-background {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://images.alphacoders.com/129/1291249.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-color: rgb(97,112,252);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-us-container {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    height: 600px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.about-card-container {
+    width: 260px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgb(54,57,63);
+    border-radius: 1rem;
+}
+
+.about-us-title {
+    color: white;
+    margin-top: 175px;
+    font-size: 40px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-img {
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    margin-top: 20px;
+}
+
+.about-card-text {
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+.about-card-links {
+    margin-top: 20px;
+    height: 40px;
+}
+
+.about-card-links:hover {
+    cursor: pointer;
+}
+
+.about-links-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+}
+
+.about-us-home {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+}
+
+.about-us-home:hover {
+    text-decoration: underline;
+}
