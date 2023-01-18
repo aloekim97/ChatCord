@@ -11,7 +11,7 @@ dm_routes = Blueprint("dm", __name__)
 
 
 # all messages
-@dm_routes.route("/")
+@dm_routes.route("")
 # @login_required
 def index():
     user = User.query.get(1)
