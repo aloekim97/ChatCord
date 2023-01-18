@@ -11,6 +11,8 @@ import CreateChannelModal from "../CreateChannelsForm";
 import { getAllServersThunk } from "../../store/server";
 import EditServerModal from "../EditServerModal";
 import MessageIndex from "../ChannelMessageIndexItem";
+import ProfileCard from "../ProfileIndexItem/indexj";
+import ServerDropdown from "../ServerIndexItem/serverDropdown";
 
 function ChannelIndex(){
 
@@ -20,6 +22,8 @@ function ChannelIndex(){
     const userObj = useSelector(state => state.session.user)
     const {serverId, channelId} = useParams()
     const [showMenu, setShowMenu] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
     const ulRef = useRef();
@@ -30,7 +34,6 @@ function ChannelIndex(){
 
 
     useEffect(() => {
-        dispatch(offLoadChannels())
         dispatch(fetchChannels(serverId));
         dispatch(fetchOneChannel(channelId))
         // dispatch(getAllServersThunk())
@@ -44,6 +47,14 @@ function ChannelIndex(){
 
     if (Object.keys(serverObj).length < 1 ){
         return null
+    }
+
+    const toggleProfileOpen = () => {
+        setIsOpen(!isOpen)
+    }
+
+    const toggleServerDropdown = () => {
+        setDropdownOpen(!dropdownOpen)
     }
 
     // console.log('this is state', showMenu)
@@ -73,9 +84,13 @@ function ChannelIndex(){
     return(
         <div className="page-container">
             <div className="server-name-container">
-                <div className="server-name-section">
+                <div className="server-name-section" onClick={toggleServerDropdown}>
                     {serverObj.name}
-                    <i class="fa-solid fa-sort-down"></i>
+                    {dropdownOpen ? <i class="fa-solid fa-x"></i>: <i class="fa-solid fa-chevron-down"></i> }
+
+
+
+
                 </div>
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
@@ -88,6 +103,8 @@ function ChannelIndex(){
                 </div>
             </div>
             <div className="channels-container">
+                {dropdownOpen ? <ServerDropdown server={serverObj} channelId={channelId} channel={currChannel}  /> : <></> }
+
                 <div>
                     <div className="channel-buttons">
                         <div className="channel-buttons2">
@@ -107,7 +124,7 @@ function ChannelIndex(){
                             <>
                                 {
                                     channels.map(channel => (
-                                        <ChannelDisplay channelId={channelId} serverId={serverId} channel={channel} isEdit={isEdit}/>
+                                        <ChannelDisplay serverObj={serverObj} channelId={channelId} serverId={serverId} channel={channel} isEdit={isEdit}/>
                                     ))
                                 }
                             </>
@@ -116,7 +133,7 @@ function ChannelIndex(){
 
                 </div>
                 <div className="channels-profile-container">
-                    <div className='profile-container'>
+                    <div className='profile-container' onClick={toggleProfileOpen}>
                         <img className="profile-pic" src={userObj.profileImg}></img>
                         <div className="profile-data-container">
                             <div>
@@ -133,12 +150,13 @@ function ChannelIndex(){
                                 modalComponent={<EditServerModal />}
                     />
                 </button>
+                {isOpen ? <ProfileCard /> : <></> }
                 </div>
             </div>
             <div className="messages-container">
                 {messages.length > 0? messages.map(message => (
                     <MessageIndex message={message} />
-                )) : <div>Hello</div>}
+                )) : <div>Hello {currChannel? currChannel.id : ''}</div>}
                 <form className="create-messages-form" onSubmit={handleSubmit}>
                     <label>
                         <input

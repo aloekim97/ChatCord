@@ -4,12 +4,15 @@ import { useModal } from "../../context/Modal";
 import './index.css';
 import { createChannel } from "../../store/channel";
 import { updateChannel, removeChannel } from "../../store/channel";
+import { Redirect, useHistory } from "react-router-dom";
+import { loadChannel } from "../../store/channel";
 
-function EditModal({channelId, channel}){
+function EditModal({channelId, channel, serverObj}){
     const dispatch = useDispatch();
     const [name, setName] = useState("")
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+    const history = useHistory();
     useEffect(() => {
         let newErrors = []
 
@@ -18,7 +21,8 @@ function EditModal({channelId, channel}){
 
         setErrors(newErrors)
     }, [name])
-
+    console.log('testing messages,', serverObj)
+    const id = serverObj.channel[0].id
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
@@ -29,8 +33,15 @@ function EditModal({channelId, channel}){
     }
 
     const handleDelete = async (e) => {
+        // e.preventDefault();
         await dispatch(removeChannel(channel))
         closeModal()
+        console.log('hitting this')
+        history.push('/')
+        console.log('plz jelp',serverObj.id, id )
+        // return <Redirect to={`/servers/${serverObj.id}/${id}`}/>
+        dispatch(loadChannel(serverObj.channel[0]))
+        history.push(`/servers/${serverObj.id}/${id}`)
     }
     return(
         <>
@@ -54,7 +65,7 @@ function EditModal({channelId, channel}){
                 </label>
                 <div className="form-footer">
                     <button className="submitButton" type="submit">Edit Channel</button>
-                    <button className="deleteButton" type="button" onClick={handleDelete}>Delete Channel</button>
+                    <button className="deleteButton" type="button" onClick={() => handleDelete()}>Delete Channel</button>
                 </div>
             </form>
         </>

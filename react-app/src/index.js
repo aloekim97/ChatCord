@@ -14,9 +14,10 @@ function Root() {
   return (
     <ModalProvider>
       <Provider store={store}>
+        <BrowserRouter>
           <App />
           <Modal />
-          <Modal2 />
+        </BrowserRouter>
       </Provider>
     </ModalProvider>
   );

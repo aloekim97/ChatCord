@@ -5,9 +5,9 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useRef, useState } from "react";
 
 
-function ChannelDisplay({channel, isEdit, serverId}){
-    
-    console.log('we got to the display component')
+function ChannelDisplay({channel, isEdit, serverId, serverObj}){
+
+    // console.log('we got to the display component')
     return(
         <NavLink key={channel.id} to={`/servers/${serverId}/${channel.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <li className=''>
@@ -21,7 +21,7 @@ function ChannelDisplay({channel, isEdit, serverId}){
                     <button className='channel-edit-button'>
                         <OpenModalMenuItem
                                     itemText={<i class="fa-solid fa-gear"></i>}
-                                    modalComponent={<EditModal isEdit={isEdit} channel={channel} channelId={channel.id} />}
+                                    modalComponent={<EditModal serverObj={serverObj} isEdit={isEdit} channel={channel} channelId={channel.id} />}
                         />
                     </button>
                 </div>
