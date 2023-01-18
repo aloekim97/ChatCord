@@ -30,7 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      {/* <ServerPage loaded={loaded} /> */}
+      <ServerPage loaded={loaded} />
       {loaded && (
         <Switch>
           <Route path="/login" exact={true}>

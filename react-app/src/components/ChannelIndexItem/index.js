@@ -6,6 +6,8 @@ import { getOneServerThunk } from "../../store/server";
 import './index.css';
 import ChannelDisplay from "./channelIndex";
 import MembersDisplay from "./MembersIndex";
+import OpenModalMenuItem from "../OpenModalButton";
+import CreateChannelModal from "../CreateChannelsForm";
 
 function ChannelIndex(){
 
@@ -14,18 +16,19 @@ function ChannelIndex(){
     const serverObj = useSelector(state => state.server.singleServer)
     const {serverId} = useParams()
     const [showMenu, setShowMenu] = useState(false);
+    const [isEdit, setIsEdit] = useState(false)
     const ulRef = useRef();
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
 
-
+    console.log('we are in thesesese components')
 
     useEffect(() => {
         dispatch(fetchChannels(serverId));
         dispatch(getOneServerThunk(serverId))
-    }, [dispatch]);
+    }, [dispatch, serverId]);
 
     const closeMenu = () => setShowMenu(false);
 
@@ -71,14 +74,18 @@ function ChannelIndex(){
                             TEXT CHANNELS
                         </button>
                         <button className="create-channel-button">
-                            <i class="fa-solid fa-plus"></i>
+
+                            <OpenModalMenuItem
+                                itemText={<i class="fa-solid fa-plus"></i>}
+                                modalComponent={<CreateChannelModal serverId={serverObj.id}/>}
+                                />
                         </button>
                     </div>
                     <ul className={ulClassName}>
                         <>
                             {
                                 channels.map(channel => (
-                                    <ChannelDisplay channel={channel}/>
+                                    <ChannelDisplay channel={channel} isEdit={isEdit}/>
                                 ))
                             }
                         </>

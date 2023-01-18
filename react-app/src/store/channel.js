@@ -52,8 +52,47 @@ export const fetchChannels = (serverId) => async dispatch => {
     const res = await fetch(`/api/servers/${serverId}`)
     if (res.ok){
         const body = await res.json();
-        // console.log(' this is the bodt ......', body.channel)
         await dispatch(loadChannels(body.channel))
+    }
+}
+
+export const createChannel = (name, serverId) => async dispatch => {
+    const res = await fetch(`/api/servers/${serverId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name
+        })
+    } )
+
+    if (res.ok){
+        const body = await res.json()
+        dispatch(addChannel(body))
+    }
+}
+
+export const updateChannel = (channelId, name) => async dispatch => {
+    const res = await fetch(`/api/channels/${channelId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name
+        })
+    })
+    if (res.ok){
+        const body = await res.json()
+        dispatch(editChannel(body))
+    }
+}
+
+export const removeChannel = (channel) => async dispatch => {
+    const res = await fetch(`/api/channels/${channel.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    })
+    if (res.ok){
+        const body = await res.json()
+        dispatch(deleteChanel(channel))
     }
 }
 
@@ -72,13 +111,29 @@ const channelReducer = (state = initialState, action) => {
             })
             return newState;
         case LOAD_CHANNEL:
-            return
+            newState = Object.assign({}, state);
+            newState.server = {...newState.server}
+            const channel = action.channel
+            newState.server[channel.id] = channel
+            return newState
         case ADD_CHANNEL:
-            return
+            newState = Object.assign({}, state);
+            newState.server = {...newState.server}
+            const channel2 = action.channel
+            newState.server[channel2.id] = channel2
+            return newState
         case EDIT_CHANNEL:
-            return
+            newState = Object.assign({}, state);
+            newState.server = {...newState.server}
+            const channel3 = action.channel
+            newState.server[channel3.id] = channel3
+            return newState
         case DELETE_CHANNEL:
-            return
+            newState = Object.assign({}, state);
+            newState.server = {...newState.server}
+            const oldChannel = action.channel
+            delete newState.server[oldChannel.id]
+            return newState
         default:
             return state;
     }
