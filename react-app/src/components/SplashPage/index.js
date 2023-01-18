@@ -19,7 +19,7 @@ function SplashPage() {
             to talk every day and hang out more often.
           </div>
           <NavLink to="/login">
-            <button className="get-started-btn">
+            <button className="get-started-btn splash-btn">
               Get Started With ChatCord!
             </button>
           </NavLink>
