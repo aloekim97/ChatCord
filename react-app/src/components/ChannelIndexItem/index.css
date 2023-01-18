@@ -1,0 +1,165 @@
+.page-container{
+    border: 1px solid red;
+    display: flex;
+    width: 95vw;
+    height: auto;
+    padding-left: 4%;
+}
+
+.nav-placeholder{
+    width: 3.6%;
+}
+
+.channels-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+    padding-top: 48px;
+    width: 13%;
+    height: auto;
+}
+
+.messages-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+    width: 73%;
+    height: auto;
+    padding-top: 48px;
+}
+
+.members-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid pink;
+    width: 14%;
+    height: auto;
+    padding-top: 48px;
+}
+
+.channel-border{
+    border: 1px solid orange;
+    display: flex;
+    height: 34px;
+    justify-content: space-between;
+    cursor:pointer;
+}
+
+.server-name-container{
+    border: 1px solid yellow;
+    display: flex;
+    position: absolute;
+    /* justify-content: space-between; */
+    /* padding: 0px 10px; */
+    align-items: center;
+
+    height: 48px;
+    width: 95vw;
+}
+
+.server-navbar{
+    display: flex;
+    width: 87%;
+    gap: 5px;
+    margin: 0px 15px;
+    justify-content: space-between;
+}
+
+.navbar-channel-name-icon{
+    display: flex;
+    gap: 5px;
+}
+
+.server-name-section{
+    display: flex;
+    width: 12%;
+    justify-content: space-between;
+    cursor:pointer;
+    margin: 0px 10px;
+}
+
+.member-index-container{
+    display: flex;
+    cursor:pointer;
+    gap: 7px;
+    padding: 0px 8px;
+}
+
+.member-index-container:hover{
+    background-color: gray;
+}
+
+.members-online-status{
+    padding: 24px 0px 0px 16px;
+}
+
+.member-username-container{
+    border: 1px none black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.member-status{
+    font-size: 12px;
+}
+
+.profile-pic{
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.channel-img{
+    height: 100%;
+    width: auto;
+}
+
+.channel-label{
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.channel-icon-border{
+    display: flex;
+    align-items: center;
+}
+
+
+.channel-edit-button{
+    border: 1px none black;
+    cursor:pointer;
+}
+
+.channel-droplist{
+    list-style: none;
+    padding: 0;
+}
+
+.channel-droplist2{
+    display: none;
+}
+
+.channel-button-container{
+    border: 1px none black;
+    cursor:pointer;
+    display: flex;
+    gap: 5px;
+}
+
+.channel-button-container:hover{
+    font-weight: bold;
+}
+
+.channel-buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0px 0px 0px;
+}
+
+.create-channel-button{
+    cursor:pointer;
+    border: 1px none black;
+}

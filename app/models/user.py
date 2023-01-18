@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from .server import member_list
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -13,6 +13,13 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_img = db.Column(db.String(2000))
+
+    server = db.relationship("Server", uselist=False, back_populates="owner")
+    message = db.relationship("Message", back_populates="user")
+    servers = db.relationship("Server", secondary=member_list, back_populates="members")
+    dmSender = db.relationship("DirectMessage", foreign_keys=('DirectMessage.sender_id'), back_populates="sendUser")
+    dmReceiver = db.relationship("DirectMessage", foreign_keys=('DirectMessage.receiver_id'), back_populates="receiveUser")
 
     @property
     def password(self):
@@ -29,5 +36,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'profileImg': self.profile_img,
+            'messages': [msg.id for msg in self.message],
+            'servers': [serv.id for serv in self.servers]
         }
