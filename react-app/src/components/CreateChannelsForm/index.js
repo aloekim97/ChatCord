@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './index.css';
 import { createChannel } from "../../store/channel";
+import { NavLink } from "react-router-dom";
 
 
 function CreateChannelModal({serverId}){

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllServersThunk } from "../../store/server";
 import "./index.css";
+import { NavLink } from "react-router-dom";
+import ServerIndex from "./serverindex";
 
 function ServerPage() {
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ function ServerPage() {
   }, [dispatch]);
 
   const serversArr = Object.values(serverObject);
+  console.log('checking fo channels', serversArr)
 
   return (
     <div className="server-page-container">
@@ -28,13 +31,7 @@ function ServerPage() {
         </div>
         <div className="serverList">
           {serversArr.map((server) => (
-            <div className="server-img-container" key={server.id}>
-              <img
-                className="server-img"
-                src={server.serverImg}
-                alt="server img"
-              ></img>
-            </div>
+            <ServerIndex server={server} />
           ))}
         </div>
       </div>

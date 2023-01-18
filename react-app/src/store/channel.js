@@ -10,6 +10,7 @@ const EDIT_CHANNEL = "channels/editChannel"
 
 const DELETE_CHANNEL = "channels/deleteSpot"
 
+const OFFLOAD_CHANNEL = "channels/offloadChannel"
 
 //Actions
 
@@ -41,6 +42,12 @@ export const editChannel = (channel) => {
     }
 }
 
+export const offLoadChannels = (channels) => {
+    return {
+        type: OFFLOAD_CHANNEL,
+    }
+}
+
 export const deleteChanel = (channel) => {
     return {
         type: DELETE_CHANNEL,
@@ -53,6 +60,15 @@ export const fetchChannels = (serverId) => async dispatch => {
     if (res.ok){
         const body = await res.json();
         await dispatch(loadChannels(body.channel))
+    }
+}
+
+export const fetchOneChannel = (channelId) => async dispatch => {
+    const res = await fetch(`/api/channels/${channelId}`)
+    if (res.ok){
+        const body = await res.json();
+        console.log('hi this is the body2', body)
+        await dispatch(loadChannel(body))
     }
 }
 
@@ -104,7 +120,7 @@ const channelReducer = (state = initialState, action) => {
     switch(action.type){
         case LOAD_CHANNELS:
             newState = Object.assign({}, state);
-            newState.server = {...newState.server}
+            newState.server = {}
             const channels = action.channels
             channels.forEach(channel => {
                 newState.server[channel.id] = channel
@@ -114,7 +130,7 @@ const channelReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.server = {...newState.server}
             const channel = action.channel
-            newState.server[channel.id] = channel
+            newState.singleChannel = {...channel}
             return newState
         case ADD_CHANNEL:
             newState = Object.assign({}, state);
