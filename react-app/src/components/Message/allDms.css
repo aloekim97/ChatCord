@@ -1,7 +1,7 @@
 .bar-next-to-servers{
     display: flex;
     flex-direction: column;
-    padding-left: 70px;
+    padding-left: 3.75%;
 }
 
 .dm{

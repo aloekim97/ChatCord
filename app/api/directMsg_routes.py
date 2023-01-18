@@ -29,7 +29,7 @@ def get_one_chat(chat_id):
 
 #see all message in dm chat
 @dm_routes.route('/<int:chat_id>/msg')
-# @login_required
+@login_required
 def get_dm_content(chat_id):
     content = DmContent.query.filter(DmContent.chat_id == chat_id).all()
     msgs = [msg.to_dict() for msg in content]
@@ -37,7 +37,7 @@ def get_dm_content(chat_id):
 
 #send dm
 @dm_routes.route('/<int:chat_id>', methods=['POST'])
-# @login_required
+@login_required
 def send_dm(chat_id):
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -45,7 +45,7 @@ def send_dm(chat_id):
     if form.validate_on_submit():
         data = DmContent(
             chat_id = chat_id,
-            sender_id = 1, #current_user.id
+            sender_id = current_user.id,
             content = form.data['content'],
             created_at = datetime.now()
         )
@@ -58,7 +58,7 @@ def send_dm(chat_id):
 
 #edit dm
 @dm_routes.route('/<int:chat_id>/msg/<int:msg_id>', methods=["PUT"])
-# @login_required
+@login_required
 def edit_dm(chat_id, msg_id):
     message = DmContent.query.filter(DmContent.id == msg_id, DmContent.chat_id == chat_id).first()
 
@@ -77,7 +77,7 @@ def edit_dm(chat_id, msg_id):
 
 #delete dm
 @dm_routes.route('/<int:chat_id>/msg/<int:msg_id>', methods=["DELETE"])
-# @login_required
+@login_required
 def delete_dm(chat_id, msg_id):
     message = DmContent.query.filter(DmContent.id == msg_id, DmContent.chat_id == chat_id).first()
 

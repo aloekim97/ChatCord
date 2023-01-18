@@ -130,7 +130,7 @@ function ChannelIndex(){
             </div>
             <div className="messages-container">
                 <div className="message-content">
-
+                                
                 </div>
                 <form className="create-messages-form" onSubmit={handleSubmit}>
                     <label>
