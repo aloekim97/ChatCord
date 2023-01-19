@@ -60,7 +60,7 @@ export const editMsgThunk = (channelId, messageId, message) => async (dispatch) 
 }
 
 export const deleteMsgThunk = (channelId, messageId) => async (dispatch) => {
-    const res = await fetch(`/api/chmsg/${channelId}/msg/${messageId}`, {
+    const res = await fetch(`/api/channels/${channelId}/msg/${messageId}`, {
         method: "DELETE"
     })
     const data = await res.json()

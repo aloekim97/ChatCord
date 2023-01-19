@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadTheDmsThunk, sendMessageThunk } from '../../store/directMsg'
+import { deleteMessageThunk, loadTheDmsThunk, sendMessageThunk } from '../../store/directMsg'
 import { getChats } from '../../store/chats'
 import { useParams } from "react-router-dom"
 import './allDms.css'
@@ -25,7 +25,10 @@ function DmPage({chat}){
         await dispatch(loadTheDmsThunk(chatId))
     }
 
-  
+    const clickDelete = (e) => {
+        e.preventDefault()
+        dispatch(deleteMessageThunk)
+    }
 
     useEffect(() => {
         dispatch(loadTheDmsThunk(chatId))
@@ -42,6 +45,7 @@ function DmPage({chat}){
                             <div className='sent-message' key={dm.id}>
                                 {/* <img src={}></img> */}
                                 <div>{dm.content}</div>
+                                <button className='del/edit'>...</button>
                             </div>
                         )
                     })}  

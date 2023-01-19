@@ -74,3 +74,8 @@
     background-color: rgb(107, 107, 107);
     width: 90%
 }
+
+.sent-message{
+    display: flex;
+    justify-content: space-between;
+}

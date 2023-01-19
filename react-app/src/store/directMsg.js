@@ -61,6 +61,16 @@ export const sendMessageThunk = (chatId, message) => async (dispatch) => {
         return message
     }
 }
+
+export const deleteMessageThunk = (chatId, messageId) => async (dispatch) => {
+    const res = await fetch(`/api/dm/${chatId}/msg/${messageId}`, {
+        method: "DELETE"
+    })
+    const data = await res.json()
+    dispatch(deleteDms(data))
+    return data
+}
+
 const normalizeData = (data) => {
     const obj = {};
     data.forEach(place => obj[place.id] = place)
@@ -84,6 +94,10 @@ const dmReducer = (state = initalState, action) => {
         }
         case CREATE_DM: {
             newState[action.message.id] = action.message
+            return newState
+        }
+        case DELETE_DM: {
+            delete newState[action.dmId]
             return newState
         }
         default:
