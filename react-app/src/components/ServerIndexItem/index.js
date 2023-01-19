@@ -7,19 +7,19 @@ import ServerIndex from "./serverindex";
 import OpenModalMenuItem from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannelsForm";
 import CreateServerModal from "../CreateServerModal";
+import LogoutButton from "../auth/LogoutButton";
 
 function ServerPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const serverObject = useSelector((state) => state.server.allServers);
   const serversArr = Object.values(serverObject);
-  const userServers = useSelector((state) => state.session.user.servers)
-
+  const user = useSelector((state) => state.session);
+  const userServers = useSelector((state) => state.session.user.servers);
 
   useEffect(() => {
     dispatch(getAllServersThunk());
   }, [dispatch]);
-
 
   let filteredServers = [];
 
@@ -28,9 +28,9 @@ function ServerPage() {
   for (let id of userServers) {
     serversArr.filter((server) => {
       if (server.id === id) {
-        filteredServers.push(server)
+        filteredServers.push(server);
       }
-    })
+    });
   }
 
   return (
@@ -50,21 +50,31 @@ function ServerPage() {
           <div className="border-break"></div>
         </div>
         <div className="serverList">
-          {filteredServers.map((server) => (
-            <ServerIndex server={server} />
-          ))}
-        </div>
-        <div className="server-img-container">
-          <button className="server-img add-server-img" alt="add-server">
-            <OpenModalMenuItem
-              itemText={
-                <img
-                  src="https://i.imgur.com/cbn6g5O.jpg"
-                  className="add-server-img-icon"
-                ></img>
-              }
-              modalComponent={<CreateServerModal />}
-            />
+          <div>
+            {filteredServers.map((server) => (
+              <ServerIndex server={server} />
+            ))}
+          </div>
+          <div className="server-img-container">
+            <button className="server-img add-server-img" alt="add-server">
+              <OpenModalMenuItem
+                itemText={
+                  <img
+                    src="https://i.imgur.com/cbn6g5O.jpg"
+                    className="add-server-img-icon"
+                  ></img>
+                }
+                modalComponent={<CreateServerModal />}
+              />
+            </button>
+          </div>
+          <button
+            onClick={() => {
+              <LogoutButton />;
+              history.push("/");
+            }}
+          >
+            Log out
           </button>
         </div>
       </div>
