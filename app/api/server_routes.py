@@ -34,6 +34,8 @@ def new_server():
         )
         server.channel.append(channel)
 
+        current_user.servers.append(server)
+
         db.session.add(server)
         db.session.commit()
 
