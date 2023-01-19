@@ -10,7 +10,7 @@ server_routes = Blueprint("servers", __name__)
 
 # get all servers
 @server_routes.route("")
-@login_required
+# @login_required
 def all_servers():
     servers = Server.query.all()
     return {"servers": [server.to_dict() for server in servers]}, 200

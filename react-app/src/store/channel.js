@@ -115,14 +115,17 @@ export const removeChannel = (channel) => async dispatch => {
 }
 
 
-const initialState = {}
+const initialState = {
+    server: {},
+    singleChannel: {},
+};
 
 const channelReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case LOAD_CHANNELS:
             newState = Object.assign({}, state);
-            newState.server = {}
+            newState.server = {...newState.server}
             const channels = action.channels
             channels.forEach(channel => {
                 newState.server[channel.id] = channel

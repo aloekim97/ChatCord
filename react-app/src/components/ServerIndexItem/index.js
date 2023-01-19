@@ -21,6 +21,8 @@ function ServerPage() {
     dispatch(getAllServersThunk());
   }, [dispatch]);
 
+  
+
   let filteredServers = [];
 
   // loop over userServers for the id(s) of servers that the user is apart of

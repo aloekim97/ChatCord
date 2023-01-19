@@ -79,7 +79,7 @@
 
 .server-navbar{
     display: flex;
-    width: 85%;
+    width: 86%;
     gap: 5px;
     margin: 0px 0 0 13%;
     justify-content: space-between;
@@ -87,6 +87,7 @@
 
 .navbar-channel-name-icon{
     display: flex;
+    align-items: center;
     gap: 5px;
     padding: 0px 15px;
     color: white;
@@ -184,6 +185,22 @@
     background-color: #2F3136;
     border-radius: 5px;
     color: #8D989D;
+}
+
+.search-input{
+    padding: 1px;
+    color: #A1A3A5;
+    padding: 0px 10px;
+}
+
+.search-form{
+    height: auto;
+    width: 150px;
+}
+
+.search-label{
+    padding: 0;
+
 }
 
 .channel-edit-button2{
