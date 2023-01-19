@@ -10,8 +10,8 @@ class DirectMessage(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    receiver_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     sendUser = db.relationship("User", back_populates='dmSender', foreign_keys=[sender_id])
     receiveUser = db.relationship("User", back_populates='dmReceiver', foreign_keys=[receiver_id])
