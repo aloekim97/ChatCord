@@ -50,13 +50,18 @@ function EditModal({channelId, channel, serverObj}){
         <>
             <div className="create-form-header">
                 <h1 id="create-channel-h1">
-                    Edit Channel
+                        Edit Channel
+                        <button className="x-cancel-button" onClick={closeModal}>
+                            <i class="fa-solid fa-x fa-xl"></i>
+                        </button>
                 </h1>
             </div>
             <form className="edit-channel" onSubmit={handleSubmit} >
 
                 <label>
-                    CHANNEL NAME
+                    <div className="channel-form-name">
+                        CHANNEL NAME
+                    </div>
                     <input
                         type="text"
                         value={name}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./index.css";
 import { addServer, getAllServersThunk } from "../../store/server";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function CreateServerModal() {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ function CreateServerModal() {
   const [server_img, setServer_img] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const history = useHistory();
   useEffect(() => {
     let newErrors = [];
 
@@ -33,8 +34,10 @@ function CreateServerModal() {
       server_img,
     };
 
-      await dispatch(addServer(newServer));
-      await dispatch(getAllServersThunk())
+    const body = await dispatch(addServer(newServer));
+    console.log('this is the new server', body)
+    await dispatch(getAllServersThunk())
+    // return history.push(`/servers/${body.id}/${body.id}`)
 
     closeModal();
   };

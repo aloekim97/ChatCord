@@ -24,11 +24,15 @@ def new_server():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        channel = Channel(
+            name='General'
+        )
         server = Server(
             owner_id = current_user.id,
             name = form.data['name'],
-            server_img = form.data['server_img']
+            server_img = form.data['server_img'],
         )
+        server.channel.append(channel)
 
         db.session.add(server)
         db.session.commit()
