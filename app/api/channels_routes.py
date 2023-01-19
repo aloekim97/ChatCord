@@ -7,7 +7,7 @@ from .auth_routes import validation_errors_to_error_messages
 channel_routes = Blueprint('channel', __name__)
 
 @channel_routes.route('/')
-# @login_required
+@login_required
 def get_all_channels():
     channels = Channel.query.all()
     mw = [chan.to_dict() for chan in channels]
@@ -15,12 +15,13 @@ def get_all_channels():
     return {"channels": [chan.to_dict() for chan in channels]}, 200
 
 @channel_routes.route('/<int:id>')
-# @login_required
+@login_required
 def get_single_channel(id):
     channel = Channel.query.get(id)
     return channel.to_dict() , 200
 
 @channel_routes.route('/<int:channelId>', methods=["PUT"])
+@login_required
 def edit_channel(channelId):
     channel = Channel.query.get(channelId)
     print('this is the chan', channel)
@@ -38,6 +39,7 @@ def edit_channel(channelId):
 
 
 @channel_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
 def delete_channel(id):
     channel = Channel.query.get(id)
     if channel:
