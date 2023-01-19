@@ -21,7 +21,7 @@ function ServerPage() {
     dispatch(getAllServersThunk());
   }, [dispatch]);
 
-  
+
 
   let filteredServers = [];
 
@@ -53,7 +53,7 @@ function ServerPage() {
         </div>
         <div className="serverList">
           <div>
-            {filteredServers.map((server) => (
+            {serversArr.map((server) => (
               <ServerIndex server={server} />
             ))}
           </div>

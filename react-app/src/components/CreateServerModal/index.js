@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./index.css";
 import { addServer, getAllServersThunk, getOneServerThunk } from "../../store/server";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { addChannel, loadChannel, loadChannels } from "../../store/channel";
 
 function CreateServerModal() {
   const dispatch = useDispatch();
@@ -12,7 +13,6 @@ function CreateServerModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const history = useHistory();
-
 
   useEffect(() => {
     let newErrors = [];
@@ -29,6 +29,7 @@ function CreateServerModal() {
 
   useEffect(() => {
     dispatch(getAllServersThunk())
+
   }, [dispatch])
 
   const handleSubmit = async (e) => {
@@ -41,10 +42,14 @@ function CreateServerModal() {
     };
 
     const body = await dispatch(addServer(newServer));
-    history.push(`/servers/${body.server.id}/${body.server.channels[0].id}`)
+    console.log('yo about to hit the push', body)
+    dispatch(addChannel(body.server.channels[0]))
+    dispatch(loadChannel(body.server.channels[0]))
+    dispatch(loadChannels(body.server.channels))
 
     // dispatch(getOneServerThunk(body.server.id))
 
+    history.push(`/servers/${body.server.id}/${body.server.channels[0].id}`)
     closeModal();
   };
 

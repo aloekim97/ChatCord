@@ -32,7 +32,9 @@ def edit_channel(channelId):
         channel.name=form.data['name']
 
         db.session.commit()
-        return channel.to_dict() , 201
+        print('yo we testing the channel', channel.server)
+        return {"channel": channel.to_dict(), "server": channel.server.to_dict()}
+        # return channel.to_dict() , 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

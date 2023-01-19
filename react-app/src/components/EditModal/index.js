@@ -6,6 +6,7 @@ import { createChannel } from "../../store/channel";
 import { updateChannel, removeChannel } from "../../store/channel";
 import { Redirect, useHistory } from "react-router-dom";
 import { loadChannel } from "../../store/channel";
+import { updateServer, editServer } from "../../store/server";
 
 function EditModal({channelId, channel, serverObj}){
     const dispatch = useDispatch();
@@ -22,16 +23,17 @@ function EditModal({channelId, channel, serverObj}){
         setErrors(newErrors)
     }, [name])
     console.log('testing messages,', serverObj)
-    const id = serverObj.channel[0].id
+    const id = serverObj.channels[0].id
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
         let errors;
         console.log('hi b4 the dispatch')
-        const body = await dispatch(updateChannel(channelId, name ))
+        const body = await dispatch(updateChannel(channelId, name, serverObj ))
         // console.log('hi im tryin got se the bodyu',body)
         // console.log('following')
-        dispatch(loadChannel(body))
+        dispatch(loadChannel(body.channel))
+        dispatch(updateServer(body.server))
         closeModal()
     }
 

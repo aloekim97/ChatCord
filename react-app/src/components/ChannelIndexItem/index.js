@@ -20,10 +20,11 @@ function ChannelIndex(){
 
     const dispatch = useDispatch();
     const {serverId, channelId} = useParams()
-    const channelsObj = useSelector(state => state.channel.server)
+    // const channelsObj = useSelector(state => state.channel.server)
     const serverObj = useSelector(state => state.server.allServers[serverId])
     // const currServer = useSelector(state => state.server.singelServer)
     const currChannel = useSelector(state => state.channel.server[channelId])
+    // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
     const userObj = useSelector(state => state.session.user)
     // const channels = useSelector(state => state.server)
     const [showMenu, setShowMenu] = useState(false);
@@ -129,6 +130,7 @@ function ChannelIndex(){
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
     console.log('testing curr, channel', currChannel)
+    // console.log('testing curr2, channel2', currChannel2)
     const members = serverObj.members
 
     // if (serverObj && serverObj.members.length > 0)
