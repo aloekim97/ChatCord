@@ -67,7 +67,7 @@ function App() {
         </Route>
         <Route path="/@me/:chatId" exact={true}>
           <ServerPage />
-          <DmBar />
+          <DmPage />
         </Route>
         <Route path="/servers/:serverId/:channelId" exact={true}>
           <ServerPage />

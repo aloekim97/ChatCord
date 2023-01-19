@@ -9,9 +9,9 @@ export const getDms = (chatId) => ({
     type: GET_DM,
     chatId
 })
-export const loadDms = (chatId) => ({
+export const loadDms = (messages) => ({
     type: LOAD_DM,
-    chatId
+    messages
 })
 export const createDms = (newDm) => ({
     type: CREATE_DM,
@@ -42,21 +42,30 @@ export const loadTheDmsThunk = (chatId) => async (dispatch) => {
     const res = await fetch(`/api/dm/${chatId}/msg`)
 
     if (res.ok) {
-        const data = res.json()
-        dispatch(loadDms(data))
-        return data
+        const messages = await res.json()
+        dispatch(loadDms(messages))
+        return messages
     }
+}
+const normalizeData = (data) => {
+    const obj = {};
+    data.forEach(place => obj[place.id] = place)
+    return obj
 }
 
 
+const initalState = {
+    chatDetails: {}
+}
 
 //REDCUER
-const dmReducer = (state = {}, action) => {
-    let newState = {}
+const dmReducer = (state = initalState, action) => {
+    let newState = {...state}
     switch(action.type) {
         case LOAD_DM: {
-            newState = {...state}
-            newState["chatDetails"] = action.chatId
+            const messagesArr = action.messages.messages
+            const messageObj = normalizeData(messagesArr)
+            newState = {...state, chatDetails:messageObj}
             return newState
         }
         default:

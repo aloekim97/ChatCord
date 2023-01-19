@@ -5,7 +5,8 @@ import server from './server';
 import channel from './channel';
 import chats from './chats'
 import channelMsg from './channelMsg'
-import dm from './directMsg'
+import dmReducer from './directMsg'
+
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
   channel,
   chats,
   channelMsg,
-  dm
+  dmReducer,
 });
 
 let enhancer;

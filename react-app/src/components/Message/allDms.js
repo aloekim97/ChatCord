@@ -8,7 +8,6 @@ import './allDms.css'
 function DmBar() {
     const dispatch = useDispatch()
     const chats = useSelector((state) => state.chats)
-
     
     useEffect(() => {
         dispatch(getChats())
@@ -32,9 +31,10 @@ function DmBar() {
             <div className='dm'> Direct Messages
                 {Object.values(chats).map((chat) => {
                     return (
-                        <div className='single-chat' key={chat.id}>
-                            <NavLink to={`/@me/${chat.id}`}>{chat.receiver_id}</NavLink>
-                        </div>
+                        <NavLink className='single-chat' to={`/@me/${chat.id}`} key={chat.id}>
+                            <img className='dm-img' src={chat.receiveUser.profileImg} />
+                            <div>{chat.receiveUser.username}</div>
+                        </NavLink>
                     )
                 })}      
             </div>

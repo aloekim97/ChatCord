@@ -1,28 +1,22 @@
-htmp{
-    height: 100%;
-}
-
 .bar-next-to-servers{
     display: flex;
     flex-direction: column;
     padding-left: 70px;
     width: 17%; 
     /* 17 */
-    height: 100vw;
-    border: red solid;
-    background-color: rgb(123, 123, 123);
+    height: 100vh;
+    background-color: rgb(47, 49, 54);
 }
 
 .dm{
     padding-top: 15px;
+    color: rgb(150, 152, 157)
 }
 
 .butt-container{
     display: flex;
     flex-direction: column;
     width: 95%;
-    border: green solid;
-
 }
 
 .friends{
@@ -42,8 +36,9 @@ htmp{
     background-color: transparent;
     border: none;
     padding-top: 5%;
-    font-size: 20px;
+    font-size: 16px;
     text-align: left;
+    color: rgb(150, 152, 157);
 }
 
 .butt:hover{
@@ -52,5 +47,30 @@ htmp{
 }
 
 .single-chat{
-        
+     display: flex;   
+     align-items: center;
+     font-size: 16px;
+     text-decoration: none;
+     color: rgb(150, 152, 157);
+}
+.dm-img{
+    width: 15%;
+    padding-right: 4%;
+}
+
+.dm-container{
+    display: flex;
+}
+
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #36393f;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.new-message{
+    background-color: rgb(107, 107, 107);
+    width: 90%
 }
