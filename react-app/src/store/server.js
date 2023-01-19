@@ -50,7 +50,7 @@ export const getAllServersThunk = () => async (dispatch) => {
 
     if (response.ok) {
         const servers = await response.json();
-        dispatch(getAllServers(servers));
+        await dispatch(getAllServers(servers));
     }
 }
 
@@ -60,7 +60,7 @@ export const getOneServerThunk = (serverId) => async (dispatch) => {
 
     if (response.ok) {
         const server = await response.json();
-        dispatch(getOneServer(server));
+        await dispatch(getOneServer(server));
         return server;
     }
 }
@@ -78,7 +78,7 @@ export const addServer = (newServer) => async (dispatch) => {
     })
     if (response.ok) {
         const server = await response.json();
-        dispatch(createServer(server));
+        await dispatch(createServer(server));
         return server;
     }
 }
