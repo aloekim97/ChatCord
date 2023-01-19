@@ -34,6 +34,7 @@ function ChannelIndex(){
     const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
+    const [content, setContent] = useState('')
 
     const ulRef = useRef();
 
