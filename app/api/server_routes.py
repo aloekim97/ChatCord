@@ -101,6 +101,6 @@ def create_channel(id):
         # print('this is server', serv)
         db.session.add(channel)
         db.session.commit()
-        return channel.to_dict() , 201
+        return {"channel": channel.to_dict(), "server": channel.server.to_dict()}, 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
