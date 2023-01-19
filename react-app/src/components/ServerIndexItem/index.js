@@ -14,26 +14,24 @@ function ServerPage() {
   const history = useHistory();
   const serverObject = useSelector((state) => state.server.allServers);
   const serversArr = Object.values(serverObject);
-  const user = useSelector((state) => state.session);
-  const userServers = useSelector((state) => state.session.user.servers);
+  const user = useSelector((state) => state.session.user.id);
+
+  // need to loop through allservers
+  // for each server need to check the memberlist
+  // if current session userid is inside memberlist then show that server on nav
+  let filteredServers = []
+
+  for (const server of serversArr) {
+    for (const member of server.members) {
+      if (member.id === user) {
+        filteredServers.push(server)
+      }
+    }
+  }
 
   useEffect(() => {
     dispatch(getAllServersThunk());
   }, [dispatch]);
-
-
-
-  let filteredServers = [];
-
-  // loop over userServers for the id(s) of servers that the user is apart of
-  // filter the allserversArr obj for servers with matching id(s) of the userServers
-  for (let id of userServers) {
-    serversArr.filter((server) => {
-      if (server.id === id) {
-        filteredServers.push(server);
-      }
-    });
-  }
 
   return (
     <div className="server-page-container">
@@ -53,7 +51,7 @@ function ServerPage() {
         </div>
         <div className="serverList">
           <div>
-            {serversArr.map((server) => (
+            {filteredServers.map((server) => (
               <ServerIndex server={server} />
             ))}
           </div>
