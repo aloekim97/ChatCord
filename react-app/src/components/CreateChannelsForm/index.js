@@ -4,13 +4,16 @@ import { useModal } from "../../context/Modal";
 import './index.css';
 import { createChannel } from "../../store/channel";
 import { NavLink } from "react-router-dom";
-
+import { loadChannel } from "../../store/channel";
+import { Redirect, useHistory } from "react-router-dom";
 
 function CreateChannelModal({serverId}){
     const dispatch = useDispatch();
     const [name, setName] = useState("")
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+    const history = useHistory();
+
     useEffect(() => {
         let newErrors = []
 
@@ -27,10 +30,11 @@ function CreateChannelModal({serverId}){
             name
         }
         let errors;
-        await dispatch(createChannel(name, serverId))
-
+        const body = await dispatch(createChannel(name, serverId))
+        dispatch(loadChannel(body))
         console.log('yay we submitted')
         closeModal()
+        return history.push(`/servers/${serverId}/${body.id}`)
     }
 
     return (

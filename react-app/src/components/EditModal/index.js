@@ -27,8 +27,11 @@ function EditModal({channelId, channel, serverObj}){
         e.preventDefault();
         // setErrors([]);
         let errors;
-        await dispatch(updateChannel(channelId, name ))
-
+        console.log('hi b4 the dispatch')
+        const body = await dispatch(updateChannel(channelId, name ))
+        // console.log('hi im tryin got se the bodyu',body)
+        // console.log('following')
+        dispatch(loadChannel(body))
         closeModal()
     }
 

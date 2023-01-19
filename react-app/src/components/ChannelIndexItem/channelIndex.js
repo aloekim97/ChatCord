@@ -12,18 +12,23 @@ function ChannelDisplay({channel, isEdit, serverId, serverObj}){
         <NavLink key={channel.id} to={`/servers/${serverId}/${channel.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <li className=''>
                 <div className="channel-border">
-                    <div className='channel-icon-border'>
-                        <i class="fa-solid fa-hashtag"></i>
-                    </div>
-                    <div className='channel-label'  key={channel.id}>
-                        {channel.name}
-                    </div>
+                    <div className='channel-border-icon-name' >
+                        <div style={{"display": "flex", "gap": "5px"}}>
+                            <div className='channel-icon-border'>
+                                <i class="fa-solid fa-hashtag"></i>
+                            </div>
+                            <div className='channel-label'  key={channel.id}>
+                                {channel.name}
+                            </div>
+
+                        </div>
                     <button className='channel-edit-button'>
                         <OpenModalMenuItem
                                     itemText={<i class="fa-solid fa-gear"></i>}
                                     modalComponent={<EditModal serverObj={serverObj} isEdit={isEdit} channel={channel} channelId={channel.id} />}
                         />
                     </button>
+                    </div>
                 </div>
             </li>
         </NavLink>

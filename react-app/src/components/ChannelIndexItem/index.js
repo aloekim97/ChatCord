@@ -85,8 +85,10 @@ function ChannelIndex(){
         <div className="page-container">
             <div className="server-name-container">
                 <div className="server-name-section" onClick={toggleServerDropdown}>
-                    {serverObj.name}
-                    {dropdownOpen ? <i class="fa-solid fa-x"></i>: <i class="fa-solid fa-chevron-down"></i> }
+                    <div className="server-name-icon">
+                        {serverObj.name}
+                        {dropdownOpen ? <i class="fa-solid fa-x"></i>: <i class="fa-solid fa-chevron-down"></i> }
+                    </div>
 
 
 
@@ -144,7 +146,7 @@ function ChannelIndex(){
                             </div>
                         </div>
                     </div>
-                    <button className='channel-edit-button'>
+                    <button className='channel-edit-button2'>
                     <OpenModalMenuItem
                                 itemText={<i class="fa-solid fa-gear"></i>}
                                 modalComponent={<EditServerModal />}

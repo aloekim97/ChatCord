@@ -1,7 +1,8 @@
 .message-content{
+    position: relative;
     display: flex;
     gap: 20px;
-    padding: 10px 10px;
+    padding: 2px 48px 2px 68px;
     margin: 17px 0px 0px;
 }
 
@@ -9,4 +10,32 @@
 .message-profile-name{
     display: flex;
     gap: 10px;
+}
+
+.message-data{
+    color: white;
+    /* cursor: none; */
+}
+
+.message-content-name{
+    color: lightblue;
+    font-weight: bold;
+    margin: 0;
+}
+
+.message-profile-pic{
+    position: absolute;
+    left: 16px;
+    top: 5px;
+    width: 36px;
+    height: auto;
+    cursor:pointer;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.message-content-date{
+    display: flex;
+    align-items: flex-end;
+    font-size: 12px;
 }

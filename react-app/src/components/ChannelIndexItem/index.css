@@ -1,8 +1,8 @@
 .page-container{
-    border: 1px solid red;
+    border: 1px none red;
     display: flex;
-    width: 95vw;
-    height: 99vh;
+    width: 96vw;
+    height: 100vh;
     padding-left: 4%;
 }
 
@@ -14,8 +14,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid green;
+    border: 1px none green;
     padding-top: 48px;
+    background-color: #2F3136;
     width: 13%;
     height: auto;
 }
@@ -23,84 +24,123 @@
 .messages-container{
     display: flex;
     flex-direction: column;
-    border: 1px solid blue;
+    border: 1px none blue;
     width: 73%;
     height: auto;
     padding-top: 48px;
     justify-content: space-between;
+    background-color: #36393F;
 }
 
 .members-container{
     display: flex;
     flex-direction: column;
-    border: 1px solid pink;
+    border: 1px none pink;
     width: 14%;
     height: auto;
     padding-top: 48px;
+    background-color: #2F3136;
 }
 
 .channel-border{
-    border: 1px solid orange;
+    border: 1px none orange;
     display: flex;
     height: 34px;
     justify-content: space-between;
+    background-color: #2F3136;
+    color: #8D989D;
     cursor:pointer;
 }
 
+.channel-border-icon-name{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.channel-border-icon-name:hover{
+    background-color: #42464D;
+}
+
 .server-name-container{
-    border: 1px solid yellow;
+    border: 1px none yellow;
     display: flex;
     position: absolute;
     /* justify-content: space-between; */
     /* padding: 0px 10px; */
     align-items: center;
-
+    border-bottom: 1px solid black;
+    background-color: #36393F;
+    /* padding-left: 2%; */
     height: 48px;
-    width: 95vw;
+    width: 96vw;
 }
 
 .server-navbar{
     display: flex;
-    width: 87%;
+    width: 85%;
     gap: 5px;
-    margin: 0px 15px;
+    margin: 0px 0 0 13%;
     justify-content: space-between;
 }
 
 .navbar-channel-name-icon{
     display: flex;
     gap: 5px;
+    padding: 0px 15px;
+    color: white;
+}
+
+.navbar-channel-name-icon .fa-solid{
+    color: #8D989D;
 }
 
 .server-name-section{
+    position: absolute;
     display: flex;
-    width: 12%;
+    width: 13%;
     height: 100%;
     justify-content: space-between;
     align-items: center;
     cursor:pointer;
+    background-color: #2F3136;
+    /* padding: 0px 4px; */
+    /* margin: 0px 2px; */
+
     /* margin: 0px 10px; */
-    padding: 0px 10px;
+    /* padding: 0px 5px; */
     /* border-radius: 5px; */
 }
 
+.server-name-icon{
+    width: 100%;
+    display: flex;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
 .server-name-section:hover{
-    background-color: gray;
+    background-color: #42464D;
 }
 
 .member-index-container{
     display: flex;
     cursor:pointer;
+    padding: 8px 16px;
+    color: lightblue;
     gap: 7px;
-    padding: 0px 8px;
 }
 
 .member-index-container:hover{
-    background-color: gray;
+    background-color: #42464D;
 }
 
 .members-online-status{
     padding: 24px 0px 0px 16px;
+    color: #8D989D;
 }
 
 .member-username-container{
@@ -141,6 +181,21 @@
 .channel-edit-button{
     border: 1px none black;
     cursor:pointer;
+    background-color: #2F3136;
+    border-radius: 5px;
+    color: #8D989D;
+}
+
+.channel-edit-button2{
+    border: 1px none black;
+    cursor:pointer;
+    background-color: #292B2F;
+    border-radius: 5px;
+    color: #8D989D;
+}
+
+.channel-edit-button2:hover{
+    background-color: #42464D;
 }
 
 .channel-droplist{
@@ -156,6 +211,8 @@
     border: 1px none black;
     cursor:pointer;
     display: flex;
+    background-color: #2F3136;
+    color: #8D989D;
     gap: 5px;
 }
 
@@ -179,6 +236,8 @@
 .create-channel-button{
     cursor:pointer;
     border: 1px none black;
+    background-color: #2F3136;
+    color: #8D989D;
 }
 
 
@@ -186,10 +245,11 @@
     display: flex;
     /* position: absolute; */
     /* position: fixed; */
-    width: 95%;
+    width: 100%;
     /* gap: 10px; */
-    padding: 0px 0px 0px 5px;
+    /* padding: 0px 0px 0px 5px; */
     height: 52px;
+    background-color: #292B2F;
 }
 
 .profile-container{
@@ -202,10 +262,11 @@
 }
 
 .profile-container:hover{
-    background-color: gray;
+    background-color: #42464D;
 }
 
 .profile-data-container{
     display: flex;
     flex-direction: column;
+    color: white;
 }

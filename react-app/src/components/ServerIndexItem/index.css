@@ -13,7 +13,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #212122
+    background-color: #212122;
+    z-index: 1000;
 }
 
 .server-title {
