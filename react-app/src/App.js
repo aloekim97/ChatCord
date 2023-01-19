@@ -39,8 +39,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <ServerPage loaded={loaded} />
-      {loaded && ( */}
+      <ServerPage loaded={loaded} />
+      {/* {loaded && ( */}
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -51,7 +51,7 @@ function App() {
         <Route path="/about" exact={true}>
           <About />
         </Route>
-        {/* <ProtectedRoute path="/users" exact={true}>
+        <ProtectedRoute path="/users" exact={true}>
             <UsersList />
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true}>
@@ -70,7 +70,7 @@ function App() {
             <ChannelIndex />
           </Route>
         </Switch>
-      )}
+      )
     </BrowserRouter>
   );
 }

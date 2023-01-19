@@ -167,7 +167,7 @@ function ChannelIndex(){
                             className="create-channel-input"
                             placeholder="Message"
                         />
-                </label>
+                    </label>
                 </form>
             </div>
             <div className="members-container">

@@ -11,9 +11,9 @@ import './index.css';
 
 function MessageIndex({message}){
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { user } = message
-    const [messages, setMessages] = useState([])
+    // const [messages, setMessages] = useState([])
     
     
     // useEffect(() => {
