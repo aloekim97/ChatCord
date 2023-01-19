@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './index.css';
-import { createChannel } from "../../store/channel";
+import { createChannel, deleteChanel } from "../../store/channel";
 import { updateChannel, removeChannel } from "../../store/channel";
 import { Redirect, useHistory } from "react-router-dom";
 import { loadChannel } from "../../store/channel";
@@ -39,14 +39,19 @@ function EditModal({channelId, channel, serverObj}){
 
     const handleDelete = async (e) => {
         // e.preventDefault();
-        await dispatch(removeChannel(channel))
-        closeModal()
+        const body = await dispatch(removeChannel(channel, serverObj))
         console.log('hitting this')
-        history.push('/')
+        // history.push('/')
         console.log('plz jelp',serverObj.id, id )
         // return <Redirect to={`/servers/${serverObj.id}/${id}`}/>
-        dispatch(loadChannel(serverObj.channel[0]))
+        // dispatch(loadChannel(serverObj.channel[0]))
+        console.log('what is serever', body)
+        dispatch(loadChannel(body.server.channels[0]))
+        dispatch(updateServer(body.server))
         history.push(`/servers/${serverObj.id}/${id}`)
+        // console.log('yo what')
+        // dispatch(deleteChanel(channel))
+        closeModal()
     }
     return(
         <>

@@ -6,6 +6,7 @@ import { createChannel } from "../../store/channel";
 import { NavLink } from "react-router-dom";
 import { loadChannel } from "../../store/channel";
 import { Redirect, useHistory } from "react-router-dom";
+import { updateServer } from "../../store/server";
 
 function CreateChannelModal({serverId}){
     const dispatch = useDispatch();
@@ -31,10 +32,12 @@ function CreateChannelModal({serverId}){
         }
         let errors;
         const body = await dispatch(createChannel(name, serverId))
-        dispatch(loadChannel(body))
+        console.log('yoooooooooooooo wgat', body.server)
+        dispatch(updateServer(body.server))
+        dispatch(loadChannel(body.channel))
         console.log('yay we submitted')
         closeModal()
-        return history.push(`/servers/${serverId}/${body.id}`)
+        return history.push(`/servers/${serverId}/${body.server.id}`)
     }
 
     return (
