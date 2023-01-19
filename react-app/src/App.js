@@ -39,8 +39,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ServerPage loaded={loaded} />
-      {/* {loaded && ( */}
+      {/* <ServerPage loaded={loaded} />
+      {loaded && ( */}
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -51,26 +51,26 @@ function App() {
         <Route path="/about" exact={true}>
           <About />
         </Route>
-        <ProtectedRoute path="/users" exact={true}>
+        {/* <ProtectedRoute path="/users" exact={true}>
             <UsersList />
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
-          </ProtectedRoute>
-          <Route path="/" exact={true}>
-            <SplashPage />
-          </Route>
-          <Route path="/@me" exact={true}>
-            <DmBar />
-          </Route>
-          <Route path="/@me/:chatId" exact={true}>
-            <DmPage />
-          </Route>
-          <Route path="/servers/:serverId/:channelId" exact={true}>
-            <ChannelIndex />
-          </Route>
-        </Switch>
-      )
+          </ProtectedRoute> */}
+        <Route path="/" exact={true}>
+          <NavBar />
+          <SplashPage />
+        </Route>
+        <Route path="/@me" exact={true}>
+          <ServerPage />
+          <DmBar />
+        </Route>
+        <Route path="/servers/:serverId/:channelId" exact={true}>
+          <ServerPage />
+          <ChannelIndex />
+        </Route>
+      </Switch>
+      {/* )} */}
     </BrowserRouter>
   );
 }
