@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./index.css";
-import { addServer, getAllServersThunk } from "../../store/server";
-import { NavLink, useHistory } from "react-router-dom";
+import { addServer, getAllServersThunk, getOneServerThunk } from "../../store/server";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 
 function CreateServerModal() {
   const dispatch = useDispatch();
@@ -12,6 +12,8 @@ function CreateServerModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const history = useHistory();
+
+
   useEffect(() => {
     let newErrors = [];
 
@@ -25,6 +27,10 @@ function CreateServerModal() {
     setErrors(newErrors);
   }, [name, server_img]);
 
+  useEffect(() => {
+    dispatch(getAllServersThunk())
+  }, [dispatch])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // setErrors([]);
@@ -35,9 +41,9 @@ function CreateServerModal() {
     };
 
     const body = await dispatch(addServer(newServer));
-    console.log('this is the new server', body)
-    await dispatch(getAllServersThunk())
-    // return history.push(`/servers/${body.id}/${body.id}`)
+    history.push(`/servers/${body.server.id}/${body.server.channels[0].id}`)
+
+    // dispatch(getOneServerThunk(body.server.id))
 
     closeModal();
   };
