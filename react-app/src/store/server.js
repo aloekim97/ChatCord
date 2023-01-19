@@ -68,7 +68,7 @@ export const getOneServerThunk = (serverId) => async (dispatch) => {
 
 export const addServer = (newServer) => async (dispatch) => {
     const { name, server_img } = newServer;
-    const response = await fetch("/api/servers", {
+    const response = await fetch("/api/servers/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

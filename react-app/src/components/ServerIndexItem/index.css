@@ -40,6 +40,7 @@
 
 .serverList {
     padding-top: 10px;
+    height: 100vh;
 }
 
 .server-img-container {
@@ -54,6 +55,21 @@
     height: 60px;
     object-fit: cover;
     border-radius: 100px;
+}
+
+.add-server-img {
+    background-color: rgb(54,57,64);
+    background-size: contain;
+    border-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-server-img-icon {
+    height: 45px;
+    width: 50px;
+    border-radius: 100%;
 }
 
 .server-img:hover{
