@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllServersThunk, updateServer, getOneServerThunk } from "../../store/server";
 import { useModal } from "../../context/Modal";
 
 function NewEditServerModal({ serverId }) {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
+  const server = useSelector((state) => state.server.singleServer)
+  const [name, setName] = useState(server?.name);
   const [server_img, setServer_Img] = useState("");
   const [errors, setErrors] = useState([]);
   const id = serverId;
