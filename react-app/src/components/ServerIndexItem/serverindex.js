@@ -27,7 +27,7 @@ function ServerIndex({ server }) {
           src={server.serverImg}
           alt="server img"
         ></img>
-        <div>{/* {isHover? <ServerNameCard server={server} /> : <></>} */}</div>
+        <div className="server-popout-card">{isHover? <ServerNameCard server={server} /> : <></>}</div>
       </div>
       </NavLink>
 

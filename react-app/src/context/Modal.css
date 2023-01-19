@@ -21,45 +21,15 @@
 
 #modal-content {
     position: absolute;
-    background-color:white;
+    background-color: rgb(54,57,63);
     width: 23%;
     /* padding: 10px; */
     border-radius: 10px;
 }
 
 
-
-#modal2{
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-#modal-background2{
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-#modal-content2 {
-    position: absolute;
-    background-color:white;
-    /* width: 90%; */
-    /* padding: 10px; */
-    border-radius: 10px;
-}
-
 #modal-content form {
     display: flex;
     flex-direction: column;
-
+    border-radius: 10px;
 }

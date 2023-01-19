@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     background-color: #212122;
-    z-index: 1000;
+    /* z-index: 1000; */
 }
 
 .server-title {
@@ -85,11 +85,12 @@
     top: 3.5em;
     left: 5.5em;
     height: 25%;
-    background-color: #212122;
+    background-color: #18191C;
     display: flex;
     flex-direction: column;
     padding: 6px;
     justify-content: space-between;
+    border-radius: 10px;
 }
 
 .modal-button-text{
@@ -100,12 +101,18 @@
 .server-cardname-container{
     align-self: top;
     position: relative;
-    /* width: 350px; */
-    width: 100%;
+    left: 85px;
+    width: auto;
+    /* width: 100%; */
     /* display: inline; */
-    left: 5em;
-    height: 10%;
-    background-color: red;
+    /* left: 5em; */
+    height: 40px;
+    background-color: #202225;
+    align-content: center;
+}
+
+.server-popout-card{
+    position: absolute;
 }
 
 .server-drop-button{
@@ -113,7 +120,7 @@
     display: flex;
     border-style: none;
     border-radius: 2px;
-    background-color: #212122;
+    background-color: #18191C;
     color: gray;
     cursor:pointer;
     width: 100%;

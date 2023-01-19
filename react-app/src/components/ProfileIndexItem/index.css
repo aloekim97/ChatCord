@@ -3,8 +3,133 @@
     position: absolute;
     /* width: 350px; */
     width: 17%;
+    /* padding: 10px; */
     bottom: 4em;
     left: 4em;
     height: 35%;
-    background-color: red;
+    background-color: #292B2F;
+    border-radius: 10px;
+}
+
+.profile-card-img{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90px;
+    /* height: 30px; */
+}
+
+.profile-card-banner{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    background-color: blue;
+    height: 20%;
+}
+
+
+.profile-card-info{
+    width: 100%;
+    display: flex;
+    color: white;
+}
+
+.profile-card-info-container{
+    margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #18191C;
+    width: 80%;
+    height: 35%;
+    border-radius: 10px;
+    padding: 5%;
+}
+
+.profile-card-status{
+    color: #C4C5C6;
+    margin-bottom: 10px;
+}
+
+.profile-card-member-date{
+    border-top: 1px solid #C4C5C6;
+    /* border-bottom: 1px solid #C4C5C6; */
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.profile-card-member-date2{
+    color: #C4C5C6;
+}
+
+.Server-profile-card-container{
+    align-self: top;
+    position: absolute;
+    /* width: 350px; */
+    width: 17%;
+    /* padding: 10px; */
+    bottom: 4em;
+    left: 4em;
+    height: 35%;
+    background-color: #292B2F;
+    border-radius: 10px;
+}
+
+.Server-profile-card-img{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90px;
+    /* height: 30px; */
+}
+
+.Server-profile-card-banner{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    background-color: blue;
+    height: 20%;
+}
+
+
+.Server-profile-card-info{
+    width: 100%;
+    display: flex;
+    color: white;
+}
+
+.Server-profile-card-info-container{
+    margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #18191C;
+    width: 80%;
+    height: 35%;
+    border-radius: 10px;
+    padding: 5%;
+}
+
+.Server-profile-card-status{
+    color: #C4C5C6;
+    margin-bottom: 10px;
+}
+
+.Server-profile-card-member-date{
+    border-top: 1px solid #C4C5C6;
+    /* border-bottom: 1px solid #C4C5C6; */
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.Server-profile-card-member-date2{
+    color: #C4C5C6;
 }

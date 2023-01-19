@@ -13,6 +13,7 @@ import EditServerModal from "../EditServerModal";
 import MessageIndex from "../ChannelMessageIndexItem";
 import ProfileCard from "../ProfileIndexItem/indexj";
 import ServerDropdown from "../ServerIndexItem/serverDropdown";
+import ServerProfileCard from "../ProfileIndexItem/serverProfileCard";
 
 function ChannelIndex(){
 
@@ -26,11 +27,50 @@ function ChannelIndex(){
     const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
+
     const ulRef = useRef();
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
+
+    const openMenu = () => {
+        if (isOpen) return;
+        setIsOpen(true);
+    }
+
+    const openServerMenu = () => {
+        if (dropdownOpen) return;
+        setDropdownOpen(true);
+    }
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (!dropdownOpen) return;
+
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [dropdownOpen]);
 
 
     useEffect(() => {
@@ -135,7 +175,7 @@ function ChannelIndex(){
 
                 </div>
                 <div className="channels-profile-container">
-                    <div className='profile-container' onClick={toggleProfileOpen}>
+                    <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
                         <img className="profile-pic" src={userObj.profileImg}></img>
                         <div className="profile-data-container">
                             <div>
@@ -152,7 +192,7 @@ function ChannelIndex(){
                                 modalComponent={<EditServerModal />}
                     />
                 </button>
-                {isOpen ? <ProfileCard /> : <></> }
+                {isOpen ? <ProfileCard user={userObj} /> : <></> }
                 </div>
             </div>
             <div className="messages-container">
@@ -174,7 +214,7 @@ function ChannelIndex(){
                 <div className="members-online-status">Members - {members.length}</div>
                 {
                     members && members.map(member => (
-                        <MembersDisplay member={member} />
+                        <MembersDisplay member={member} server={serverObj} />
                     ))
                 }
             </div>

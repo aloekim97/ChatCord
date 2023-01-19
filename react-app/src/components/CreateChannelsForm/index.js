@@ -42,15 +42,20 @@ function CreateChannelModal({serverId}){
             <div className="create-form-header">
                 <h1 id="create-channel-h1">
                     Create Channel
+                    <button className="x-cancel-button" onClick={closeModal}>
+                        <i class="fa-solid fa-x fa-xl"></i>
+                    </button>
                 </h1>
             </div>
             <form className="create-channel" onSubmit={handleSubmit}>
-                <ul>
+                <ul className="create-channel-errors">
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
 
                 <label>
-                    CHANNEL NAME
+                    <div className="channel-form-name">
+                        CHANNEL NAME
+                    </div>
                     <input
                         type="text"
                         value={name}
@@ -61,7 +66,7 @@ function CreateChannelModal({serverId}){
                     />
                 </label>
                 <div className="form-footer">
-                    <button className="cancelButton" type="button" onClick={closeModal}>cancel</button>
+                    <button className="cancelButton" type="button" onClick={closeModal}>Cancel</button>
                     <button className="submitButton" type="submit">Create Channel</button>
                 </div>
             </form>
