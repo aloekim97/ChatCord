@@ -31,7 +31,7 @@ def get_one_chat(chat_id):
 @dm_routes.route('/<int:chat_id>/msg')
 @login_required
 def get_dm_content(chat_id):
-    content = DmContent.query.filter(DmContent.chat_id == chat_id).all()
+    content = DmContent.query.filter(DmContent.chat_id == chat_id).order_by(DmContent.created_at).all()
     msgs = [msg.to_dict() for msg in content]
     return {"messages": msgs}
 

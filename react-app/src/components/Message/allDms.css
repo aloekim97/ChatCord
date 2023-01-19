@@ -1,9 +1,56 @@
+htmp{
+    height: 100%;
+}
+
 .bar-next-to-servers{
     display: flex;
     flex-direction: column;
-    padding-left: 3.75%;
+    padding-left: 70px;
+    width: 17%; 
+    /* 17 */
+    height: 100vw;
+    border: red solid;
+    background-color: rgb(123, 123, 123);
 }
 
 .dm{
     padding-top: 15px;
+}
+
+.butt-container{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: green solid;
+
+}
+
+.friends{
+    width: 100%;
+}
+
+.nitro{
+    width: 100%;
+}
+
+.message_req{
+    width: 100%;
+}
+
+.butt{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding-top: 5%;
+    font-size: 20px;
+    text-align: left;
+}
+
+.butt:hover{
+    cursor: pointer;
+    
+}
+
+.single-chat{
+        
 }

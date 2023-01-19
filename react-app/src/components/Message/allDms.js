@@ -8,7 +8,7 @@ import './allDms.css'
 function DmBar() {
     const dispatch = useDispatch()
     const chats = useSelector((state) => state.chats)
-    console.log(chats)
+
     
     useEffect(() => {
         dispatch(getChats())
@@ -16,15 +16,24 @@ function DmBar() {
 
     return (
         <div className='bar-next-to-servers'>
-            <div classname='friends'>Friends</div>
-            <div classname='nitro'>Nitro</div>
-            <div classname='message_req'>Message Requests</div>
+            <div className='butt-container'>
+                <NavLink className='friends' to={'/@me'}>
+                    <button className='butt'>Friends</button>
+                </NavLink>
+                <NavLink className='nitro' to={'/@me'}>
+                    <button className='butt'>Nitro</button>
+                </NavLink>
+                <NavLink className='message_req' to={'/@me'}>
+                    <button className='butt'>Message Requests</button>
+                </NavLink>
+
+            </div>
 
             <div className='dm'> Direct Messages
                 {Object.values(chats).map((chat) => {
                     return (
                         <div className='single-chat' key={chat.id}>
-                            <NavLink to={`/dm/${chat.id}`}>{chat.receiver_id}</NavLink>
+                            <NavLink to={`/@me/${chat.id}`}>{chat.receiver_id}</NavLink>
                         </div>
                     )
                 })}      

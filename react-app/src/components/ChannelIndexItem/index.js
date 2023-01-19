@@ -12,6 +12,7 @@ import { getAllServersThunk } from "../../store/server";
 import EditServerModal from "../EditServerModal";
 import MessageIndex from "../ChannelMessageIndexItem";
 
+
 function ChannelIndex(){
 
     const dispatch = useDispatch();
@@ -139,6 +140,9 @@ function ChannelIndex(){
                 {messages.length > 0? messages.map(message => (
                     <MessageIndex message={message} />
                 )) : <div>Hello</div>}
+                <div className="message-content">
+                                
+                </div>
                 <form className="create-messages-form" onSubmit={handleSubmit}>
                     <label>
                         <input

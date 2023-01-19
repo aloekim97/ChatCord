@@ -5,13 +5,15 @@ import server from './server';
 import channel from './channel';
 import chats from './chats'
 import channelMsg from './channelMsg'
+import dm from './directMsg'
 
 const rootReducer = combineReducers({
   session,
   server,
   channel,
   chats,
-  channelMsg
+  channelMsg,
+  dm
 });
 
 let enhancer;

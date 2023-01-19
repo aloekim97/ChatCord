@@ -12,6 +12,7 @@ import SplashPage from "./components/SplashPage";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 import DmBar from "./components/Message/allDms";
+import DmPage from './components/Message/theDm'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +60,9 @@ function App() {
           </Route>
           <Route path="/@me" exact={true}>
             <DmBar />
+          </Route>
+          <Route path="/@me/:chatId" exact={true}>
+            <DmPage />
           </Route>
           <Route path="/servers/:serverId/:channelId" exact={true}>
             <ChannelIndex />
