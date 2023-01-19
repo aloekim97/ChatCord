@@ -12,14 +12,26 @@ function ServerPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const serverObject = useSelector((state) => state.server.allServers);
+  const serversArr = Object.values(serverObject);
+  const userServers = useSelector((state) => state.session.user.servers)
+
 
   useEffect(() => {
     dispatch(getAllServersThunk());
   }, [dispatch]);
 
-  const serversArr = Object.values(serverObject);
-  console.log(serversArr);
-  console.log("checking fo channels", serversArr);
+
+  let filteredServers = [];
+
+  // loop over userServers for the id(s) of servers that the user is apart of
+  // filter the allserversArr obj for servers with matching id(s) of the userServers
+  for (let id of userServers) {
+    serversArr.filter((server) => {
+      if (server.id === id) {
+        filteredServers.push(server)
+      }
+    })
+  }
 
   return (
     <div className="server-page-container">
@@ -38,7 +50,7 @@ function ServerPage() {
           <div className="border-break"></div>
         </div>
         <div className="serverList">
-          {serversArr.map((server) => (
+          {filteredServers.map((server) => (
             <ServerIndex server={server} />
           ))}
         </div>
