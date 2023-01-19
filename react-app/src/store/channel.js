@@ -86,6 +86,8 @@ export const createChannel = (name, serverId) => async dispatch => {
     if (res.ok){
         const body = await res.json()
         dispatch(addChannel(body))
+        body.server.server_img = body.server.serverImg
+        delete body.server.serverImg
         return body
     }
 }
@@ -109,14 +111,17 @@ export const updateChannel = (channelId, name) => async dispatch => {
     }
 }
 
-export const removeChannel = (channel) => async dispatch => {
+export const removeChannel = (channel, server) => async dispatch => {
     const res = await fetch(`/api/channels/${channel.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     })
     if (res.ok){
         const body = await res.json()
-        dispatch(deleteChanel(channel))
+        console.log('we almost done', server)
+        body.server.server_img = body.server.serverImg
+        delete body.server.serverImg
+        return body
     }
 }
 
@@ -141,7 +146,9 @@ const channelReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.server = {...newState.server}
             const channel = action.channel
+            newState.singleChannel = {}
             newState.singleChannel = {...channel}
+            newState.server[channel.id] = channel
             return newState
         case ADD_CHANNEL:
             newState = Object.assign({}, state);

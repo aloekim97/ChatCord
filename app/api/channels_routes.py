@@ -33,7 +33,7 @@ def edit_channel(channelId):
 
         db.session.commit()
         print('yo we testing the channel', channel.server)
-        return {"channel": channel.to_dict(), "server": channel.server.to_dict()}
+        return {"channel": channel.to_dict(), "server": channel.server.to_dict()}, 201
         # return channel.to_dict() , 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -44,9 +44,10 @@ def edit_channel(channelId):
 @login_required
 def delete_channel(id):
     channel = Channel.query.get(id)
+    server = Server.query.get(channel.server.id)
     if channel:
         db.session.delete(channel)
         db.session.commit()
-        return { "message": "Deleted"}, 200
+        return { "message": "Deleted", "server": server.to_dict()}, 200
     else:
         return {"message":'Channel couldn\'t be found'} , 404

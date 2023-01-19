@@ -15,7 +15,7 @@ function ServerIndex({ server }) {
 
   useEffect(() => {
     dispatch(fetchChannels(server.id));
-    dispatch(getOneServerThunk(server.id))
+    // dispatch(getOneServerThunk(server.id))
   }, [dispatch])
 
 
@@ -40,7 +40,7 @@ function ServerIndex({ server }) {
         ></img>
         <div className="server-popout-card">{isHover? <ServerNameCard server={server} /> : <></>}</div>
       </div>
-      </NavLink>
+    </NavLink>
 
   );
 }
