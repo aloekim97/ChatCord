@@ -16,6 +16,8 @@ import ServerDropdown from "../ServerIndexItem/serverDropdown";
 import ServerProfileCard from "../ProfileIndexItem/serverProfileCard";
 import { getOneServerThunk } from "../../store/server";
 import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
+import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
+
 
 function ChannelIndex(){
 
@@ -242,7 +244,7 @@ function ChannelIndex(){
                     <button className='channel-edit-button2'>
                     <OpenModalMenuItem
                                 itemText={<i class="fa-solid fa-gear"></i>}
-                                modalComponent={<EditServerModal />}
+                                modalComponent={<EditProfileModal />}
                     />
                 </button>
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
