@@ -48,7 +48,7 @@ def edit_msg(channel_id, message_id):
     if form.validate_on_submit():
         message = Message.query.filter(Message.channel_id == channel_id, Message.id == message_id).first()
 
-        if current_user.id == message.user_id:
+        if current_user.id == message.user.id:
             message.message = form.data['content']
         db.session.commit()
         return {"message": message.to_dict()}
@@ -61,7 +61,7 @@ def edit_msg(channel_id, message_id):
 def del_msg(channel_id, message_id):
     message = Message.query.filter(Message.channel_id == channel_id, Message.id == message_id).first()
 
-    if current_user.id == message.user_id:
+    if current_user.id == message.user.id:
         db.session.delete(message)
         db.session.commit()
     

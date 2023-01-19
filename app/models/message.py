@@ -19,7 +19,7 @@ class Message(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user': self.user_id,
+            'user': self.user.to_dict(),
             'channel': self.channel_id,
             'message': self.message,
             'createdAt': self.created_at
