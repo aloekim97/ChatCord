@@ -13,9 +13,9 @@ export const loadDms = (messages) => ({
     type: LOAD_DM,
     messages
 })
-export const createDms = (newDm) => ({
+export const createDms = (message) => ({
     type: CREATE_DM,
-    newDm
+    message
 })
 export const editDms = (dmId) => ({
     type: EDIT_DM,
@@ -47,6 +47,20 @@ export const loadTheDmsThunk = (chatId) => async (dispatch) => {
         return messages
     }
 }
+
+export const sendMessageThunk = (chatId, message) => async (dispatch) => {
+    const res = await fetch(`/api/dm/${chatId}`, {         
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(message)
+})
+
+    if (res.ok) {
+        const message = await res.json()
+        dispatch(createDms(message))
+        return message
+    }
+}
 const normalizeData = (data) => {
     const obj = {};
     data.forEach(place => obj[place.id] = place)
@@ -66,6 +80,10 @@ const dmReducer = (state = initalState, action) => {
             const messagesArr = action.messages.messages
             const messageObj = normalizeData(messagesArr)
             newState = {...state, chatDetails:messageObj}
+            return newState
+        }
+        case CREATE_DM: {
+            newState[action.message.id] = action.message
             return newState
         }
         default:

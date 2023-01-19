@@ -8,9 +8,9 @@ export const loadMsg = (msg) => ({
     type: LOAD_CHMSG,
     msg
 })
-export const createMsg = (newMsg) => ({
+export const createMsg = (message) => ({
     type: CREATE_CHMSG,
-    newMsg
+    message
 })
 export const editMsg = (msgId) => ({
     type: EDIT_CHMSG,
@@ -23,7 +23,7 @@ export const deleteMsg = (msgId) => ({
 
 //Thunks
 export const loadMsgThunk = (channelId) => async (dispatch) => {
-    const res = await fetch(`/api/chmsg/${channelId}/msg`)
+    const res = await fetch(`/api/channels/${channelId}/msg`)
 
     if (res.ok) {
         const data = await res.json()
@@ -32,12 +32,10 @@ export const loadMsgThunk = (channelId) => async (dispatch) => {
 }
 
 export const createMsgThunk = (channelId, message) => async (dispatch) => {
-    const res = await fetch(`/api/chmsg/${channelId}/msg`, {
+    const res = await fetch(`/api/channels/${channelId}/msg`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            message
-        })
+        body: JSON.stringify(message)
     })
     if (res.ok) {
         const data = await res.json()
@@ -47,7 +45,7 @@ export const createMsgThunk = (channelId, message) => async (dispatch) => {
 }
 
 export const editMsgThunk = (channelId, messageId, message) => async (dispatch) => {
-    const res = await fetch(`/api/chmsg/${channelId}/msg/${messageId}`, {
+    const res = await fetch(`/api/channels/${channelId}/msg/${messageId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -70,19 +68,28 @@ export const deleteMsgThunk = (channelId, messageId) => async (dispatch) => {
     return data
 }
 
+const normalizeData = (data) => {
+    const obj = {};
+    data.forEach(place => obj[place.id] = place)
+    return obj
+}
+
+
+const initalState = {
+    channelChat: {}
+}
 //REDUCER
 const chmsgReducer = (state = {}, action) => {
-    let newState = {}
+    let newState = {...state}
     switch(action.type) {
         case LOAD_CHMSG: {
-            action.msg.forEach(message => {
-                newState[message.id] = message
-            })
+            const messageArr = action.msg.messages
+            const messageObj = normalizeData(messageArr)
+            newState = {...state, channelChat:messageObj}
             return newState
         }
         case CREATE_CHMSG: {
-            newState = {...state}
-            newState[action.newMsg.id] = action.newMsg
+            newState[action.message] = action.message
             return newState
         }
         case EDIT_CHMSG: {

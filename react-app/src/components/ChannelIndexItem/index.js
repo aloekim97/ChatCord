@@ -14,6 +14,7 @@ import MessageIndex from "../ChannelMessageIndexItem";
 import ProfileCard from "../ProfileIndexItem/indexj";
 import ServerDropdown from "../ServerIndexItem/serverDropdown";
 import ServerProfileCard from "../ProfileIndexItem/serverProfileCard";
+import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
 
 function ChannelIndex(){
 
@@ -27,6 +28,8 @@ function ChannelIndex(){
     const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
+    const [content, setContent] = useState('')
+
 
     const ulRef = useRef();
 
@@ -79,7 +82,6 @@ function ChannelIndex(){
         // dispatch(getAllServersThunk())
         dispatch(getOneServerThunk(serverId))
         // setMembers(serverObj.members)
-
     }, [dispatch, serverId, channelId]);
 
     const closeMenu = () => setShowMenu(false);
@@ -114,8 +116,19 @@ function ChannelIndex(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
-        console.log('it submitted the message')
-
+        const input = {
+            content
+        }
+        await dispatch(createMsgThunk(channelId, input))
+        .then(() => {
+            setContent('')
+        })
+        await dispatch(fetchChannels(serverId));
+        await dispatch(fetchOneChannel(channelId))
+        // dispatch(getAllServersThunk())
+        await dispatch(getOneServerThunk(serverId))
+        // setMembers(serverObj.members)
+        await dispatch(loadMsgThunk(channelId))
         // closeModal()
     }
 
@@ -204,6 +217,8 @@ function ChannelIndex(){
                         <input
                             type="text"
                             required
+                            value={content}
+                            onChange = {e => setContent(e.target.value)}
                             className="create-channel-input"
                             placeholder="Message"
                         />

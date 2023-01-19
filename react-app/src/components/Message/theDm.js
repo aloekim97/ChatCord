@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadTheDmsThunk } from '../../store/directMsg'
+import { loadTheDmsThunk, sendMessageThunk } from '../../store/directMsg'
 import { getChats } from '../../store/chats'
 import { useParams } from "react-router-dom"
 import './allDms.css'
@@ -10,7 +10,20 @@ function DmPage({chat}){
     const dispatch = useDispatch()
     const {chatId} = useParams()
     const dms = useSelector(state => state.dmReducer.chatDetails)
+    const [content, setContent] = useState('')
 
+    const onSub = async (e) => {
+        e.preventDefault()
+
+        const input = {
+            content
+        }
+        await dispatch(sendMessageThunk(chatId, input))
+        .then(() => {
+            setContent('')
+        })
+        await dispatch(loadTheDmsThunk(chatId))
+    }
 
   
 
@@ -33,7 +46,13 @@ function DmPage({chat}){
                         )
                     })}  
                 </div>
-                <textarea className='new-message'></textarea>
+                <form onSubmit={onSub}>
+                    <textarea className='text-box'
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                    />
+                    <button className='submit' type='submit'>Submit</button>
+                </form>
             </div>
             
         </div>
