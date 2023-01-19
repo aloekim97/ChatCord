@@ -10,7 +10,7 @@ server_routes = Blueprint("servers", __name__)
 
 # get all servers
 @server_routes.route("")
-# @login_required
+@login_required
 def all_servers():
     servers = Server.query.all()
     return {"servers": [server.to_dict() for server in servers]}, 200
@@ -18,7 +18,7 @@ def all_servers():
 
 # add new server
 @server_routes.route('/new', methods=["POST"])
-# @login_required
+@login_required
 def new_server():
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -41,7 +41,7 @@ def new_server():
 
 # Get / Edit / Delete server
 @server_routes.route("/<int:id>", methods=["GET", "PUT", "DELETE"])
-# @login_required
+@login_required
 def server_action(id):
     server = Server.query.get(id)
 
