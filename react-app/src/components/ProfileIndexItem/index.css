@@ -1,0 +1,10 @@
+.profile-card-container{
+    align-self: top;
+    position: absolute;
+    /* width: 350px; */
+    width: 17%;
+    bottom: 4em;
+    left: 4em;
+    height: 35%;
+    background-color: red;
+}

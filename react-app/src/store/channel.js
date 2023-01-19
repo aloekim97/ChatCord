@@ -84,6 +84,7 @@ export const createChannel = (name, serverId) => async dispatch => {
     if (res.ok){
         const body = await res.json()
         dispatch(addChannel(body))
+        return body
     }
 }
 
@@ -98,6 +99,7 @@ export const updateChannel = (channelId, name) => async dispatch => {
     if (res.ok){
         const body = await res.json()
         dispatch(editChannel(body))
+        return body
     }
 }
 

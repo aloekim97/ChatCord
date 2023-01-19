@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import SplashPage from "./components/SplashPage";
+import About from "./components/AboutUs";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 import DmBar from "./components/Message/allDms";
@@ -17,13 +18,13 @@ import DmPage from './components/Message/theDm'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const userObj = useSelector(state => state.session.user)
-  console.log('hi this is hte user', userObj)
-  const x={}
-  if (Object.values(x)){
-    console.log('a')
-  } else{
-    console.log('b')
+  // const userObj = useSelector(state => state.session.user)
+  // console.log('hi this is hte user', userObj)
+  const x = {};
+  if (Object.values(x)) {
+    console.log("a");
+  } else {
+    console.log("b");
   }
   useEffect(() => {
     (async () => {
@@ -38,18 +39,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      {!userObj ?  <NavBar /> : <></> }
-
-      <ServerPage loaded={loaded} />
-      {loaded && (
-        <Switch>
-          <Route path="/login" exact={true}>
-            <LoginForm />
-          </Route>
-          <Route path="/sign-up" exact={true}>
-            <SignUpForm />
-          </Route>
-          <ProtectedRoute path="/users" exact={true}>
+      {/* <ServerPage loaded={loaded} />
+      {loaded && ( */}
+      <Switch>
+        <Route path="/login" exact={true}>
+          <LoginForm />
+        </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm />
+        </Route>
+        <Route path="/about" exact={true}>
+          <About />
+        </Route>
+        {/* <ProtectedRoute path="/users" exact={true}>
             <UsersList />
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true}>

@@ -28,14 +28,14 @@ function MessageIndex({message}){
 
     return (
         <div className="message-content">
-            <img className="profile-pic" src={user.profileImg}>
+            <img className="message-profile-pic" src={user.profileImg}>
             </img>
             <div className="message-content-container">
                 <div className="message-profile-name">
-                    <div>
+                    <h3 className="message-content-name">
                         {user.username}
-                    </div>
-                    <div>
+                    </h3>
+                    <div className="message-content-date">
                         {message.createdAt}
                     </div>
                 </div>

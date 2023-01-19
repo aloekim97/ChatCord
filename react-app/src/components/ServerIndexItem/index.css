@@ -13,7 +13,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #212122
+    background-color: #212122;
+    z-index: 1000;
 }
 
 .server-title {
@@ -58,4 +59,55 @@
 
 .server-img:hover{
     cursor: pointer;
+}
+
+.server-dropdown-container{
+    align-self: top;
+    position: absolute;
+    /* width: 350px; */
+    width: 11%;
+    top: 3.5em;
+    left: 5.5em;
+    height: 25%;
+    background-color: #212122;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    justify-content: space-between;
+}
+
+.modal-button-text{
+    display: flex;
+    width: 100%;
+}
+
+.server-cardname-container{
+    align-self: top;
+    position: relative;
+    /* width: 350px; */
+    width: 100%;
+    /* display: inline; */
+    left: 5em;
+    height: 10%;
+    background-color: red;
+}
+
+.server-drop-button{
+    padding: 6px;
+    display: flex;
+    border-style: none;
+    border-radius: 2px;
+    background-color: #212122;
+    color: gray;
+    cursor:pointer;
+    width: 100%;
+}
+
+.server-drop-button:hover{
+    background-color: blue;
+}
+
+.dropdown-delete-button-container{
+    display: flex;
+    width: 100%;
 }
