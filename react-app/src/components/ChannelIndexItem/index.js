@@ -56,33 +56,33 @@ function ChannelIndex(){
         setDropdownOpen(true);
     }
 
-    useEffect(() => {
-        if (!isOpen) return;
+    // useEffect(() => {
+    //     if (!isOpen) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        };
+    //     const closeMenu = (e) => {
+    //         if (!ulRef.current.contains(e.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('click', closeMenu);
+    //     document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
-    }, [isOpen]);
+    //     return () => document.removeEventListener("click", closeMenu);
+    // }, [isOpen]);
 
-    useEffect(() => {
-        if (!dropdownOpen) return;
+    // useEffect(() => {
+    //     if (!dropdownOpen) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setDropdownOpen(false);
-            }
-        };
+    //     const closeMenu = (e) => {
+    //         if (!ulRef.current.contains(e.target)) {
+    //             setDropdownOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('click', closeMenu);
+    //     document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
-    }, [dropdownOpen]);
+    //     return () => document.removeEventListener("click", closeMenu);
+    // }, [dropdownOpen]);
 
 
     useEffect(() => {
@@ -198,7 +198,6 @@ function ChannelIndex(){
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    required
                                     className="search-input"
                                     placeholder="Search"
                                 />

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 import './allDms.css'
 import DmBar from './allDms'
 import dmReducer from '../../store/directMsg'
+import { getDmSearch } from '../../store/search'
 
 function DmPage(){
     const dispatch = useDispatch()
@@ -15,14 +16,14 @@ function DmPage(){
     const [senderId, setSenderId] = useState()
     const [dmId, setDmId] = useState()
     const [newM, setNewM] = useState('')
-
+    const [search, setSearch] = useState('')
 
       useEffect(() => {
         dispatch(loadTheDmsThunk(chatId))
         dispatch(getChats())
-    },[dispatch, chatId])  
-    
-    
+    },[dispatch, chatId])
+
+
     const onSub = async (e) => {
         e.preventDefault()
 
@@ -35,7 +36,7 @@ function DmPage(){
         })
         await dispatch(loadTheDmsThunk(chatId))
     }
-    
+
     const updateMessage = async (e) => {
         e.preventDefault()
 
@@ -49,9 +50,16 @@ function DmPage(){
     console.log(senderId)
 
 
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        // setErrors([]);
+        const body = await dispatch(getDmSearch(chatId, search))
+        // setIsSearch(true)
+        console.log('it submitted the message')
+
+    }
 
 
-    
     return (
         <div className='dm-container'>
             <DmBar />
@@ -62,13 +70,13 @@ function DmPage(){
                             <div className='sent-message' key={dm.id}>
                                 {/* <img src={}></img> */}
                                 <div>{dm.content}</div>
-                                <div className='edit/del'> 
+                                <div className='edit/del'>
                                 <button className='edit' onClick={function() {setDmId(dm.id); setSenderId(dm.sender_id)}}>Edit </button>
                                     <button className='del' onClick={async (e) => {
                                         e.preventDefault()
                                         await dispatch(deleteMessageThunk(chatId, dm.id))
                                         await dispatch(loadTheDmsThunk(chatId))
-                                    }}>Delete</button>                       
+                                    }}>Delete</button>
                                 </div>
                                 <form className='edit-box'>
                                     {dm.id === dmId ? (
@@ -76,11 +84,11 @@ function DmPage(){
                                             value={newM}
                                             onChange={e => setNewM(e.target.value)}
                                             placeholder={dm.content}
-                                        />) : null}                                          
-                                </form>                                
+                                        />) : null}
+                                </form>
                             </div>
                         )
-                    })}  
+                    })}
                 </div>
                 <form onSubmit={onSub}>
                     <input className='text-box'
@@ -88,8 +96,19 @@ function DmPage(){
                     onChange={e => setContent(e.target.value)}
                     />
                 </form>
+                <form className="search-form" onSubmit={handleSearchSubmit}>
+                    <label className="search-label" >
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="search-input"
+                            placeholder="Search"
+                        />
+                    </label>
+                </form>
             </div>
-            
+
         </div>
     )
 }
@@ -102,7 +121,7 @@ export default DmPage
                                     await dispatch(loadTheDmsThunk(chatId))
                                 }}>...</button> */}
  {/* <button className='edit' onClick={showText}>
-                                        {text ? (<input 
+                                        {text ? (<input
                                             type='text'
                                             value={newMessage}
                                             onChange={e => setNewMessage(e.target.value)}
@@ -113,4 +132,4 @@ export default DmPage
                                         e.preventDefault()
                                         await dispatch(deleteMessageThunk(chatId, dm.id))
                                         await dispatch(loadTheDmsThunk(chatId))
-                                    }}>Delete</button>              */}          
+                                    }}>Delete</button>              */}

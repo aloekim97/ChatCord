@@ -2,6 +2,8 @@ export const LOAD_SEARCH = 'search/loadSearch'
 
 export const ADD_SEARCH = 'search/addSearch'
 
+export const LOAD_DMSEARCH = 'search/loadDmSearch'
+
 export const loadSearch = (search) => {
     return {
         type: LOAD_SEARCH,
@@ -16,6 +18,25 @@ export const addSearch = (search) => {
     }
 }
 
+
+export const getDmSearch = (chatId, search) => async dispatch => {
+    const res = await fetch(`/api/search/dms/${chatId}`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            search
+        })
+    })
+
+    if (res.ok){
+        const body = await res.json()
+        console.log(body, 'yoooooooooooooooooooooo')
+        return body
+    }
+    else{
+        console.log('oooooooooooopsie')
+    }
+}
 
 
 export const getMessagesSearch = (channelId, search) => async dispatch => {
