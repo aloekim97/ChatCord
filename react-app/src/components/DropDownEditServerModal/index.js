@@ -8,7 +8,7 @@ function NewEditServerModal({ serverId }) {
   const dispatch = useDispatch();
   const server = useSelector((state) => state.server.allServers[serverId])
   const [name, setName] = useState(server?.name);
-  const [server_img, setServer_Img] = useState("");
+  const [server_img, setServer_Img] = useState(server?.serverImg);
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const id = serverId;

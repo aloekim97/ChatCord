@@ -15,22 +15,11 @@ function ServerDropdown({ server, channelId, channel }) {
   const history = useHistory();
   const userId = useSelector((state) => state.session.user.id);
   const ownerId = server.owner.id;
-  
+
   useEffect(() => {
     dispatch(getAllServersThunk());
     dispatch(getOneServerThunk(server.id));
   }, [dispatch]);
-
-  // const serverOwner = useSelector(
-  //   (state) => state.server.singleServer.owner.id
-  // );
-  // console.log("serverowner id", serverOwner);
-
-  //   const handleDelete = async (e) => {
-  //     e.preventDefault();
-  //     dispatch(deleteServerThunk(serverId));
-  //     history.push("/@me");
-  //   };
 
   return (
     <div className="server-dropdown-container">

@@ -70,14 +70,14 @@ function ServerPage() {
               />
             </button>
           </div>
-          <button
+          {/* <button
             onClick={() => {
               <LogoutButton />;
               history.push("/");
             }}
           >
             Log out
-          </button>
+          </button> */}
         </div>
       </div>
       {/* <div className="left-side-channels"> channels info </div> */}
