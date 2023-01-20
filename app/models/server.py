@@ -7,6 +7,10 @@ member_list = db.Table(
     db.Column("server_id", db.Integer, db.ForeignKey(add_prefix_for_prod("servers.id")), primary_key=True),
 )
 
+if environment == "production":
+    member_list.schema = SCHEMA
+
+
 class Server(db.Model):
     __tablename__ = 'servers'
 
