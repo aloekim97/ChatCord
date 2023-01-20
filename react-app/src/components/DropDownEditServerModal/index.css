@@ -1,0 +1,20 @@
+.edit-server-modal {
+    display: flex;
+    height: 396px;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+}
+
+.edit-footer-background {
+    background-color: rgb(242,243,245);
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
