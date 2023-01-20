@@ -1,7 +1,9 @@
 import './index.css';
+import LogoutButton from '../auth/LogoutButton';
+import { useHistory } from 'react-router';
 
 function ProfileCard({user}){
-
+    const history = useHistory();
 
     return(
         <div className="profile-card-container">
@@ -20,7 +22,16 @@ function ProfileCard({user}){
                     <div className='profile-card-member-date2'>Jan 1, 2020</div>
                 </div>
             </div>
-
+            <div className='profile-logout-container'>
+                <button className='profile-logout-button'
+                    onClick={() => {
+                    <LogoutButton />;
+                    history.push("/");
+                    }}
+                >
+                    Log out
+                </button>
+            </div>
         </div>
     )
 

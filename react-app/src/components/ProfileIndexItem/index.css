@@ -6,7 +6,7 @@
     /* padding: 10px; */
     bottom: 4em;
     left: 4em;
-    height: 35%;
+    height: 375px;
     background-color: #292B2F;
     border-radius: 10px;
 }
@@ -64,6 +64,21 @@
 
 .profile-card-member-date2{
     color: #C4C5C6;
+}
+
+.profile-logout-button{
+    background-color: #585B9E;
+    border-style: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-logout-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
 }
 
 .Server-profile-card-container{
