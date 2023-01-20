@@ -225,8 +225,13 @@
     color: #8D989D;
 }
 
+.edit-gear-icon {
+    font-size: 18px;
+}
+
 .channel-edit-button2:hover{
     background-color: #42464D;
+    color: rgb(255,255,255);
 }
 
 .channel-droplist{
