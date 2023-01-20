@@ -30,6 +30,7 @@ function DmPage(){
         socket = io();
         socket.on("chat", (chat) => {
             setMessages(messages => [...messages, chat])
+            dispatch(loadTheDmsThunk(chatId))
         })
         return (() => {
             socket.disconnect()
@@ -87,9 +88,9 @@ function DmPage(){
     // console.log(dmId)
     // console.log(senderId)
 
+    const deleteDm = (messageId)
 
-
-
+    
     
     return (
         <div className='dm-container'>
@@ -109,14 +110,14 @@ function DmPage(){
                                         await dispatch(loadTheDmsThunk(chatId))
                                     }}>Delete</button>                       
                                 </div>
-                                {/* <form className='edit-box'>
+                                <form className='edit-box'>
                                     {dm.id === dmId ? (
-                                        <input className='text-here' onSubmit={updateMessage}
-                                            value={newM}
-                                            onChange={e => setNewM(e.target.value)}
+                                        <input className='text-here' onSubmit={sendChat}
+                                            value={chatInput}
+                                            onChange={updateChatInput}
                                             placeholder={dm.content}
                                         />) : null}                                          
-                                    </form>                                 */}
+                                    </form>                                
                             </div>
                         )
                     })}  

@@ -1,11 +1,12 @@
 from flask_socketio import SocketIO, emit
-import os
 from app.models import db, DmContent
+import os
+from datetime import datetime
 
 # create your SocketIO instance
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "https://disclone-irt9.onrender.com/",
+        "http://disclone-irt9.onrender.com/",
         "https://disclone-irt9.onrender.com/"
     ]
 else:
@@ -22,8 +23,15 @@ def handle_chat(data):
         chat_id = data['chat_id'],
         sender_id = data['sender_id'],
         content = data['content'],
-        created_at = date
+        created_at = datetime.now()
     )
     db.session.add(dm)
     db.session.commit()
     emit("chat", data, broadcast=True)
+
+@socketio.on("delete")
+def handle_delete(data):
+    dm = DmContent.query.get(data['id'])
+    db.session.delete(dm)
+    db.session.commit()
+

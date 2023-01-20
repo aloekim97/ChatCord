@@ -42,6 +42,8 @@ app.register_blueprint(search_routes, url_prefix='/api/search')
 
 db.init_app(app)
 Migrate(app, db)
+socketio.init_app(app)
+
 
 # Application Security
 CORS(app)
@@ -85,6 +87,10 @@ def api_help():
     return route_list
 
 
+if __name__ == '__main__':
+    socketio.run(app)
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -102,6 +108,3 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file('index.html')
 
-
-if __name__ == '__main__':
-    socketio.run(app)
