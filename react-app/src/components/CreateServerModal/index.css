@@ -1,6 +1,7 @@
 .create-server-modal{
     display: flex;
     height: 423px;
+    width: 440px;
     align-items: center;
     flex-direction: column;
     background-color: white;
