@@ -58,6 +58,11 @@
     background-color: #2F3136;
 }
 
+.channel-messages-content-container{
+    height: 95vh;
+    overflow-y: scroll;
+}
+
 .channel-border{
     border: 1px none orange;
     display: flex;
