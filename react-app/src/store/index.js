@@ -4,7 +4,7 @@ import session from './session'
 import server from './server';
 import channel from './channel';
 import chats from './chats'
-import channelMsg from './channelMsg'
+import chmsgReducer from './channelMsg'
 import dmReducer from './directMsg'
 
 
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   server,
   channel,
   chats,
-  channelMsg,
+  chmsgReducer,
   dmReducer,
 });
 

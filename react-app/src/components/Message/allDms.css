@@ -78,4 +78,13 @@
 .sent-message{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.edit-box{
+    width: 100%;
+}
+
+.text-here{
+    width: 40%;
 }

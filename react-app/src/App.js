@@ -14,6 +14,8 @@ import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 import DmBar from "./components/Message/allDms";
 import DmPage from './components/Message/theDm'
+import MainPage from './components/Landing/me'
+import ChannelM from "./components/ChannelMessageIndexItem/channelM";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,7 +65,7 @@ function App() {
         </Route>
         <Route path="/@me" exact={true}>
           <ServerPage />
-          <DmBar />
+          <MainPage />
         </Route>
         <Route path="/@me/:chatId" exact={true}>
           <ServerPage />
@@ -72,6 +74,10 @@ function App() {
         <Route path="/servers/:serverId/:channelId" exact={true}>
           <ServerPage />
           <ChannelIndex />
+        </Route>
+        <Route path="/servers/:serverId/:channelId/M" exact={true}>
+          <ServerPage />
+          <ChannelM />
         </Route>
       </Switch>
       {/* )} */}

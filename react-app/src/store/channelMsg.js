@@ -89,7 +89,7 @@ const chmsgReducer = (state = {}, action) => {
             return newState
         }
         case CREATE_CHMSG: {
-            newState[action.message] = action.message
+            newState[action.message.id] = action.message.message
             return newState
         }
         case EDIT_CHMSG: {

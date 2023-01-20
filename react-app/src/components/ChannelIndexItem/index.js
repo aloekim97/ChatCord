@@ -149,11 +149,11 @@ function ChannelIndex(){
         .then(() => {
             setContent('')
         })
-        await dispatch(fetchChannels(serverId));
-        await dispatch(fetchOneChannel(channelId))
-        // dispatch(getAllServersThunk())
-        await dispatch(getOneServerThunk(serverId))
-        // setMembers(serverObj.members)
+        // await dispatch(fetchChannels(serverId));
+        // await dispatch(fetchOneChannel(channelId))
+        // // dispatch(getAllServersThunk())
+        // await dispatch(getOneServerThunk(serverId))
+        // // setMembers(serverObj.members)
         await dispatch(loadMsgThunk(channelId))
         // closeModal()
     }
