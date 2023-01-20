@@ -18,6 +18,7 @@ import { getOneServerThunk } from "../../store/server";
 import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
 import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
 import SearchPage from "../SearchResultsComponent";
+import { getMessagesSearch } from "../../store/search";
 
 function ChannelIndex(){
 
@@ -119,7 +120,7 @@ function ChannelIndex(){
     }
 
     const toggleSearchResults = () => {
-        setIsSearch(!isSearch)
+        setIsSearch(false)
     }
     // console.log('this is state', showMenu)
     // console.log('this is the server', serverObj)
@@ -164,6 +165,8 @@ function ChannelIndex(){
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
+        const body = await dispatch(getMessagesSearch(channelId, search))
+        setIsSearch(true)
         console.log('it submitted the message')
 
     }
@@ -188,7 +191,7 @@ function ChannelIndex(){
                         {currChannel.name}
                     </div>
                     <div className="search-form-container">
-                        <button onClick={toggleSearchResults}></button>
+                        <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>
                         <form className="search-form" onSubmit={handleSearchSubmit}>
                             <label className="search-label" >
                                 <input

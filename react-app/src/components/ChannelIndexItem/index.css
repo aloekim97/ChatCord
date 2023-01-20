@@ -42,6 +42,8 @@
 
 .search-form-container{
     display: flex;
+    position: relative;
+    align-items: center;
 }
 
 .members-container{
@@ -230,6 +232,15 @@
 .channel-droplist{
     list-style: none;
     padding: 0;
+}
+
+.search-form-cancel-button{
+    background-color: #202225;
+    border-style: none;
+    border-radius: 10px;
+    position: absolute;
+    left: 83%;
+    cursor:pointer;
 }
 
 .channel-droplist2{
