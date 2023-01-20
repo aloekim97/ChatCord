@@ -11,13 +11,27 @@ export const loadSearch = (search) => {
     }
 }
 
-export const addSearch = (search) => {
+// export const addSearch = (search) => {
+//     return {
+//         type: ADD_SEARCH,
+//         search
+//     }
+// }
+
+
+export const loadDmSearch = (search) => {
     return {
-        type: ADD_SEARCH,
+        type: LOAD_DMSEARCH,
         search
     }
 }
 
+// export const addDmSearch = (search) => {
+//     return {
+//         type: ADD_SEARCH,
+//         search
+//     }
+// }
 
 export const getDmSearch = (chatId, search) => async dispatch => {
     const res = await fetch(`/api/search/dms/${chatId}`, {
@@ -31,6 +45,8 @@ export const getDmSearch = (chatId, search) => async dispatch => {
     if (res.ok){
         const body = await res.json()
         console.log(body, 'yoooooooooooooooooooooo')
+        console.log(body[0].id)
+        dispatch(loadDmSearch(body))
         return body
     }
     else{
@@ -64,6 +80,7 @@ const searchReducer = (state = initialState, action) => {
         case LOAD_SEARCH:
             newState = Object.assign({}, state);
             newState.search = {}
+            newState.dmSearch = {...state.dmSearch}
             const search = action.search
             search.forEach((item) => {
                 newState.search[item.id] = item
@@ -72,6 +89,15 @@ const searchReducer = (state = initialState, action) => {
         case ADD_SEARCH:
             newState = Object.assign({}, state)
             newState.search = {...action.search}
+            return newState
+        case LOAD_DMSEARCH:
+            newState = Object.assign({}, state)
+            newState.dmSearch = {}
+            newState.search = {...state.search}
+            const searchDm = action.search
+            searchDm.forEach(item => {
+                newState.dmSearch[item.id] = item
+            })
             return newState
       default:
         return state;
