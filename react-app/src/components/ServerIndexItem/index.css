@@ -59,6 +59,7 @@
 
 .server-img-container:hover > .server-img {
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .server-img {
