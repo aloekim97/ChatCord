@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom"
 import './allDms.css'
 import DmBar from './allDms'
 import dmReducer from '../../store/directMsg'
+import {io} from 'socket.io-client'
+
+let socket;
 
 function DmPage(){
     const dispatch = useDispatch()
@@ -15,12 +18,48 @@ function DmPage(){
     const [senderId, setSenderId] = useState()
     const [dmId, setDmId] = useState()
     const [newM, setNewM] = useState('')
+    const user = useSelector(state => state.session.user)
+    const [messages, setMessages] = useState([]);
+    const [chatInput, setChatInput] = useState("");
 
-
-      useEffect(() => {
+    useEffect(() => {
         dispatch(loadTheDmsThunk(chatId))
-        dispatch(getChats())
-    },[dispatch, chatId])  
+    }, [dispatch, chatId])
+
+    useEffect(() => {
+        socket = io();
+        socket.on("chat", (chat) => {
+            setMessages(messages => [...messages, chat])
+        })
+        return (() => {
+            socket.disconnect()
+        })
+    }, [])
+    
+
+
+    const updateChatInput = (e) => {
+        setChatInput(e.target.value)
+    };
+    const sendChat = (e) => {
+        e.preventDefault()
+        socket.emit("chat", {
+            chat_id: chatId, 
+            sender_id: user.id, 
+            content: chatInput });
+        setChatInput("")
+    }
+
+    useEffect(() => {
+        const func = async () => {
+          setMessages([])
+
+            await dispatch(loadTheDmsThunk(chatId))
+
+
+          }
+    })
+    
     
     
     const onSub = async (e) => {
@@ -36,17 +75,17 @@ function DmPage(){
         await dispatch(loadTheDmsThunk(chatId))
     }
     
-    const updateMessage = async (e) => {
-        e.preventDefault()
+    // const updateMessage = async (e) => {
+    //     e.preventDefault()
 
-        const data = {
-            newM
-        }
-        await dispatch(editMessageThunk(chatId, dmId, data, senderId))
-        await dispatch(loadTheDmsThunk(chatId))
-    }
-    console.log(dmId)
-    console.log(senderId)
+    //     const data = {
+    //         newM
+    //     }
+    //     await dispatch(editMessageThunk(chatId, dmId, data, senderId))
+    //     await dispatch(loadTheDmsThunk(chatId))
+    // }
+    // console.log(dmId)
+    // console.log(senderId)
 
 
 
@@ -70,27 +109,41 @@ function DmPage(){
                                         await dispatch(loadTheDmsThunk(chatId))
                                     }}>Delete</button>                       
                                 </div>
-                                <form className='edit-box'>
+                                {/* <form className='edit-box'>
                                     {dm.id === dmId ? (
                                         <input className='text-here' onSubmit={updateMessage}
                                             value={newM}
                                             onChange={e => setNewM(e.target.value)}
                                             placeholder={dm.content}
                                         />) : null}                                          
-                                </form>                                
+                                    </form>                                 */}
                             </div>
                         )
                     })}  
+                    </div>
+                    {/* <form onSubmit={onSub}>
+                        <input className='text-box'
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
+                        />
+                    </form> */}
+                    <form onSubmit={sendChat}>
+                         <input
+                            value={chatInput}
+                            onChange={updateChatInput}
+                        />
+                         <button type="submit">Send</button>
+                     </form>
                 </div>
-                <form onSubmit={onSub}>
-                    <input className='text-box'
-                    value={content}
-                    onChange={e => setContent(e.target.value)}
-                    />
-                </form>
-            </div>
-            
+                
         </div>
+        // <div>
+        //     <div> 
+        //         {messages.map((message, ind) => (
+        //             <div key={ind}>{`${message.user}: ${message.content}`}</div>
+        //         ))}
+        //     </div>
+        // </div>
     )
 }
 

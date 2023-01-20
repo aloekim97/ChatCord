@@ -260,9 +260,9 @@ function ChannelIndex(){
             </div>
             <div className="messages-members-border">
                 <div className="messages-container">
-                    {/* {messages.length > 0? messages.map(message => (
+                    {messages.length > 0? messages.map(message => (
                         <MessageIndex message={message} />
-                    )) : <div>Hello</div>} */}
+                    )) : <div>Hello</div>}
                     <form className="create-messages-form" onSubmit={handleSubmit}>
                         <label>
                             <input
