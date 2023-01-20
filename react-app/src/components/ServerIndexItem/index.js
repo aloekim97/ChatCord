@@ -52,7 +52,7 @@ function ServerPage() {
           <div className="border-break"></div>
         </div>
         <div className="serverList">
-          <div>
+          <div className="server-index-container">
             {filteredServers.map((server) => (
               <ServerIndex server={server} />
             ))}

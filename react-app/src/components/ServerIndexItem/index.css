@@ -107,15 +107,29 @@
 .server-cardname-container{
     align-self: top;
     position: relative;
-    left: 85px;
-    width: auto;
+    left: 110px;
+    top: 10px;
+    width: 100px;
     /* width: 100%; */
     /* display: inline; */
     /* left: 5em; */
     height: 40px;
     background-color: #202225;
     align-content: center;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px 5px 15px;
+    border-radius: 5px;
 }
+
+.server-index-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .server-popout-card{
     position: absolute;
