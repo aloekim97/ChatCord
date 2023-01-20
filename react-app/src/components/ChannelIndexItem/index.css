@@ -310,3 +310,71 @@
     flex-direction: column;
     color: white;
 }
+
+
+.member-cardname-container{
+    align-self: top;
+    position: absolute;
+    right: 25px;
+    width: 300px;
+    /* width: 100%; */
+    /* display: inline; */
+    /* left: 5em; */
+    height: 250px;
+    background-color: #202225;
+    align-content: center;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding: 60px 0px 0px 0px;
+    border-radius: 5px;
+    background-color: blue ;
+    overflow: hidden;
+}
+
+.member-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.member-card-banner{
+    display: flex;
+}
+
+.member-card-info-container{
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    background-color: #292B2F;
+    border-radius: 5px;
+    align-items: flex-end;
+}
+
+.member-logout-container{
+
+}
+
+.member-profile-card-img{
+    width: 80px;
+    height: auto;
+    position: absolute;
+    top: 40px;
+}
+
+.member-card-banner{
+    width: 100%;
+    background-color: blue ;
+    /* height: ; */
+}
+
+.members-card-data-container{
+    padding: 25px 20px 0px 20px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 76%;
+    background-color: #18191C;
+    border-radius: 5px;
+}
