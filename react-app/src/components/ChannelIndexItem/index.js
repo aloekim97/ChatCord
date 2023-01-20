@@ -17,7 +17,7 @@ import ServerProfileCard from "../ProfileIndexItem/serverProfileCard";
 import { getOneServerThunk } from "../../store/server";
 import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
 import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
-
+import SearchPage from "../SearchResultsComponent";
 
 function ChannelIndex(){
 
@@ -33,6 +33,7 @@ function ChannelIndex(){
     const [showMenu, setShowMenu] = useState(false);
     const [isOpen, setIsOpen] = useState(false)
     const [search, setSearch] = useState('')
+    const [isSearch, setIsSearch] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
@@ -117,6 +118,9 @@ function ChannelIndex(){
         setDropdownOpen(!dropdownOpen)
     }
 
+    const toggleSearchResults = () => {
+        setIsSearch(!isSearch)
+    }
     // console.log('this is state', showMenu)
     // console.log('this is the server', serverObj)
     // console.log('hi, just checking on the channels obj', channelsObj)
@@ -183,7 +187,8 @@ function ChannelIndex(){
                         <i class="fa-solid fa-hashtag"></i>
                         {currChannel.name}
                     </div>
-                    <div>
+                    <div className="search-form-container">
+                        <button onClick={toggleSearchResults}></button>
                         <form className="search-form" onSubmit={handleSearchSubmit}>
                             <label className="search-label" >
                                 <input
@@ -250,30 +255,34 @@ function ChannelIndex(){
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
                 </div>
             </div>
-            <div className="messages-container">
-                {/* {messages.length > 0? messages.map(message => (
-                    <MessageIndex message={message} />
-                )) : <div>Hello</div>} */}
-                <form className="create-messages-form" onSubmit={handleSubmit}>
-                    <label>
-                        <input
-                            type="text"
-                            required
-                            value={content}
-                            onChange = {e => setContent(e.target.value)}
-                            className="create-channel-input"
-                            placeholder="Message"
-                        />
-                    </label>
-                </form>
-            </div>
-            <div className="members-container">
-                <div className="members-online-status">Members - {members.length}</div>
-                {
-                    members && members.map(member => (
-                        <MembersDisplay member={member} server={serverObj} />
-                    ))
-                }
+            <div className="messages-members-border">
+                <div className="messages-container">
+                    {/* {messages.length > 0? messages.map(message => (
+                        <MessageIndex message={message} />
+                    )) : <div>Hello</div>} */}
+                    <form className="create-messages-form" onSubmit={handleSubmit}>
+                        <label>
+                            <input
+                                type="text"
+                                required
+                                value={content}
+                                onChange = {e => setContent(e.target.value)}
+                                className="create-channel-input"
+                                placeholder="Message"
+                            />
+                        </label>
+                    </form>
+                </div>
+                {isSearch ? <SearchPage /> : <div className="members-container">
+                    <div className="members-online-status">Members - {members.length}</div>
+                    {
+                        members && members.map(member => (
+                            <MembersDisplay member={member} server={serverObj} />
+                        ))
+                    }
+                </div> }
+
+
             </div>
         </div>
     )
