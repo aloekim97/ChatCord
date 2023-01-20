@@ -23,7 +23,7 @@ class Server(db.Model):
     server_img = db.Column(db.String(2000), nullable=False)
 
     owner = db.relationship("User", back_populates="server")
-    channel = db.relationship("Channel", back_populates="server")
+    channel = db.relationship("Channel", back_populates="server", cascade="all, delete")
     members = db.relationship("User", secondary=member_list, back_populates="servers")
 
     def to_dict(self):

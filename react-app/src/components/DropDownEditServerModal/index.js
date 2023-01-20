@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllServersThunk, updateServer, getOneServerThunk } from "../../store/server";
 import { useModal } from "../../context/Modal";
 import "./index.css";
-import {
-  addServer,
-  getAllServersThunk,
-  getOneServerThunk,
-} from "../../store/server";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { addChannel, loadChannel, loadChannels } from "../../store/channel";
 
-function CreateServerModal({ user }) {
+function NewEditServerModal({ serverId }) {
   const dispatch = useDispatch();
-  const [name, setName] = useState(`${user}'s server`);
-  const [server_img, setServer_img] = useState("");
+  const server = useSelector((state) => state.server.allServers[serverId])
+  const [name, setName] = useState(server?.name);
+  const [server_img, setServer_Img] = useState(server?.serverImg);
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
-  const history = useHistory();
+  const id = serverId;
 
   useEffect(() => {
     let newErrors = [];
@@ -31,40 +26,32 @@ function CreateServerModal({ user }) {
     setErrors(newErrors);
   }, [name, server_img]);
 
-  useEffect(() => {
-    dispatch(getAllServersThunk());
-  }, [dispatch]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrors([]);
 
-    const newServer = {
+    const serverData = {
       name,
       server_img,
+      id,
     };
 
-    const body = await dispatch(addServer(newServer));
-    console.log("yo about to hit the push", body);
-    dispatch(addChannel(body.server.channels[0]));
-    dispatch(loadChannel(body.server.channels[0]));
-    dispatch(loadChannels(body.server.channels));
+    await dispatch(updateServer(serverData));
+    await dispatch(getAllServersThunk());
+    await dispatch(getOneServerThunk(serverId))
 
-    history.push(`/servers/${body.server.id}/${body.server.channels[0].id}`);
     closeModal();
   };
 
   return (
-    <>
-      <div className="create-server-modal">
+    <div className="edit-server-modal">
         <div className="create-server-top-container">
-          <h1 className="create-server-h1">Customize your server</h1>
+          <h1 className="create-server-h1">Edit your server</h1>
           <div className="description-container">
             <div className="create-server-descript">
-              Give your new server a personality with a name and an
+              Ready for a change? Give your server a fresh new name
             </div>
             <div className="create-server-descript">
-              icon. You can always change it later.
+              and image! You can always change it later.
             </div>
           </div>
         </div>
@@ -82,7 +69,7 @@ function CreateServerModal({ user }) {
             SERVER NAME
             <input
               type="text"
-              value={name}
+            value={name}
               onChange={(e) => setName(e.target.value)}
               required
               className="create-server-modal-input"
@@ -94,32 +81,25 @@ function CreateServerModal({ user }) {
             <input
               type="text"
               value={server_img}
-              onChange={(e) => setServer_img(e.target.value)}
+              onChange={(e) => setServer_Img(e.target.value)}
               required
               className="create-server-modal-input"
             />
           </label>
 
-          <div className="server-disclaimer">
-            <div className="disclaim agreement">
-              By creating a server, you agree to ChatCord's
-            </div>
-            <div className="guidelines agreement">Community Guidelines</div>
-          </div>
-          <div className="footer-background">
+          <div className="edit-footer-background">
             <div className="create-server-footer">
               <div className="create-server-cancel" onClick={closeModal}>
                 Cancel
               </div>
               <button className="create-server-btn" type="submit">
-                Create
+                Save
               </button>
             </div>
           </div>
         </form>
       </div>
-    </>
   );
 }
 
-export default CreateServerModal;
+export default NewEditServerModal;

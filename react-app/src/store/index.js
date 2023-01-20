@@ -6,7 +6,7 @@ import channel from './channel';
 import chats from './chats'
 import chmsgReducer from './channelMsg'
 import dmReducer from './directMsg'
-
+import search from './search';
 
 const rootReducer = combineReducers({
   session,
@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
   chats,
   chmsgReducer,
   dmReducer,
+  search,
 });
 
 let enhancer;

@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import ServerNameCard from "./serverhovercard";
 import { fetchChannels } from "../../store/channel";
 import { getOneServerThunk } from "../../store/server";
+import "./index.css";
+
 function ServerIndex({ server }) {
   // console.log(server.channels);
   const dispatch = useDispatch();
