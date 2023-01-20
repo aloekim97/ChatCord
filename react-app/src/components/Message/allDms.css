@@ -1,8 +1,8 @@
 .bar-next-to-servers{
     display: flex;
     flex-direction: column;
-    padding-left: 70px;
-    width: 17%; 
+    padding-left: 80px;
+    width: 223px;
     /* 17 */
     height: 100vh;
     background-color: rgb(47, 49, 54);
@@ -43,11 +43,11 @@
 
 .butt:hover{
     cursor: pointer;
-    
+
 }
 
 .single-chat{
-     display: flex;   
+     display: flex;
      align-items: center;
      font-size: 16px;
      text-decoration: none;
