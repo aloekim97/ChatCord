@@ -13,13 +13,13 @@ import DeleteServerModal from "../DeleteServerModal";
 function ServerDropdown({ server, channelId, channel }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector((state) => state.session.user.id);
-
-
+  const userId = useSelector((state) => state.session.user.id);
+  const ownerId = server.owner.id;
+  
   useEffect(() => {
-    dispatch(getAllServersThunk())
-    dispatch(getOneServerThunk(server.id))
-  }, [dispatch])
+    dispatch(getAllServersThunk());
+    dispatch(getOneServerThunk(server.id));
+  }, [dispatch]);
 
   // const serverOwner = useSelector(
   //   (state) => state.server.singleServer.owner.id
@@ -35,14 +35,14 @@ function ServerDropdown({ server, channelId, channel }) {
   return (
     <div className="server-dropdown-container">
       <div style={{ width: "100%" }}>
-        {/* {user === serverOwner && ( */}
+        {userId === ownerId && (
           <button className="server-drop-button">
             <OpenModalMenuItem
               itemText="Edit Server"
               modalComponent={<NewEditServerModal serverId={server.id} />}
             />
           </button>
-        {/* )} */}
+        )}
         <button className="server-drop-button">
           <OpenModalMenuItem
             itemText="Create Channel"
@@ -63,16 +63,14 @@ function ServerDropdown({ server, channelId, channel }) {
         </button>
       </div>
       <div className="dropdown-delete-button-container">
-        {/* {user === serverOwner && ( */}
+        {userId === ownerId && (
           <button className="server-drop-button">
-
             <OpenModalMenuItem
               itemText="Delete Server"
               modalComponent={<DeleteServerModal serverId={server.id} />}
             />
-
           </button>
-        // )}
+        )}
       </div>
     </div>
   );

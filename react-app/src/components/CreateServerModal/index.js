@@ -117,7 +117,6 @@ function CreateServerModal({ user }) {
             </div>
           </div>
         </form>
-        <div className="background-grey"></div>
       </div>
     </>
   );

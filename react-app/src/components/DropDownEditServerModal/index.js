@@ -48,10 +48,10 @@ function NewEditServerModal({ serverId }) {
           <h1 className="create-server-h1">Edit your server</h1>
           <div className="description-container">
             <div className="create-server-descript">
-              Give your new server a personality with a name and an
+              Ready for a change? Give your server a fresh new name
             </div>
             <div className="create-server-descript">
-              icon. You can always change it later.
+              and image! You can always change it later.
             </div>
           </div>
         </div>
@@ -98,7 +98,6 @@ function NewEditServerModal({ serverId }) {
             </div>
           </div>
         </form>
-        <div className="background-grey"></div>
       </div>
   );
 }
