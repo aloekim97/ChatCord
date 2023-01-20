@@ -131,7 +131,7 @@ function ChannelIndex(){
     // const channels = Object.values(channelsObj)
     console.log('this is server obj', serverObj)
     // const currChannel = channels[channelId-1]
-    const messages = currChannel.message
+    // const messages = currChannel.message
     // console.log('this is the currChannel', channels)
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
@@ -188,7 +188,7 @@ function ChannelIndex(){
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
                         <i class="fa-solid fa-hashtag"></i>
-                        {currChannel.name}
+                        {/* {currChannel.name} */}
                     </div>
                     <div className="search-form-container">
                         <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>

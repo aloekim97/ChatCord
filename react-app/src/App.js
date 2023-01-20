@@ -38,7 +38,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <>
       {/* <ServerPage loaded={loaded} />
       {loaded && ( */}
       <Switch>
@@ -75,7 +75,8 @@ function App() {
         </Route>
       </Switch>
       {/* )} */}
-    </BrowserRouter>
+    </>
+
   );
 }
 
