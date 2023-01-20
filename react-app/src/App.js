@@ -16,6 +16,7 @@ import DmBar from "./components/Message/allDms";
 import DmPage from './components/Message/theDm'
 import MainPage from './components/Landing/me'
 import ChannelM from "./components/ChannelMessageIndexItem/channelM";
+import ComingSoon from "./components/ComingSoonComponent";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -78,6 +79,10 @@ function App() {
         <Route path="/servers/:serverId/:channelId/M" exact={true}>
           <ServerPage />
           <ChannelM />
+        </Route>
+        <Route path="/coming-soon" exact={true}>
+          <ServerPage />
+          <ComingSoon />
         </Route>
       </Switch>
       {/* )} */}

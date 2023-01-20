@@ -8,8 +8,8 @@ import './allDms.css'
 function DmBar() {
     const dispatch = useDispatch()
     const chats = useSelector((state) => state.chats)
-    
-    
+
+
     useEffect(() => {
         dispatch(getChats())
     }, [dispatch])
@@ -20,7 +20,7 @@ function DmBar() {
                 <NavLink className='friends' to={'/@me'}>
                     <button className='butt'>Friends</button>
                 </NavLink>
-                <NavLink className='nitro' to={'/@me'}>
+                <NavLink className='nitro' to={'/coming-soon'}>
                     <button className='butt'>Nitro</button>
                 </NavLink>
                 <NavLink className='message_req' to={'/@me'}>
@@ -37,7 +37,7 @@ function DmBar() {
                             <div>{chat.receiveUser.username}</div>
                         </NavLink>
                     )
-                })}      
+                })}
             </div>
         </div>
 
@@ -46,4 +46,3 @@ function DmBar() {
 }
 
 export default DmBar
-
