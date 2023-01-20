@@ -42,7 +42,7 @@ const searchReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SEARCH:
             newState = Object.assign({}, state);
-            newState.search = {...state.search}
+            newState.search = {}
             const search = action.search
             search.forEach((item) => {
                 newState.search[item.id] = item
