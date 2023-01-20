@@ -15,6 +15,8 @@ function ServerPage() {
   const serverObject = useSelector((state) => state.server.allServers);
   const serversArr = Object.values(serverObject);
   const user = useSelector((state) => state.session.user.id);
+  const userName = useSelector((state) => state.session.user.username)
+
 
   // need to loop through allservers
   // for each server need to check the memberlist
@@ -64,7 +66,7 @@ function ServerPage() {
                     className="add-server-img-icon"
                   ></img>
                 }
-                modalComponent={<CreateServerModal />}
+                modalComponent={<CreateServerModal user={userName} />}
               />
             </button>
           </div>
