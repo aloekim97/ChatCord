@@ -34,6 +34,7 @@ function EditModal({channelId, channel, serverObj}){
         // console.log('following')
         dispatch(loadChannel(body.channel))
         dispatch(updateServer(body.server))
+        // history.push(`/servers/${serverObj.id}/${body.channel.id}`)
         closeModal()
     }
 
