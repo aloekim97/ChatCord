@@ -1,65 +1,85 @@
 .bar-next-to-servers{
     display: flex;
     flex-direction: column;
-    padding-left: 70px;
-    width: 17%; 
-    /* 17 */
+    padding-left: 80px;
+    width: 235px;
     height: 100vh;
     background-color: rgb(47, 49, 54);
 }
 
-.dm{
+.dm {
     padding-top: 15px;
-    color: rgb(150, 152, 157)
+    color: rgb(150,152,157);
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    width: 235px;
 }
 
 .butt-container{
     display: flex;
     flex-direction: column;
     width: 95%;
+    margin-top: 10px;
 }
 
-.friends{
+.user-links {
     width: 100%;
+    text-decoration: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nitro{
-    width: 100%;
-}
-
-.message_req{
-    width: 100%;
+.user-links:hover {
+    background-color: rgb(66,70,77);
 }
 
 .butt{
     width: 100%;
+    text-decoration: none;
     background-color: transparent;
     border: none;
-    padding-top: 5%;
-    font-size: 16px;
+    padding: 0;
+    margin-left: 15px;
+    font-size: 15px;
     text-align: left;
-    color: rgb(150, 152, 157);
+    color: rgb(150,152,157);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
 }
 
 .butt:hover{
     cursor: pointer;
-    
+    color: rgb(255,255,255);
 }
 
 .single-chat{
-     display: flex;   
+     display: flex;
+     width: 210px;
+     height: 40px;
      align-items: center;
      font-size: 16px;
      text-decoration: none;
      color: rgb(150, 152, 157);
-}
-.dm-img{
-    width: 15%;
-    padding-right: 4%;
+     margin-top: 10px;
 }
 
-.dm-container{
-    display: flex;
+.single-chat:hover {
+    cursor: pointer;
+    color: rgb(255,255,255);
+    background-color: rgb(66,70,77);
+}
+
+.dm-img{
+    width: 15%;
+    padding-right: 10px;
+    margin-left: 10px;
+}
+
+.chat-username {
+    font-size: 15px;
 }
 
 .chat-container{
@@ -87,4 +107,21 @@
 
 .text-here{
     width: 40%;
+}
+
+.extra-links-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 26px;
+    color: rgb(150,152,157);
+}
+
+.extra-links-container:hover {
+    color: rgb(255,255,255);
+}
+
+.exta-icons {
+    font-size: 19px;
+    margin-left: 5px;
 }

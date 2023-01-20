@@ -252,7 +252,7 @@ function ChannelIndex(){
                     </div>
                     <button className='channel-edit-button2'>
                     <OpenModalMenuItem
-                                itemText={<i class="fa-solid fa-gear"></i>}
+                                itemText={<i class="fa-solid fa-gear edit-gear-icon"></i>}
                                 modalComponent={<EditProfileModal />}
                     />
                 </button>
