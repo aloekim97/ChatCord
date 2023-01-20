@@ -7,11 +7,11 @@ import './allDms.css'
 import DmBar from './allDms'
 import dmReducer from '../../store/directMsg'
 import { getDmSearch } from '../../store/search'
-import {io} from 'socket.io-client'
+
 
 let socket;
 
-function DmPage(){
+export default function DmPage(){
     const dispatch = useDispatch()
     const {chatId} = useParams()
     const dms = useSelector(state => state.dmReducer.chatDetails)
@@ -42,6 +42,7 @@ function DmPage(){
     
     const updateMessage = async (e) => {
         e.preventDefault()
+    }
 
     //     const data = {
     //         newM
@@ -104,24 +105,3 @@ function DmPage(){
         // </div>
     )
 }
-
-export default DmPage
-
-{/* <button className='del/edit' onClick={async (e) => {
-                                    e.preventDefault()
-                                    await dispatch(deleteMessageThunk(chatId, dm.id))
-                                    await dispatch(loadTheDmsThunk(chatId))
-                                }}>...</button> */}
- {/* <button className='edit' onClick={showText}>
-                                        {text ? (<input
-                                            type='text'
-                                            value={newMessage}
-                                            onChange={e => setNewMessage(e.target.value)}
-                                            placeholder={dm.content}
-                                        />) : 'Edit'}
-                                    </button>
-                                    <button className='del' onClick={async (e) => {
-                                        e.preventDefault()
-                                        await dispatch(deleteMessageThunk(chatId, dm.id))
-                                        await dispatch(loadTheDmsThunk(chatId))
-                                    }}>Delete</button>              */}
