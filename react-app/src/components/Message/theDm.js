@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom"
 import './allDms.css'
 import DmBar from './allDms'
 import dmReducer from '../../store/directMsg'
-import {io} from 'socket.io-client'
+import { getDmSearch } from '../../store/search'
+
 
 let socket;
 
-function DmPage(){
+export default function DmPage(){
     const dispatch = useDispatch()
     const {chatId} = useParams()
     const dms = useSelector(state => state.dmReducer.chatDetails)
@@ -76,8 +77,9 @@ function DmPage(){
         await dispatch(loadTheDmsThunk(chatId))
     }
     
-    // const updateMessage = async (e) => {
-    //     e.preventDefault()
+    const updateMessage = async (e) => {
+        e.preventDefault()
+    }
 
     //     const data = {
     //         newM
@@ -156,7 +158,7 @@ export default DmPage
                                     await dispatch(loadTheDmsThunk(chatId))
                                 }}>...</button> */}
  {/* <button className='edit' onClick={showText}>
-                                        {text ? (<input 
+                                        {text ? (<input
                                             type='text'
                                             value={newMessage}
                                             onChange={e => setNewMessage(e.target.value)}
@@ -167,4 +169,4 @@ export default DmPage
                                         e.preventDefault()
                                         await dispatch(deleteMessageThunk(chatId, dm.id))
                                         await dispatch(loadTheDmsThunk(chatId))
-                                    }}>Delete</button>              */}         
+                                    }}>Delete</button>              */}
