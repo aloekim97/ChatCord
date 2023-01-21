@@ -21,7 +21,7 @@
     align-items: center;
     width: 500px;
     height: 580px;
-    margin-top: 300px;
+    margin-top: 260px;
     border: 1px solid black;
     border-radius: 3%;
     border-color: rgb(97,112,252);
@@ -113,6 +113,10 @@
     text-decoration: none;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 17px;
+}
+
+.register:hover {
+    text-decoration: underline;
 }
 
 input:focus {
