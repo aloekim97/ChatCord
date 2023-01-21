@@ -132,7 +132,7 @@ function ChannelIndex(){
     // const channels = Object.values(channelsObj)
     console.log('this is server obj', serverObj)
     // const currChannel = channels[channelId-1]
-    // const messages = currChannel.message
+    const messages = currChannel.message
     // console.log('this is the currChannel', channels)
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
@@ -266,9 +266,9 @@ function ChannelIndex(){
                             <MessageIndex message={message} />
                         ))}
                     </div>
-                    {/* {chats.length > 0? chats.map(message => (
+                    {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />
-                    )) : <div>Hello</div>} */}
+                    )) : <div>Hello</div>}
                     <form className="create-messages-form" onSubmit={handleSubmit}>
                         <label>
                             <input

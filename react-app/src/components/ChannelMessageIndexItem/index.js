@@ -5,26 +5,11 @@ import { fetchChannels } from "../../store/channel";
 import { getOneServerThunk } from "../../store/server";
 import { loadMsg } from "../../store/channelMsg";
 import './index.css';
-// import { io } from 'socket.io-client';
-
-// let socket;
 
 function MessageIndex({message}){
 
-    // const dispatch = useDispatch()
     const { user } = message
-    // const [messages, setMessages] = useState([])
-    
-    
-    // useEffect(() => {
-    //     socket = io();
-    //     socket.on("chat", (chat) => {
-    //         setMessages(messages => [...messages, chat])
-    //     })
-    //     return (() => {
-    //         socket.disconnect()
-    //     })
-    // }, [])
+
 
     return (
         <div className="message-content">
