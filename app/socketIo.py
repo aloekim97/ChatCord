@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO, emit
-from app.models import db, DmContent
+from app.models import db, DmContent, Message
 import os
 from datetime import datetime
 
@@ -31,7 +31,9 @@ def handle_chat(data):
 
 @socketio.on("delete")
 def handle_delete(data):
-    dm = DmContent.query.get(data['id'])
-    db.session.delete(dm)
+    print(data)
+    dm = DmContent.query.filter(DmContent.id == data['msg_id'], ).all()
+    for o in dm:
+        db.session.delete(o)
     db.session.commit()
-
+    emit("delete", data, broadcast=True)

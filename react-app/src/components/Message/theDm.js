@@ -23,7 +23,7 @@ export default function DmPage() {
   const [content, setContent] = useState("");
   const [senderId, setSenderId] = useState();
   const [dmId, setDmId] = useState();
-  const [newM, setNewM] = useState("");
+  const [delId, setDelId] = useState();
   const user = useSelector((state) => state.session.user);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
@@ -36,13 +36,18 @@ export default function DmPage() {
   useEffect(() => {
     socket = io();
     socket.on("chat", (chat) => {
-      setMessages((messages) => [...messages, chat]);
+      setMessages((messages) => delete messages[chat.id]);
       dispatch(loadTheDmsThunk(chatId));
     });
+    socket.on("delete", (chat) => {
+        setMessages((messages) => [...messages, chat])
+        dispatch(loadTheDmsThunk(chatId))
+    })
     return () => {
       socket.disconnect();
     };
   }, []);
+
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
@@ -73,17 +78,17 @@ export default function DmPage() {
     };
   });
 
-  const onSub = async (e) => {
-    e.preventDefault();
+//   const onSub = async (e) => {
+//     e.preventDefault();
 
-    const input = {
-      content,
-    };
-    await dispatch(sendMessageThunk(chatId, input)).then(() => {
-      setContent("");
-    });
-    await dispatch(loadTheDmsThunk(chatId));
-  };
+//     const input = {
+//       content,
+//     };
+//     await dispatch(sendMessageThunk(chatId, input)).then(() => {
+//       setContent("");
+//     });
+//     await dispatch(loadTheDmsThunk(chatId));
+//   };
 
   const updateMessage = async (e) => {
     e.preventDefault();
@@ -98,7 +103,10 @@ export default function DmPage() {
   // console.log(dmId)
   // console.log(senderId)
 
-  // const deleteDm = (messageId)
+  const deleteDm = (e) => {
+    socket.emit("delete", {msg_id: delId, chat_id: chatId})
+  } 
+  console.log(dms)
 
   return (
     <div className="dm-container">
@@ -118,15 +126,11 @@ export default function DmPage() {
                       setSenderId(dm.sender_id);
                     }}
                   >
-                    Edit{" "}
+                    Edit
                   </button>
                   <button
                     className="del"
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      await dispatch(deleteMessageThunk(chatId, dm.id));
-                      await dispatch(loadTheDmsThunk(chatId));
-                    }}
+                    onClick={function() {deleteDm(); setDelId(dm.id)}}
                   >
                     Delete
                   </button>
