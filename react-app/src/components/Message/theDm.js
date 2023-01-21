@@ -7,6 +7,7 @@ import './allDms.css'
 import DmBar from './allDms'
 import dmReducer from '../../store/directMsg'
 import { getDmSearch } from '../../store/search'
+import {io} from 'socket.io-client'
 
 
 let socket;
