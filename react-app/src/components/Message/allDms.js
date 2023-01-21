@@ -21,7 +21,7 @@ function DmBar() {
             <button className="butt">Friends</button>
           </div>
         </NavLink>
-        <NavLink className="user-links" to={"/@me"}>
+        <NavLink className="user-links" to={"/coming-soon"}>
           <div className="extra-links-container">
           <i class="fa-solid fa-list-check exta-icons"></i>
             <button className="butt">Coming Soon</button>
