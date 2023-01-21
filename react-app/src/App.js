@@ -13,10 +13,11 @@ import About from "./components/AboutUs";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 import DmBar from "./components/Message/allDms";
-import DmPage from './components/Message/theDm'
-import MainPage from './components/Landing/me'
+import DmPage from "./components/Message/theDm";
+import MainPage from "./components/Landing/me";
 import ChannelM from "./components/ChannelMessageIndexItem/channelM";
 import ComingSoon from "./components/ComingSoonComponent";
+import PageNotFound from "./components/ErrorPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -84,10 +85,12 @@ function App() {
           <ServerPage />
           <ComingSoon />
         </Route>
+        <Route path="*">
+          <PageNotFound />
+        </Route>
       </Switch>
       {/* )} */}
     </>
-
   );
 }
 
