@@ -21,7 +21,7 @@ function DeleteServerModal({ serverId }) {
   } else {
     serverName = allServersAvail[serverId].name
   }
-  
+
   const channel = useSelector((state) => state.channel);
   const chats = useSelector((state) => state.chats);
   let confirmation = `Confirm delete of ${serverName}`;
@@ -65,7 +65,7 @@ function DeleteServerModal({ serverId }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             required
-            className="create-server-modal-input"
+            className="create-server-modal-input confirm-del-statement"
           />
         </label>
         <div className="delete-footer-background">

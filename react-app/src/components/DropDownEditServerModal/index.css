@@ -1,6 +1,7 @@
 .edit-server-modal {
     display: flex;
-    height: 396px;
+    height: 397px;
+    width: 440px;
     align-items: center;
     flex-direction: column;
     background-color: white;

@@ -40,7 +40,7 @@ function ServerPage() {
       <div className="left-side-servers">
         <div className="dm-prof-link">
           <img
-            className="server-img"
+            className="server-img-me"
             src="https://i.pinimg.com/236x/d8/00/7e/d8007e6361ddd2eea97eb17e72335570.jpg"
             alt="dm profile img"
             onClick={() => {

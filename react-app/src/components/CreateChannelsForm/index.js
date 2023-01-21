@@ -37,7 +37,7 @@ function CreateChannelModal({serverId}){
         dispatch(loadChannel(body.channel))
         console.log('yay we submitted')
         closeModal()
-        return history.push(`/servers/${serverId}/${body.server.id}`)
+        return history.push(`/servers/${serverId}/${body.channel.id}`)
     }
 
     return (

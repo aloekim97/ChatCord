@@ -58,6 +58,11 @@
     background-color: #2F3136;
 }
 
+.channel-messages-content-container{
+    height: 95vh;
+    overflow-y: scroll;
+}
+
 .channel-border{
     border: 1px none orange;
     display: flex;
@@ -227,8 +232,13 @@
     color: #8D989D;
 }
 
+.edit-gear-icon {
+    font-size: 18px;
+}
+
 .channel-edit-button2:hover{
     background-color: #42464D;
+    color: rgb(255,255,255);
 }
 
 .channel-droplist{

@@ -1,6 +1,7 @@
 .delete-server-modal {
     display: flex;
-    height: 274px;
+    height: 275px;
+    width: 440px;
     align-items: center;
     flex-direction: column;
     background-color: white;
@@ -19,3 +20,6 @@
     margin-top: 10px;
 }
 
+.confirm-del-statement {
+    margin-top: 5px;
+}
