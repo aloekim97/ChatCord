@@ -18,6 +18,7 @@ import MainPage from "./components/Landing/me";
 import ChannelM from "./components/ChannelMessageIndexItem/channelM";
 import ComingSoon from "./components/ComingSoonComponent";
 import PageNotFound from "./components/ErrorPage";
+import MessageIndex from "./components/ChannelMessageIndexItem";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,13 +74,17 @@ function App() {
           <ServerPage />
           <DmPage />
         </Route>
+        <Route path="/server" >
+          <ServerPage />
+          <MainPage />
+        </Route>
         <Route path="/servers/:serverId/:channelId" exact={true}>
           <ServerPage />
           <ChannelIndex />
         </Route>
         <Route path="/servers/:serverId/:channelId/M" exact={true}>
           <ServerPage />
-          <ChannelM />
+          <MessageIndex />
         </Route>
         <Route path="/coming-soon" exact={true}>
           <ServerPage />

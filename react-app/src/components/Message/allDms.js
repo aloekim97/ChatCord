@@ -7,6 +7,7 @@ import "./allDms.css";
 function DmBar() {
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chats);
+  
 
   useEffect(() => {
     dispatch(getChats());

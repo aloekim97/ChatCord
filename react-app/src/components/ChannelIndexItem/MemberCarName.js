@@ -7,7 +7,7 @@ function MemberNameCard({member}){
     return (
         <div className="member-cardname-container" >
             <div className="member-card-container">
-                <img className='member-profile-card-img' src={member.profileImg}></img>
+                <img className='member-profile-card-img' src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                 <div className='member-card-banner'>
                 </div>
                 <div className='member-card-info-container'>

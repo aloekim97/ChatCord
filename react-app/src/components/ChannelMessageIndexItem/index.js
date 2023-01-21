@@ -8,7 +8,7 @@ import './index.css';
 
 function MessageIndex({message}){
 
-    const { user } = message
+    const { user } = message;
 
 
     return (

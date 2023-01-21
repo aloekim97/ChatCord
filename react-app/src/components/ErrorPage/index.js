@@ -4,6 +4,7 @@ import "./index.css";
 const PageNotFound = () => {
   const history = useHistory();
 
+
   return (
     <div className="error-page">
       <div className="error-page-left">

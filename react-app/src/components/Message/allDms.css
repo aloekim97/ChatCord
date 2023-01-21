@@ -5,6 +5,7 @@
     width: 235px;
     height: 100vh;
     background-color: rgb(47, 49, 54);
+    margin: 0;
 }
 
 .dm {
@@ -124,4 +125,9 @@
 .exta-icons {
     font-size: 19px;
     margin-left: 5px;
+}
+
+
+.dm-container {
+    display: flex;
 }

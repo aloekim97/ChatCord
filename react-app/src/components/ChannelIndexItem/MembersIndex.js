@@ -19,12 +19,12 @@ function MembersDisplay({member, server}){
 
     return(
         <div className="member-index-container" onClick={toggleIsHover} >
-            <img className="profile-pic" src={member.profileImg}></img>
+            <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt='img'></img>
             <div className='member-username-container'>
                 {member.username}
                 <div className='member-status'>Grinding</div>
             </div>
-            <div className="server-popout-card">{isHover? <MemberNameCard member={member} /> : <></>}</div>
+            {/* <div className="server-popout-card">{isHover? <MemberNameCard member={member} /> : <></>}</div> */}
         </div>
     )
 }

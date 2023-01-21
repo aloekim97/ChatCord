@@ -71,19 +71,19 @@ function ChannelIndex(){
     //     return () => document.removeEventListener("click", closeMenu);
     // }, [isOpen]);
 
-    // useEffect(() => {
-    //     if (!dropdownOpen) return;
+    useEffect(() => {
+        if (!dropdownOpen) return;
 
-    //     const closeMenu = (e) => {
-    //         if (!ulRef.current.contains(e.target)) {
-    //             setDropdownOpen(false);
-    //         }
-    //     };
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setDropdownOpen(false);
+            }
+        };
 
-    //     document.addEventListener('click', closeMenu);
+        document.addEventListener('click', closeMenu);
 
-    //     return () => document.removeEventListener("click", closeMenu);
-    // }, [dropdownOpen]);
+        return () => document.removeEventListener("click", closeMenu);
+    }, [dropdownOpen]);
 
 
     useEffect(() => {
@@ -240,7 +240,7 @@ function ChannelIndex(){
                 </div>
                 <div className="channels-profile-container">
                     <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic" src={userObj.profileImg}></img>
+                        <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
                             <div>
                                 {userObj.username}
@@ -266,9 +266,9 @@ function ChannelIndex(){
                             <MessageIndex message={message} />
                         ))}
                     </div>
-                    {chats.length > 0? chats.map(message => (
+                    {/* {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />
-                    )) : <div>Hello</div>}
+                    )) : <div>Hello</div>} */}
                     <form className="create-messages-form" onSubmit={handleSubmit}>
                         <label>
                             <input
