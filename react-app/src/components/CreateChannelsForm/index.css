@@ -30,15 +30,16 @@ label input{
 }
 
 .cancelButton{
-    border: 1px none black;
     background-color: #2F3136;
-    color: #D8D9DA;
-    border-width: 20%;
+    border-width: 0;
     cursor:pointer;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
 }
 
 .cancelButton:hover{
     text-decoration: underline;
+    color: rgb(173,175,178);
 }
 
 .create-channel{
@@ -46,11 +47,20 @@ label input{
 }
 
 .submitButton{
-    border-color: rgb(88,101,242);;
-    background-color: rgb(88,101,242);;
+    background-color: rgb(88,101,242);
+    border-width: 0;
     border-radius: 5px;
     padding: 2px 16px;
+    color: rgb(173,175,178);
     cursor:pointer;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    background-color: rgb(71, 82, 207);
+    color: white;
 }
 
 .create-form-header{
@@ -62,25 +72,30 @@ label input{
 
 #create-channel-h1{
     margin: 0;
-    color: #D8D9DA;
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
 }
 .x-cancel-button{
     background-color:  rgb(54,57,63);
     border-style: none;
     cursor:pointer;
-    color: #A1A3A5;
+    color: white;
 }
 
 .create-channel-input{
-    /* background-color:black ; */
-    color: #A1A3A5;
-    /* width: 100%; */
+    background-color: rgb(64,68,75);
+    color: rgb(190,191,193);
+    font-size: 18px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .channel-form-name{
     padding-bottom: 10px;
+    color: rgb(173,175,178);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
 }

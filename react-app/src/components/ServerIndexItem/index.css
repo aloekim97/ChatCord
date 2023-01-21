@@ -44,6 +44,7 @@
     height: 100vh;
     overflow-y: scroll;
     scroll-padding: 0;
+    margin-bottom: 50px;
 }
 
 ::-webkit-scrollbar {
@@ -120,8 +121,8 @@
 .server-cardname-container{
     align-self: top;
     position: relative;
-    left: 110px;
-    width: 100px;
+    left: 130px;
+    width: 130px;
     height: 40px;
     margin-top: 3px;
     background-color: #202225;
@@ -131,6 +132,8 @@
     align-items: center;
     padding: 5px 10px 5px 15px;
     border-radius: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
 }
 
 .server-index-container{

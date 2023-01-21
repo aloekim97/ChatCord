@@ -76,7 +76,7 @@ function EditModal({channelId, channel, serverObj}){
                         onChange={(e) => setName(e.target.value)}
                         required
                         className="create-channel-input"
-                        placeholder="new channel"
+                        placeholder="New Channel Name"
                     />
                 </label>
                 <div className="form-footer">

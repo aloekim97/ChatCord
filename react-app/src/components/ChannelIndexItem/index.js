@@ -242,11 +242,11 @@ function ChannelIndex(){
                     <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
                         <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
-                            <div>
+                            <div className="prof-username">
                                 {userObj.username}
                             </div>
                             <div className='member-status'>
-                                Grinding
+                                #00{userObj.id}
                             </div>
                         </div>
                     </div>

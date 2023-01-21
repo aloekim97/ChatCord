@@ -9,9 +9,17 @@
 
 
 .deleteButton{
-    border-color: red;
-    background-color: red;
+    border-width: 0;
+    background-color: rgb(255, 61, 61);
+    color: rgb(173,175,178);
     border-radius: 5px;
     padding: 2px 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+}
+
+.deleteButton:hover {
+    background-color: red;
     cursor:pointer;
+    color: white;
 }
