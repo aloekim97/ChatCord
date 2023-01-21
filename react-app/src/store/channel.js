@@ -1,3 +1,5 @@
+import { updateServer } from "./server"
+
 const GET_ALL_CHANNELS = "channels/getChannels"
 
 const LOAD_CHANNELS = "channels/loadChannels"
@@ -84,6 +86,8 @@ export const createChannel = (name, serverId) => async dispatch => {
     if (res.ok){
         const body = await res.json()
         dispatch(addChannel(body))
+        body.server.server_img = body.server.serverImg
+        delete body.server.serverImg
         return body
     }
 }
@@ -98,31 +102,41 @@ export const updateChannel = (channelId, name) => async dispatch => {
     })
     if (res.ok){
         const body = await res.json()
-        dispatch(editChannel(body))
+        dispatch(editChannel(body.channel))
+        body.server.server_img = body.server.serverImg
+        console.log(body.server, 'yoooooooooooooooooooooooo')
+        delete body.server.serverImg
+        // dispatch(updateServer(body.server))
         return body
     }
 }
 
-export const removeChannel = (channel) => async dispatch => {
+export const removeChannel = (channel, server) => async dispatch => {
     const res = await fetch(`/api/channels/${channel.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     })
     if (res.ok){
         const body = await res.json()
-        dispatch(deleteChanel(channel))
+        console.log('we almost done', server)
+        body.server.server_img = body.server.serverImg
+        delete body.server.serverImg
+        return body
     }
 }
 
 
-const initialState = {}
+const initialState = {
+    server: {},
+    singleChannel: {},
+};
 
 const channelReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case LOAD_CHANNELS:
             newState = Object.assign({}, state);
-            newState.server = {}
+            newState.server = {...newState.server}
             const channels = action.channels
             channels.forEach(channel => {
                 newState.server[channel.id] = channel
@@ -132,7 +146,9 @@ const channelReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.server = {...newState.server}
             const channel = action.channel
+            newState.singleChannel = {}
             newState.singleChannel = {...channel}
+            newState.server[channel.id] = channel
             return newState
         case ADD_CHANNEL:
             newState = Object.assign({}, state);

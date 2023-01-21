@@ -1,0 +1,46 @@
+.search-results-container{
+    width: 30%;
+    padding-top: 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-header{
+    background-color: #202225;
+    padding: 16px;
+    color: #F2FFFF;
+}
+
+.search-body{
+
+    background-color: #2F3136;
+    padding: 16px;
+    height: 90vh;
+    color: #F2FFFF;
+}
+
+.search-message-content-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.search-message-name-date-container{
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15% 10px 20%;
+    background-color: #36393F;
+    border-radius: 5px;
+}
+
+.search-profile-pic{
+    height: auto;
+    width: 32px;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}

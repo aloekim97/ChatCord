@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ServerNameCard from "./serverhovercard";
+import { fetchChannels } from "../../store/channel";
+import { getOneServerThunk } from "../../store/server";
+import "./index.css";
 
 function ServerIndex({ server }) {
   // console.log(server.channels);
+  const dispatch = useDispatch();
   const [isHover, setIsHover] = useState(false);
   const firstChan = server.channels[0];
   const toggleIsHover = () => {
     setIsHover(!isHover);
   };
+
+  useEffect(() => {
+    dispatch(fetchChannels(server.id));
+    // dispatch(getOneServerThunk(server.id))
+  }, [dispatch])
+
+
   if (!firstChan) {
     return null;
   }
+
   // console.log(firstChan);
   return (
 
@@ -29,7 +42,7 @@ function ServerIndex({ server }) {
         ></img>
         <div className="server-popout-card">{isHover? <ServerNameCard server={server} /> : <></>}</div>
       </div>
-      </NavLink>
+    </NavLink>
 
   );
 }

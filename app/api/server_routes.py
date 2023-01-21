@@ -10,7 +10,7 @@ server_routes = Blueprint("servers", __name__)
 
 # get all servers
 @server_routes.route("")
-@login_required
+# @login_required
 def all_servers():
     servers = Server.query.all()
     return {"servers": [server.to_dict() for server in servers]}, 200
@@ -33,6 +33,8 @@ def new_server():
             server_img = form.data['server_img'],
         )
         server.channel.append(channel)
+
+        current_user.servers.append(server)
 
         db.session.add(server)
         db.session.commit()
@@ -99,6 +101,6 @@ def create_channel(id):
         # print('this is server', serv)
         db.session.add(channel)
         db.session.commit()
-        return channel.to_dict() , 201
+        return {"channel": channel.to_dict(), "server": channel.server.to_dict()}, 201
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400

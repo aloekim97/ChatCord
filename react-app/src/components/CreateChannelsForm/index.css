@@ -78,6 +78,7 @@ label input{
 .create-channel-input{
     /* background-color:black ; */
     color: #A1A3A5;
+    /* width: 100%; */
 }
 
 .channel-form-name{

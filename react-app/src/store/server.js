@@ -1,3 +1,5 @@
+import { addChannel, loadChannel, loadChannels } from "./channel";
+
 // constants
 const GET_ALL_SERVERS = "servers/GET_ALL_SERVERS";
 const GET_ONE_SERVER = "servers/GET_ONE_SERVER"
@@ -29,7 +31,7 @@ const createServer = (newServer) => {
     }
 }
 
-const editServer = (server) => {
+export const editServer = (server) => {
     return {
         type: EDIT_SERVER,
         server
@@ -96,6 +98,7 @@ export const updateServer = (server) => async (dispatch) => {
     })
     if (response.ok) {
         const server = await response.json();
+        console.log('yoooooooooooooooooooooooo', server)
         dispatch(editServer(server));
         return server;
     }
@@ -138,12 +141,15 @@ const serverReducer = (state = initialState, action) => {
         }
         case CREATE_SERVER: {
             newState = { ...state };
-            newState[action.newServer.id] = action.newServer
+            newState.allServers = {...state.allServers}
+            newState.allServers[action.newServer.server.id] = action.newServer.server
+            // newState.singleServer = {...state.singleServer}
+            // newState.singleServer = action.server;
             return newState
         }
         case EDIT_SERVER: {
             newState = { ...state };
-            newState[action.server.id] = action.server;
+            newState.allServers[action.server.server.id] = action.server.server;
             return newState
         }
         case DELETE_SERVER: {

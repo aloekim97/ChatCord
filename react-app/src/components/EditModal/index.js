@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './index.css';
-import { createChannel } from "../../store/channel";
+import { createChannel, deleteChanel } from "../../store/channel";
 import { updateChannel, removeChannel } from "../../store/channel";
 import { Redirect, useHistory } from "react-router-dom";
 import { loadChannel } from "../../store/channel";
+import { updateServer, editServer } from "../../store/server";
 
 function EditModal({channelId, channel, serverObj}){
     const dispatch = useDispatch();
@@ -22,29 +23,36 @@ function EditModal({channelId, channel, serverObj}){
         setErrors(newErrors)
     }, [name])
     console.log('testing messages,', serverObj)
-    const id = serverObj.channel[0].id
+    const id = serverObj.channels[0].id
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
         let errors;
         console.log('hi b4 the dispatch')
-        const body = await dispatch(updateChannel(channelId, name ))
+        const body = await dispatch(updateChannel(channelId, name, serverObj ))
         // console.log('hi im tryin got se the bodyu',body)
         // console.log('following')
-        dispatch(loadChannel(body))
+        dispatch(loadChannel(body.channel))
+        dispatch(updateServer(body.server))
+        // history.push(`/servers/${serverObj.id}/${body.channel.id}`)
         closeModal()
     }
 
     const handleDelete = async (e) => {
         // e.preventDefault();
-        await dispatch(removeChannel(channel))
-        closeModal()
+        const body = await dispatch(removeChannel(channel, serverObj))
         console.log('hitting this')
-        history.push('/')
+        // history.push('/')
         console.log('plz jelp',serverObj.id, id )
         // return <Redirect to={`/servers/${serverObj.id}/${id}`}/>
-        dispatch(loadChannel(serverObj.channel[0]))
+        // dispatch(loadChannel(serverObj.channel[0]))
+        console.log('what is serever', body)
+        dispatch(loadChannel(body.server.channels[0]))
+        dispatch(updateServer(body.server))
         history.push(`/servers/${serverObj.id}/${id}`)
+        // console.log('yo what')
+        // dispatch(deleteChanel(channel))
+        closeModal()
     }
     return(
         <>

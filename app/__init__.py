@@ -13,6 +13,8 @@ from .config import Config
 from .api.channels_routes import channel_routes
 from .api.directMsg_routes import dm_routes
 from .api.channel_msg_routes import chmsg
+from .api.search_routes import search_routes
+from .socketIo import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -35,10 +37,13 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
 app.register_blueprint(dm_routes, url_prefix='/api/dm')
-app.register_blueprint(chmsg, url_prefix='/api/chmsg')
+app.register_blueprint(chmsg, url_prefix='/api')
+app.register_blueprint(search_routes, url_prefix='/api/search')
 
 db.init_app(app)
 Migrate(app, db)
+socketio.init_app(app)
+
 
 # Application Security
 CORS(app)
@@ -82,6 +87,10 @@ def api_help():
     return route_list
 
 
+if __name__ == '__main__':
+    socketio.run(app)
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -98,3 +107,4 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+

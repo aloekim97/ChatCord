@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import { fetchChannels, fetchOneChannel, offLoadChannels } from "../../store/channel";
-import { getOneServerThunk } from "../../store/server";
+// import { getOneServerThunk } from "../../store/server";
 import './index.css';
 import ChannelDisplay from "./channelIndex";
 import MembersDisplay from "./MembersIndex";
@@ -14,19 +14,32 @@ import MessageIndex from "../ChannelMessageIndexItem";
 import ProfileCard from "../ProfileIndexItem/indexj";
 import ServerDropdown from "../ServerIndexItem/serverDropdown";
 import ServerProfileCard from "../ProfileIndexItem/serverProfileCard";
+import { getOneServerThunk } from "../../store/server";
+import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
+import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
+import SearchPage from "../SearchResultsComponent";
+import { getMessagesSearch } from "../../store/search";
 
 function ChannelIndex(){
 
     const dispatch = useDispatch();
-    const channelsObj = useSelector(state => state.channel)
-    const serverObj = useSelector(state => state.server.singleServer)
-    const userObj = useSelector(state => state.session.user)
     const {serverId, channelId} = useParams()
+    // const channelsObj = useSelector(state => state.channel.server)
+    const serverObj = useSelector(state => state.server.allServers[serverId])
+    const chats = useSelector(state => Object.values(state.chats))
+    // const currServer = useSelector(state => state.server.singelServer)
+    const currChannel = useSelector(state => state.channel.server[channelId])
+    // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
+    const userObj = useSelector(state => state.session.user)
+    // const channels = useSelector(state => state.server)
     const [showMenu, setShowMenu] = useState(false);
     const [isOpen, setIsOpen] = useState(false)
+    const [search, setSearch] = useState('')
+    const [isSearch, setIsSearch] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
+    const [content, setContent] = useState('')
 
     const ulRef = useRef();
 
@@ -44,19 +57,19 @@ function ChannelIndex(){
         setDropdownOpen(true);
     }
 
-    useEffect(() => {
-        if (!isOpen) return;
+    // useEffect(() => {
+    //     if (!isOpen) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        };
+    //     const closeMenu = (e) => {
+    //         if (!ulRef.current.contains(e.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('click', closeMenu);
+    //     document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
-    }, [isOpen]);
+    //     return () => document.removeEventListener("click", closeMenu);
+    // }, [isOpen]);
 
     useEffect(() => {
         if (!dropdownOpen) return;
@@ -74,18 +87,28 @@ function ChannelIndex(){
 
 
     useEffect(() => {
+        // dispatch(getOneServerThunk(serverId))
+        dispatch(getOneServerThunk(serverId))
         dispatch(fetchChannels(serverId));
         dispatch(fetchOneChannel(channelId))
         // dispatch(getAllServersThunk())
-        dispatch(getOneServerThunk(serverId))
         // setMembers(serverObj.members)
-
     }, [dispatch, serverId, channelId]);
+
+    // useEffect(() => {
+    //     (async () => {
+    //         await dispatch(fetchChannels(serverId));
+    //         await dispatch(fetchOneChannel(channelId))
+    //         // dispatch(getAllServersThunk())
+    //         await dispatch(getOneServerThunk(serverId))
+    //         // setMembers(serverObj.members)
+    //     })();
+    // }, [dispatch, serverId, channelId]);
 
     const closeMenu = () => setShowMenu(false);
 
 
-    if (Object.keys(serverObj).length < 1 ){
+    if (!serverObj ){
         return null
     }
 
@@ -97,28 +120,58 @@ function ChannelIndex(){
         setDropdownOpen(!dropdownOpen)
     }
 
+    const toggleSearchResults = () => {
+        setIsSearch(false)
+    }
     // console.log('this is state', showMenu)
     // console.log('this is the server', serverObj)
     // console.log('hi, just checking on the channels obj', channelsObj)
-    // const channels = Object.values(serverObj.channel)
-    const channels = Object.values(channelsObj.server)
-    const currChannel = channelsObj.singleChannel
+
+    const channels = Object.values(serverObj.channels)
+
+    // const channels = Object.values(channelsObj)
+    console.log('this is server obj', serverObj)
+    // const currChannel = channels[channelId-1]
     const messages = currChannel.message
-    console.log('this is the currChannel', channels)
+    // console.log('this is the currChannel', channels)
+    // console.log('this is the curr server', currServer)
+    console.log('testing the channels onk', channels)
+    console.log('testing curr, channel', currChannel)
+    // console.log('testing curr2, channel2', currChannel2)
     const members = serverObj.members
+
     // if (serverObj && serverObj.members.length > 0)
     // console.log('the channels in the component',channels)
-    // console.log('the members',members)
+    console.log('the members',members)
+    console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', chats)
     const ulClassName = (showMenu ? 'channel-droplist' : 'channel-droplist2');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
-        console.log('it submitted the message')
-
+        const input = {
+            content
+        }
+        await dispatch(createMsgThunk(channelId, input))
+        .then(() => {
+            setContent('')
+        })
+        // await dispatch(fetchChannels(serverId));
+        // await dispatch(fetchOneChannel(channelId))
+        // // dispatch(getAllServersThunk())
+        // await dispatch(getOneServerThunk(serverId))
+        // // setMembers(serverObj.members)
+        await dispatch(loadMsgThunk(channelId))
         // closeModal()
     }
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        // setErrors([]);
+        const body = await dispatch(getMessagesSearch(channelId, search))
+        setIsSearch(true)
+        console.log('it submitted the message')
 
+    }
 
 
     return(
@@ -139,8 +192,19 @@ function ChannelIndex(){
                         <i class="fa-solid fa-hashtag"></i>
                         {currChannel.name}
                     </div>
-                    <div>
-                        Search Placeholder
+                    <div className="search-form-container">
+                        <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>
+                        <form className="search-form" onSubmit={handleSearchSubmit}>
+                            <label className="search-label" >
+                                <input
+                                    type="text"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    className="search-input"
+                                    placeholder="Search"
+                                />
+                            </label>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -176,7 +240,7 @@ function ChannelIndex(){
                 </div>
                 <div className="channels-profile-container">
                     <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic" src={userObj.profileImg}></img>
+                        <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
                             <div>
                                 {userObj.username}
@@ -188,35 +252,46 @@ function ChannelIndex(){
                     </div>
                     <button className='channel-edit-button2'>
                     <OpenModalMenuItem
-                                itemText={<i class="fa-solid fa-gear"></i>}
-                                modalComponent={<EditServerModal />}
+                                itemText={<i class="fa-solid fa-gear edit-gear-icon"></i>}
+                                modalComponent={<EditProfileModal />}
                     />
                 </button>
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
                 </div>
             </div>
-            <div className="messages-container">
-                {messages.length > 0? messages.map(message => (
-                    <MessageIndex message={message} />
-                )) : <div>Hello</div>}
-                <form className="create-messages-form" onSubmit={handleSubmit}>
-                    <label>
-                        <input
-                            type="text"
-                            required
-                            className="create-channel-input"
-                            placeholder="Message"
-                        />
-                    </label>
-                </form>
-            </div>
-            <div className="members-container">
-                <div className="members-online-status">Members - {members.length}</div>
-                {
-                    members && members.map(member => (
-                        <MembersDisplay member={member} server={serverObj} />
-                    ))
-                }
+            <div className="messages-members-border">
+                <div className="messages-container">
+                    <div className="channel-messages-content-container">
+                        {currChannel.message.map(message => (
+                            <MessageIndex message={message} />
+                        ))}
+                    </div>
+                    {/* {chats.length > 0? chats.map(message => (
+                        <MessageIndex message={message} />
+                    )) : <div>Hello</div>} */}
+                    <form className="create-messages-form" onSubmit={handleSubmit}>
+                        <label>
+                            <input
+                                type="text"
+                                required
+                                value={content}
+                                onChange = {e => setContent(e.target.value)}
+                                className="create-channel-input"
+                                placeholder="Message"
+                            />
+                        </label>
+                    </form>
+                </div>
+                {isSearch ? <SearchPage /> : <div className="members-container">
+                    <div className="members-online-status">Members - {members.length}</div>
+                    {
+                        members && members.map(member => (
+                            <MembersDisplay member={member} server={serverObj} />
+                        ))
+                    }
+                </div> }
+
+
             </div>
         </div>
     )

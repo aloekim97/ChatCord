@@ -13,7 +13,12 @@ import About from "./components/AboutUs";
 import { authenticate } from "./store/session";
 import ChannelIndex from "./components/ChannelIndexItem";
 import DmBar from "./components/Message/allDms";
-import DmPage from './components/Message/theDm'
+import DmPage from "./components/Message/theDm";
+import MainPage from "./components/Landing/me";
+import ChannelM from "./components/ChannelMessageIndexItem/channelM";
+import ComingSoon from "./components/ComingSoonComponent";
+import PageNotFound from "./components/ErrorPage";
+import MessageIndex from "./components/ChannelMessageIndexItem";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,7 +43,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <>
       {/* <ServerPage loaded={loaded} />
       {loaded && ( */}
       <Switch>
@@ -63,19 +68,34 @@ function App() {
         </Route>
         <Route path="/@me" exact={true}>
           <ServerPage />
-          <DmBar />
+          <MainPage />
         </Route>
         <Route path="/@me/:chatId" exact={true}>
           <ServerPage />
           <DmPage />
         </Route>
+        <Route path="/server" >
+          <ServerPage />
+          <MainPage />
+        </Route>
         <Route path="/servers/:serverId/:channelId" exact={true}>
           <ServerPage />
           <ChannelIndex />
         </Route>
+        <Route path="/servers/:serverId/:channelId/M" exact={true}>
+          <ServerPage />
+          <MessageIndex />
+        </Route>
+        <Route path="/coming-soon" exact={true}>
+          <ServerPage />
+          <ComingSoon />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
+        </Route>
       </Switch>
       {/* )} */}
-    </BrowserRouter>
+    </>
   );
 }
 
