@@ -149,24 +149,3 @@ export default function DmPage(){
         // </div>
     )
 }
-
-export default DmPage
-
-{/* <button className='del/edit' onClick={async (e) => {
-                                    e.preventDefault()
-                                    await dispatch(deleteMessageThunk(chatId, dm.id))
-                                    await dispatch(loadTheDmsThunk(chatId))
-                                }}>...</button> */}
- {/* <button className='edit' onClick={showText}>
-                                        {text ? (<input
-                                            type='text'
-                                            value={newMessage}
-                                            onChange={e => setNewMessage(e.target.value)}
-                                            placeholder={dm.content}
-                                        />) : 'Edit'}
-                                    </button>
-                                    <button className='del' onClick={async (e) => {
-                                        e.preventDefault()
-                                        await dispatch(deleteMessageThunk(chatId, dm.id))
-                                        await dispatch(loadTheDmsThunk(chatId))
-                                    }}>Delete</button>              */}
