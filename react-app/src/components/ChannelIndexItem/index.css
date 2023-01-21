@@ -4,7 +4,9 @@
     width: 96vw;
     height: 100vh;
     padding-left: 4%;
+    background-color: #36393F;
 }
+
 
 .nav-placeholder{
     width: 3.6%;
@@ -54,6 +56,11 @@
     height: auto;
     padding-top: 48px;
     background-color: #2F3136;
+}
+
+.channel-messages-content-container{
+    height: 95vh;
+    overflow-y: scroll;
 }
 
 .channel-border{
@@ -225,8 +232,13 @@
     color: #8D989D;
 }
 
+.edit-gear-icon {
+    font-size: 18px;
+}
+
 .channel-edit-button2:hover{
     background-color: #42464D;
+    color: rgb(255,255,255);
 }
 
 .channel-droplist{

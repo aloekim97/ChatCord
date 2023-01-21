@@ -26,6 +26,7 @@ function ChannelIndex(){
     const {serverId, channelId} = useParams()
     // const channelsObj = useSelector(state => state.channel.server)
     const serverObj = useSelector(state => state.server.allServers[serverId])
+    const chats = useSelector(state => Object.values(state.chats))
     // const currServer = useSelector(state => state.server.singelServer)
     const currChannel = useSelector(state => state.channel.server[channelId])
     // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
@@ -56,33 +57,33 @@ function ChannelIndex(){
         setDropdownOpen(true);
     }
 
-    useEffect(() => {
-        if (!isOpen) return;
+    // useEffect(() => {
+    //     if (!isOpen) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        };
+    //     const closeMenu = (e) => {
+    //         if (!ulRef.current.contains(e.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('click', closeMenu);
+    //     document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
-    }, [isOpen]);
+    //     return () => document.removeEventListener("click", closeMenu);
+    // }, [isOpen]);
 
-    useEffect(() => {
-        if (!dropdownOpen) return;
+    // useEffect(() => {
+    //     if (!dropdownOpen) return;
 
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setDropdownOpen(false);
-            }
-        };
+    //     const closeMenu = (e) => {
+    //         if (!ulRef.current.contains(e.target)) {
+    //             setDropdownOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('click', closeMenu);
+    //     document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
-    }, [dropdownOpen]);
+    //     return () => document.removeEventListener("click", closeMenu);
+    // }, [dropdownOpen]);
 
 
     useEffect(() => {
@@ -142,6 +143,7 @@ function ChannelIndex(){
     // if (serverObj && serverObj.members.length > 0)
     // console.log('the channels in the component',channels)
     console.log('the members',members)
+    console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', chats)
     const ulClassName = (showMenu ? 'channel-droplist' : 'channel-droplist2');
 
     const handleSubmit = async (e) => {
@@ -188,7 +190,7 @@ function ChannelIndex(){
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
                         <i class="fa-solid fa-hashtag"></i>
-                        {/* {currChannel.name} */}
+                        {currChannel.name}
                     </div>
                     <div className="search-form-container">
                         <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>
@@ -198,7 +200,6 @@ function ChannelIndex(){
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    required
                                     className="search-input"
                                     placeholder="Search"
                                 />
@@ -251,7 +252,7 @@ function ChannelIndex(){
                     </div>
                     <button className='channel-edit-button2'>
                     <OpenModalMenuItem
-                                itemText={<i class="fa-solid fa-gear"></i>}
+                                itemText={<i class="fa-solid fa-gear edit-gear-icon"></i>}
                                 modalComponent={<EditProfileModal />}
                     />
                 </button>
@@ -260,7 +261,12 @@ function ChannelIndex(){
             </div>
             <div className="messages-members-border">
                 <div className="messages-container">
-                    {messages.length > 0? messages.map(message => (
+                    <div className="channel-messages-content-container">
+                        {currChannel.message.map(message => (
+                            <MessageIndex message={message} />
+                        ))}
+                    </div>
+                    {/* {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />
                     )) : <div>Hello</div>}
                     <form className="create-messages-form" onSubmit={handleSubmit}>
