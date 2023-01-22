@@ -19,6 +19,7 @@ import ChannelM from "./components/ChannelMessageIndexItem/channelM";
 import ComingSoon from "./components/ComingSoonComponent";
 import PageNotFound from "./components/ErrorPage";
 import MessageIndex from "./components/ChannelMessageIndexItem";
+import MessageRequest from "./components/MessageRequestPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -90,6 +91,11 @@ function App() {
           <ServerPage />
           <ComingSoon />
         </Route>
+        <Route path="/message-requests" exact={true}>
+          <ServerPage />
+          <MessageRequest />
+        </Route>
+
         <Route path="*">
           <PageNotFound />
         </Route>

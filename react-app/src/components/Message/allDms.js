@@ -7,7 +7,7 @@ import "./allDms.css";
 function DmBar() {
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chats);
-  
+
 
   useEffect(() => {
     dispatch(getChats());
@@ -28,7 +28,7 @@ function DmBar() {
             <button className="butt">Coming Soon</button>
           </div>
         </NavLink>
-        <NavLink className="user-links" to={"/@me"}>
+        <NavLink className="user-links" to={"/message-requests"}>
           <div className="extra-links-container">
             <i class="fa-solid fa-comment exta-icons"></i>
             <button className="butt">Message Requests</button>
