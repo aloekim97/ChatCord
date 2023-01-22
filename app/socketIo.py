@@ -7,16 +7,15 @@ from flask_login import current_user
 # create your SocketIO instance
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://disclone-irt9.onrender.com/",
-        "https://disclone-irt9.onrender.com/",
         'http://disclone-irt9.onrender.com',
         'https://disclone-irt9.onrender.com',
+    
     ]
 else:
     origins = "*"
 
 # create your SocketIO instance
-socketio = SocketIO(cors_allowed_origins=origins)
+socketio = SocketIO(cors_allowed_origins=origins, ping_timeout=120)
 
 
 # handle chat messages

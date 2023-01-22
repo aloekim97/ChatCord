@@ -10,14 +10,6 @@ import "./allDms.css";
 function DmBar() {
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chats);
-  const [isOpen, setIsOpen] = useState(false)
-  const userObj = useSelector(state => state.session.user)
-
-  const ulRef = useRef();
-
-  const toggleProfileOpen = () => {
-    setIsOpen(!isOpen)
-}
 
 
   useEffect(() => {
