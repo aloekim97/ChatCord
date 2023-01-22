@@ -63,11 +63,11 @@ def handle_channel(data):
     emit("channelMsg", data, broadcast=True)
 
 
-# @socketio.on("del")
-# def handle_del(data):
-#     print(data)
-#     dm = Message.query.filter(Message.id == data['messageId'])
-#     for o in dm:
-#         db.session.delete(o)
-#         db.session.commit()
-#     emit("del", data, broadcast=True)
+@socketio.on("del")
+def handle_del(data):
+    print(data)
+    dm = Message.query.filter(Message.id == data['messageId'])
+    for o in dm:
+        db.session.delete(o)
+        db.session.commit()
+    emit("del", data, broadcast=True)

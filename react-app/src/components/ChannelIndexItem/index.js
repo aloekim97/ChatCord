@@ -34,7 +34,7 @@ function ChannelIndex(){
     // const currServer = useSelector(state => state.server.singelServer)
     const currChannel = useSelector(state => state.channel.server[channelId])
     // console.log(currChannel)
-
+    const msgs = useSelector(state => state.channelMsg.channelChat)
     // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
     const userObj = useSelector(state => state.session.user)
     // const channels = useSelector(state => state.server)
@@ -59,17 +59,17 @@ function ChannelIndex(){
         socket = io();
         socket.on("channelMsg", (chat) => {
             dispatch(loadMsgThunk(channelId)).then(
-                setMessage((messages) => [...messages, chat]))
+                setMessage((message) => [...message, chat]))
         });
         socket.on("del", (chat) => {
-            setMessage((messages) => [...messages, chat])
+            setMessage((message) => [...message, chat])
             dispatch(loadMsgThunk(channelId))
         })
         return () => {
             // setMessage([])
           socket.disconnect();
         };
-      },[dispatch, channelId]);
+      },[]);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -311,14 +311,16 @@ function ChannelIndex(){
                         {currChannel.message.map(message => (
                             <MessageIndex message={message} channelId={channelId} />
                         ))} */}
-                        {message?.map((messag, ind) => (
+                        <div className="channel-messages-content-container">
+                        {msgs && Object.values(msgs).map((messag) => (
                             <MessageIndex
-                            key={`message-${ind}`}
+                            key={messag.id}
                             messag={messag}
                             userObj={userObj}
                             deleteMsg={deleteMsg}
                             />
                             ))}
+                            </div>
                     {/* </div> */}
                     {/* {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />

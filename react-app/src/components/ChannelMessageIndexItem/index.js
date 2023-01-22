@@ -26,7 +26,7 @@ function MessageIndex({messag, userObj, deleteMsg}){
                     {messag.message}
                 </div>
             </div>
-            <button onClick={deleteMsg(messag.id)}>
+            <button onClick={() => deleteMsg(messag.id)}>
                 DELETE
             </button>
         </div>
