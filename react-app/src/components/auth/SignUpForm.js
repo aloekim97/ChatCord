@@ -20,6 +20,10 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data);
       }
+    } else if (password !== repeatPassword) {
+      let errors = [];
+      errors.push("Passwords do not match. Please try again.")
+      return setErrors(errors);
     }
   };
 
@@ -65,6 +69,7 @@ const SignUpForm = () => {
                 className="login-signup-text-box"
                 onChange={updateUsername}
                 value={username}
+                required
               ></input>
             </div>
             <div className="login-signup-input">
@@ -75,6 +80,7 @@ const SignUpForm = () => {
                 className="login-signup-text-box"
                 onChange={updateEmail}
                 value={email}
+                required
               ></input>
             </div>
             <div className="login-signup-input">
@@ -85,6 +91,7 @@ const SignUpForm = () => {
                 className="login-signup-text-box"
                 onChange={updatePassword}
                 value={password}
+                required
               ></input>
             </div>
             <div className="login-signup-input">
