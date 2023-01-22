@@ -7,8 +7,6 @@ from flask_login import current_user
 # create your SocketIO instance
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://disclone-irt9.onrender.com/",
-        "https://disclone-irt9.onrender.com/",
         'http://disclone-irt9.onrender.com',
         'https://disclone-irt9.onrender.com',
     ]
