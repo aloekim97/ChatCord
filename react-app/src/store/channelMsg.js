@@ -28,6 +28,7 @@ export const loadMsgThunk = (channelId) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json()
         dispatch(loadMsg(data))
+        return data
     }
 }
 

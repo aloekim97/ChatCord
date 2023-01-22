@@ -25,23 +25,23 @@ function EditProfileModal({channelId, channel}){
     return(
         <>
             <div className="create-form-header">
-                <h1 id="">
+                <h1 className="edit-prof-title">
                     Edit Profile
                 </h1>
             </div>
             <form className="edit-channel" onSubmit={handleSubmit} >
 
-                <label>
+                <label className="edit-channel-label">
                     Profile Username
                     <input
                         type="text"
                         required
-                        className="create-channel-input"
-                        placeholder="new name"
+                        className="edit-channel-input"
+                        placeholder="New Name"
                     />
                 </label>
                 <div className="form-footer">
-                    <button className="submitButton" type="submit">Update</button>
+                    <button className="edit-submitButton" type="submit">Update</button>
                     {/* <button className="deleteButton" type="button" >Delete Channel</button> */}
                 </div>
             </form>

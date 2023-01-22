@@ -19,6 +19,10 @@ import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
 import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
 import SearchPage from "../SearchResultsComponent";
 import { getMessagesSearch } from "../../store/search";
+import { io } from "socket.io-client";
+
+
+let socket;
 
 function ChannelIndex(){
 
@@ -29,6 +33,8 @@ function ChannelIndex(){
     const chats = useSelector(state => Object.values(state.chats))
     // const currServer = useSelector(state => state.server.singelServer)
     const currChannel = useSelector(state => state.channel.server[channelId])
+    // console.log(currChannel)
+    const msgs = useSelector(state => state.channelMsg.channelChat)
     // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
     const userObj = useSelector(state => state.session.user)
     // const channels = useSelector(state => state.server)
@@ -40,8 +46,32 @@ function ChannelIndex(){
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
     const [content, setContent] = useState('')
+    const [message, setMessage] = useState([]);
+    const [chatInput, setChatInput] = useState("");
 
     const ulRef = useRef();
+
+    useEffect(() => {
+        console.log('are u the problem?')
+        dispatch(loadMsgThunk(channelId))
+    },[dispatch,channelId])
+
+    useEffect(() => {
+        socket = io();
+        socket.on("channelMsg", (chat) => {
+            const id = parseInt(chat.channel_id)
+            dispatch(loadMsgThunk(id))
+                setMessage((message) => [...message, chat])
+        });
+        socket.on("del", (chat) => {
+            setMessage((message) => [...message, chat])
+            dispatch(loadMsgThunk(channelId))
+        })
+        return () => {
+            // setMessage([])
+          socket.disconnect();
+        };
+      },[]);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -86,14 +116,14 @@ function ChannelIndex(){
     }, [dropdownOpen]);
 
 
-    useEffect(() => {
-        // dispatch(getOneServerThunk(serverId))
-        dispatch(getOneServerThunk(serverId))
-        dispatch(fetchChannels(serverId));
-        dispatch(fetchOneChannel(channelId))
-        // dispatch(getAllServersThunk())
-        // setMembers(serverObj.members)
-    }, [dispatch, serverId, channelId]);
+    // useEffect(() => {
+    //     // dispatch(getOneServerThunk(serverId))
+    //     dispatch(getOneServerThunk(serverId))
+    //     dispatch(fetchChannels(serverId));
+    //     dispatch(fetchOneChannel(channelId))
+    //     // dispatch(getAllServersThunk())
+    //     // setMembers(serverObj.members)
+    // }, [dispatch, serverId, channelId]);
 
     // useEffect(() => {
     //     (async () => {
@@ -105,7 +135,7 @@ function ChannelIndex(){
     //     })();
     // }, [dispatch, serverId, channelId]);
 
-    const closeMenu = () => setShowMenu(false);
+    // const closeMenu = () => setShowMenu(false);
 
 
     if (!serverObj ){
@@ -132,7 +162,8 @@ function ChannelIndex(){
     // const channels = Object.values(channelsObj)
     console.log('this is server obj', serverObj)
     // const currChannel = channels[channelId-1]
-    const messages = currChannel.message
+    // const messages = currChannel.message
+
     // console.log('this is the currChannel', channels)
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
@@ -146,24 +177,24 @@ function ChannelIndex(){
     console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', chats)
     const ulClassName = (showMenu ? 'channel-droplist' : 'channel-droplist2');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // setErrors([]);
-        const input = {
-            content
-        }
-        await dispatch(createMsgThunk(channelId, input))
-        .then(() => {
-            setContent('')
-        })
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // setErrors([]);
+    //     const input = {
+    //         content
+    //     }
+        // await dispatch(createMsgThunk(channelId, input))
+        // .then(() => {
+        //     setContent('')
+        // })
         // await dispatch(fetchChannels(serverId));
         // await dispatch(fetchOneChannel(channelId))
         // // dispatch(getAllServersThunk())
         // await dispatch(getOneServerThunk(serverId))
         // // setMembers(serverObj.members)
-        await dispatch(loadMsgThunk(channelId))
+        // await dispatch(loadMsgThunk(channelId))
         // closeModal()
-    }
+    // }
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
@@ -173,6 +204,23 @@ function ChannelIndex(){
 
     }
 
+
+    const updateChatInput = (e) => {
+        setChatInput(e.target.value);
+    };
+
+    const sendChat = (e) => {
+    e.preventDefault();
+    socket.emit("channelMsg", {
+        channel_id: channelId,
+        message: chatInput,
+        server: serverId
+    });
+        setChatInput("");
+    };
+    const deleteMsg = (messageId) => {
+        socket.emit("del", {messageId: messageId })
+      }
 
     return(
         <div className="page-container">
@@ -190,7 +238,7 @@ function ChannelIndex(){
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
                         <i class="fa-solid fa-hashtag"></i>
-                        {currChannel.name}
+                        {currChannel?.name}
                     </div>
                     <div className="search-form-container">
                         <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>
@@ -242,11 +290,11 @@ function ChannelIndex(){
                     <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
                         <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
-                            <div>
+                            <div className="prof-username">
                                 {userObj.username}
                             </div>
                             <div className='member-status'>
-                                Grinding
+                                #00{userObj.id}
                             </div>
                         </div>
                     </div>
@@ -261,21 +309,31 @@ function ChannelIndex(){
             </div>
             <div className="messages-members-border">
                 <div className="messages-container">
-                    <div className="channel-messages-content-container">
+                    {/* <div className="channel-messages-content-container">
                         {currChannel.message.map(message => (
-                            <MessageIndex message={message} />
-                        ))}
-                    </div>
+                            <MessageIndex message={message} channelId={channelId} />
+                        ))} */}
+                        <div className="channel-messages-content-container">
+                        {msgs && Object.values(msgs).map((messag) => (
+                            <MessageIndex
+                            key={messag.id}
+                            messag={messag}
+                            userObj={userObj}
+                            deleteMsg={deleteMsg}
+                            />
+                            ))}
+                            </div>
+                    {/* </div> */}
                     {/* {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />
                     )) : <div>Hello</div>} */}
-                    <form className="create-messages-form" onSubmit={handleSubmit}>
+                    <form className="create-messages-form" onSubmit={sendChat}>
                         <label>
                             <input
                                 type="text"
                                 required
-                                value={content}
-                                onChange = {e => setContent(e.target.value)}
+                                value={chatInput}
+                                onChange = {updateChatInput}
                                 className="create-channel-input"
                                 placeholder="Message"
                             />

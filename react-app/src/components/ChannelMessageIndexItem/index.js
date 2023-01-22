@@ -3,31 +3,32 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import { fetchChannels } from "../../store/channel";
 import { getOneServerThunk } from "../../store/server";
-import { loadMsg } from "../../store/channelMsg";
+import { loadMsg, loadMsgThunk } from "../../store/channelMsg";
 import './index.css';
 
-function MessageIndex({message}){
 
-    const { user } = message;
-
+function MessageIndex({messag, userObj, deleteMsg}){
 
     return (
         <div className="message-content">
-            <img className="message-profile-pic" src={user.profileImg}>
+            <img className="message-profile-pic" src={userObj.profileImg}>
             </img>
             <div className="message-content-container">
                 <div className="message-profile-name">
                     <h3 className="message-content-name">
-                        {user.username}
+                        {userObj.username}
                     </h3>
                     <div className="message-content-date">
-                        {message.createdAt}
+                        {messag.createdAt}
                     </div>
                 </div>
                 <div className="message-data">
-                    {message.message}
+                    {messag.message}
                 </div>
             </div>
+            <button onClick={() => deleteMsg(messag.id)}>
+                DELETE
+            </button>
         </div>
     )
 }
