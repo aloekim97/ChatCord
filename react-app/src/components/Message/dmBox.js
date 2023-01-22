@@ -8,7 +8,7 @@ function DmBox({dm, deleteDm, user}) {
                 <div className="message-content-container">
                     <div className="message-profile-name">
                         <h3 className="message-content-name">
-                            {user.username}
+                            {dm.userSender.username}
                         </h3>
                         <div className="message-content-date">
                             {dm.created_at}
@@ -19,7 +19,11 @@ function DmBox({dm, deleteDm, user}) {
                     </div>
                 </div>
             </div>
-                <button onClick={() => deleteDm(dm.id)}>Delete</button>
+                {user.id === dm.userSender.id && (
+            <div className='butt'>
+                <button className="delete-dm" onClick={() => deleteDm(dm.id)}>Delete</button>
+            </div>
+                )}
         </div>
     )
 }

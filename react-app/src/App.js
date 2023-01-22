@@ -83,10 +83,6 @@ function App() {
           <ServerPage />
           <ChannelIndex />
         </Route>
-        <Route path="/servers/:serverId/:channelId/M" exact={true}>
-          <ServerPage />
-          <MessageIndex />
-        </Route>
         <Route path="/coming-soon" exact={true}>
           <ServerPage />
           <ComingSoon />

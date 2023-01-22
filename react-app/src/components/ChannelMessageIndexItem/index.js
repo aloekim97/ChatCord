@@ -16,7 +16,7 @@ function MessageIndex({messag, userObj, deleteMsg}){
             <div className="message-content-container">
                 <div className="message-profile-name">
                     <h3 className="message-content-name">
-                        {userObj.username}
+                        {messag.user.username}
                     </h3>
                     <div className="message-content-date">
                         {messag.createdAt}
