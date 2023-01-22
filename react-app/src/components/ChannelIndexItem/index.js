@@ -46,25 +46,23 @@ function ChannelIndex(){
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
     const [content, setContent] = useState('')
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState([]);
     const [chatInput, setChatInput] = useState("");
 
     const ulRef = useRef();
 
-    // useEffect(() => {
-    //     dispatch(loadMsgThunk(channelId)).then(
-    //         setMessage(message => [...message])
-    //     )
-    // },[dispatch,channelId])
+    useEffect(() => {
+        dispatch(loadMsgThunk(channelId))
+    },[dispatch,channelId])
 
     useEffect(() => {
         socket = io();
         socket.on("channelMsg", (chat) => {
             dispatch(loadMsgThunk(channelId)).then(
-                setMessages((messages) => [...messages, chat]))
+                setMessage((messages) => [...messages, chat]))
         });
         socket.on("del", (chat) => {
-            setMessages((messages) => [...messages, chat])
+            setMessage((messages) => [...messages, chat])
             dispatch(loadMsgThunk(channelId))
         })
         return () => {
@@ -238,7 +236,7 @@ function ChannelIndex(){
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
                         <i class="fa-solid fa-hashtag"></i>
-                        {currChannel.name}
+                        {currChannel?.name}
                     </div>
                     <div className="search-form-container">
                         <button className="search-form-cancel-button" onClick={toggleSearchResults}><i class="fa-solid fa-x"></i></button>
@@ -313,7 +311,7 @@ function ChannelIndex(){
                         {currChannel.message.map(message => (
                             <MessageIndex message={message} channelId={channelId} />
                         ))} */}
-                        {messages.map((messag, ind) => (
+                        {message?.map((messag, ind) => (
                             <MessageIndex
                             key={`message-${ind}`}
                             messag={messag}

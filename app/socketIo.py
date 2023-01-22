@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO, emit
-from app.models import db, DmContent, Message, Server
+from app.models import db, DmContent, Message, Server, Channel
 import os
 from datetime import datetime
 from flask_login import current_user
@@ -41,16 +41,20 @@ def handle_delete(data):
 
 @socketio.on("channelMsg")
 def handle_channel(data):
+    channel=Channel.query.get(data['channel_id'])
+    
     dm = Message(
         user_id = current_user.id,
         channel_id = data['channel_id'],
         message = data['message'],
         created_at = datetime.now(),
+        channel=channel
         # id = Server.query.filter(Server.id == data['server'])
         # FROM servers, members_list 
         # WHERE ? = members_list.user_id AND servers.id = members_list.server_id
     )
     # ser = Server.query.filter(Server.id == data['server'])
+    print("DFASDFASDFSDAF", dm)
     db.session.add(dm)
     # for o in ser:
     #     db.session.add(o)
@@ -59,11 +63,11 @@ def handle_channel(data):
     emit("channelMsg", data, broadcast=True)
 
 
-@socketio.on("del")
-def handle_del(data):
-    print(data)
-    dm = Message.query.filter(Message.id == data['messageId'])
-    for o in dm:
-        db.session.delete(o)
-        db.session.commit()
-    emit("del", data, broadcast=True)
+# @socketio.on("del")
+# def handle_del(data):
+#     print(data)
+#     dm = Message.query.filter(Message.id == data['messageId'])
+#     for o in dm:
+#         db.session.delete(o)
+#         db.session.commit()
+#     emit("del", data, broadcast=True)

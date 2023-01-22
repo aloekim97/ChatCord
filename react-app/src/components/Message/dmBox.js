@@ -1,20 +1,22 @@
-import DelBox from "./delBox"
+
 function DmBox({dm, deleteDm, user}) {
     return(
         <div className="message-content">
-            <img className="message-profile-pic" src={user.profileImg}>
-            </img>
-            <div className="message-content-container">
-                <div className="message-profile-name">
-                    <h3 className="message-content-name">
-                        {user.username}
-                    </h3>
-                    <div className="message-content-date">
-                        {dm.created_at}
+            <div className="actual-message">
+                <img className="message-profile-pic" src={user.profileImg}>
+                </img>
+                <div className="message-content-container">
+                    <div className="message-profile-name">
+                        <h3 className="message-content-name">
+                            {user.username}
+                        </h3>
+                        <div className="message-content-date">
+                            {dm.created_at}
+                        </div>
                     </div>
-                </div>
-                <div className="message-data">
-                    {dm.content}
+                    <div className="message-data">
+                        {dm.content}
+                    </div>
                 </div>
             </div>
                 <button onClick={() => deleteDm(dm.id)}>Delete</button>

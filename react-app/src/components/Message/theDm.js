@@ -114,7 +114,8 @@ export default function DmPage() {
     <div className="dm-container">
       <DmBar />
       <div className="chat-container">
-        <div className="chat-part">
+        <div className="chat-text">
+                  <div className="chat-part">
           {Object.values(dms).map((dm) => (
             <DmBox 
             key={dm.id}
@@ -123,22 +124,26 @@ export default function DmPage() {
             user={user}
             /> 
             ))}
+          </div>
+            <div>
+              <form onSubmit={sendChat} className="lets-chat">
+                <input value={chatInput} onChange={updateChatInput} />
+              </form>
+          </div>
         </div>
-      <form onSubmit={sendChat}>
-          <input value={chatInput} onChange={updateChatInput} />
-          <button type="submit">Send</button>
-        </form>
-        <form className="search-form" onSubmit={handleSearchSubmit}>
-          <label className="search-label">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
-              placeholder="Search"
-            />
-          </label>
-        </form> 
+        <div className="search-portion">
+          <form className="search-form" onSubmit={handleSearchSubmit}>
+            <label className="search-label">
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+                placeholder="Search"
+              />
+            </label>
+          </form> 
+        </div>
       </div>
     </div>
  ) 

@@ -1,8 +1,0 @@
-function DelBox(){
-    return(
-        <button>
-            Delete
-        </button>
-    )
-}
-export default DelBox
