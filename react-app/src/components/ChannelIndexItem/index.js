@@ -52,18 +52,20 @@ function ChannelIndex(){
     const ulRef = useRef();
 
     useEffect(() => {
+        console.log('are u the problem?')
         dispatch(loadMsgThunk(channelId))
     },[dispatch,channelId])
 
     useEffect(() => {
         socket = io();
         socket.on("channelMsg", (chat) => {
-            dispatch(loadMsgThunk(parseInt(chat.channelId)))
+            const id = parseInt(chat.channel_id)
+            dispatch(loadMsgThunk(id))
                 setMessage((message) => [...message, chat])
         });
         socket.on("del", (chat) => {
             setMessage((message) => [...message, chat])
-            dispatch(loadMsgThunk(channelId))
+            dispatch(loadMsgThunk(parseInt(chat.channel_Id)))
         })
         return () => {
             // setMessage([])
@@ -161,7 +163,7 @@ function ChannelIndex(){
     console.log('this is server obj', serverObj)
     // const currChannel = channels[channelId-1]
     // const messages = currChannel.message
-    
+
     // console.log('this is the currChannel', channels)
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
@@ -218,7 +220,7 @@ function ChannelIndex(){
     };
     const deleteMsg = (messageId) => {
         socket.emit("del", {messageId: messageId })
-      } 
+      }
 
     return(
         <div className="page-container">
