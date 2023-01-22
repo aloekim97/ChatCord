@@ -95,8 +95,7 @@ function App() {
           <ServerPage />
           <MessageRequest />
         </Route>
-
-        <Route>
+        <Route path="*">
           <NavBar />
           <PageNotFound />
         </Route>

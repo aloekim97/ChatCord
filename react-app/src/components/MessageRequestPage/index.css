@@ -1,0 +1,45 @@
+.message-request-page {
+    display: flex;
+    height: 100vh;
+    background-color: rgb(55,57,63);
+}
+
+.message-request-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.message-request-title {
+    color: rgb(173,187,190);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid rgb(47,49,54);
+    background-color: rgb(55,57,63);
+}
+
+.fa-envelope {
+    font-size: 20px;
+    padding-right: 6px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.nofriend-img-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(55,57,63);
+}
+
+.nofriends-img {
+    height: 410px;
+}
