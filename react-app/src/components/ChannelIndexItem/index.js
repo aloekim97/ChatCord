@@ -65,7 +65,7 @@ function ChannelIndex(){
         });
         socket.on("del", (chat) => {
             setMessage((message) => [...message, chat])
-            dispatch(loadMsgThunk(parseInt(chat.channel_Id)))
+            dispatch(loadMsgThunk(channelId))
         })
         return () => {
             // setMessage([])
