@@ -19,7 +19,7 @@ let socket;
 export default function DmPage() {
   const dispatch = useDispatch();
   const { chatId } = useParams();
-  const dms = useSelector((state) => state.dmReducer.chatDetails);
+  const dms = useSelector((state) => state.dm.chatDetails);
   const [content, setContent] = useState("");
   const [senderId, setSenderId] = useState();
   const [dmId, setDmId] = useState();

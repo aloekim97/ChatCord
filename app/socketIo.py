@@ -2,6 +2,7 @@ from flask_socketio import SocketIO, emit
 from app.models import db, DmContent, Message, Server
 import os
 from datetime import datetime
+from flask_login import current_user
 
 # create your SocketIO instance
 if os.environ.get("FLASK_ENV") == "production":
@@ -40,20 +41,19 @@ def handle_delete(data):
 
 @socketio.on("channelMsg")
 def handle_channel(data):
-    print(data)
     dm = Message(
-        user_id = data['user_id'],
+        user_id = current_user.id,
         channel_id = data['channel_id'],
         message = data['message'],
         created_at = datetime.now(),
-        # id = Server.query.filter(Server.id == data['server'])
+        id = Server.query.filter(Server.id == data['server'])
         # FROM servers, members_list 
         # WHERE ? = members_list.user_id AND servers.id = members_list.server_id
     )
-    ser = Server.query.filter(Server.id == data['server'])
+    # ser = Server.query.filter(Server.id == data['server'])
     db.session.add(dm)
-    for o in ser:
-        db.session.add(o)
+    # for o in ser:
+    #     db.session.add(o)
     db.session.commit()
     print(dm)
     emit("channelMsg", data, broadcast=True)

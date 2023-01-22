@@ -33,6 +33,8 @@ function ChannelIndex(){
     const chats = useSelector(state => Object.values(state.chats))
     // const currServer = useSelector(state => state.server.singelServer)
     const currChannel = useSelector(state => state.channel.server[channelId])
+    // console.log(currChannel)
+
     // const currChannel2 = useSelector(state => state.server.allServers[serverId].channels[channelId])
     const userObj = useSelector(state => state.session.user)
     // const channels = useSelector(state => state.server)
@@ -44,26 +46,26 @@ function ChannelIndex(){
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
     const [content, setContent] = useState('')
-    const [message, setMessage] = useState([]);
+    const [messages, setMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
 
     const ulRef = useRef();
 
-    useEffect(() => {
-        dispatch(loadMsgThunk(channelId)).then(
-            setMessage(message => [...message])
-        )
-    },[dispatch,channelId])
+    // useEffect(() => {
+    //     dispatch(loadMsgThunk(channelId)).then(
+    //         setMessage(message => [...message])
+    //     )
+    // },[dispatch,channelId])
 
     useEffect(() => {
         socket = io();
         socket.on("channelMsg", (chat) => {
             dispatch(loadMsgThunk(channelId)).then(
-                setMessage((message) => [...message, chat]))
+                setMessages((messages) => [...messages, chat]))
         });
         socket.on("del", (chat) => {
-            dispatch(loadMsgThunk(channelId)).then(
-            setMessage((message) => [...message, chat]))
+            setMessages((messages) => [...messages, chat])
+            dispatch(loadMsgThunk(channelId))
         })
         return () => {
             // setMessage([])
@@ -114,14 +116,14 @@ function ChannelIndex(){
     }, [dropdownOpen]);
 
 
-    useEffect(() => {
-        // dispatch(getOneServerThunk(serverId))
-        dispatch(getOneServerThunk(serverId))
-        dispatch(fetchChannels(serverId));
-        dispatch(fetchOneChannel(channelId))
-        // dispatch(getAllServersThunk())
-        // setMembers(serverObj.members)
-    }, [dispatch, serverId, channelId]);
+    // useEffect(() => {
+    //     // dispatch(getOneServerThunk(serverId))
+    //     dispatch(getOneServerThunk(serverId))
+    //     dispatch(fetchChannels(serverId));
+    //     dispatch(fetchOneChannel(channelId))
+    //     // dispatch(getAllServersThunk())
+    //     // setMembers(serverObj.members)
+    // }, [dispatch, serverId, channelId]);
 
     // useEffect(() => {
     //     (async () => {
@@ -133,7 +135,7 @@ function ChannelIndex(){
     //     })();
     // }, [dispatch, serverId, channelId]);
 
-    const closeMenu = () => setShowMenu(false);
+    // const closeMenu = () => setShowMenu(false);
 
 
     if (!serverObj ){
@@ -160,7 +162,8 @@ function ChannelIndex(){
     // const channels = Object.values(channelsObj)
     console.log('this is server obj', serverObj)
     // const currChannel = channels[channelId-1]
-    const messages = currChannel.message
+    // const messages = currChannel.message
+    
     // console.log('this is the currChannel', channels)
     // console.log('this is the curr server', currServer)
     console.log('testing the channels onk', channels)
@@ -209,7 +212,6 @@ function ChannelIndex(){
     const sendChat = (e) => {
     e.preventDefault();
     socket.emit("channelMsg", {
-        user_id:  userObj.id,
         channel_id: channelId,
         message: chatInput,
         server: serverId
@@ -311,7 +313,7 @@ function ChannelIndex(){
                         {currChannel.message.map(message => (
                             <MessageIndex message={message} channelId={channelId} />
                         ))} */}
-                        {Object.values(message).map((messag, ind) => (
+                        {messages.map((messag, ind) => (
                             <MessageIndex
                             key={`message-${ind}`}
                             messag={messag}

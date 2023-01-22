@@ -11,8 +11,8 @@ function MessageIndex({messag, userObj, deleteMsg}){
 
     return (
         <div className="message-content">
-            {/* <img className="message-profile-pic" src={user.profileImg}>
-            </img> */}
+            <img className="message-profile-pic" src={userObj.profileImg}>
+            </img>
             <div className="message-content-container">
                 <div className="message-profile-name">
                     <h3 className="message-content-name">
