@@ -36,8 +36,8 @@ export default function DmPage() {
   useEffect(() => {
     socket = io();
     socket.on("chat", (chat) => {
-      setMessages((messages) => delete messages[chat.id]);
-      dispatch(loadTheDmsThunk(chatId));
+        dispatch(loadTheDmsThunk(chatId)).then(
+        setMessages((messages) => [...messages, chat]))
     });
     socket.on("delete", (chat) => {
         setMessages((messages) => [...messages, chat])
@@ -69,14 +69,15 @@ export default function DmPage() {
     });
     setChatInput("");
   };
+  console.log(chatId, user.id)
 
-  useEffect(() => {
-    const func = async () => {
-      setMessages([]);
+  // useEffect(() => {
+  //   const func = async () => {
+  //     setMessages([]);
 
-      await dispatch(loadTheDmsThunk(chatId));
-    };
-  });
+  //     await dispatch(loadTheDmsThunk(chatId));
+  //   };
+  // });
 
 //   const onSub = async (e) => {
 //     e.preventDefault();
@@ -103,11 +104,12 @@ export default function DmPage() {
   // console.log(dmId)
   // console.log(senderId)
 
-  const deleteDm = (e) => {
-    socket.emit("delete", {msg_id: delId, chat_id: chatId})
+  const deleteDm = () => {
+    socket.emit("delete", {msg_id: delId })
   } 
-  console.log(dms)
-
+//   const butt = document.getElementsByClassName("del")
+//   const clickButt = deleteDm(setDelId(this.id))
+  
   return (
     <div className="dm-container">
       <DmBar />
@@ -117,7 +119,7 @@ export default function DmPage() {
             return (
               <div className="sent-message" key={dm.id}>
                 {/* <img src={}></img> */}
-                <div>{dm.content}</div>
+                <div>{dm.content}{dm.id}{delId}</div>
                 <div className="edit/del">
                   <button
                     className="edit"
@@ -130,7 +132,11 @@ export default function DmPage() {
                   </button>
                   <button
                     className="del"
-                    onClick={function() {deleteDm(); setDelId(dm.id)}}
+                    onClick={() => {
+                        setDelId(dm.id);
+                        deleteDm(delId)
+                    }}
+                        
                   >
                     Delete
                   </button>

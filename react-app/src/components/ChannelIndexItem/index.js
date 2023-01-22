@@ -19,6 +19,10 @@ import { createMsgThunk, loadMsgThunk } from "../../store/channelMsg";
 import EditProfileModal from "../ProfileIndexItem/EditProfileComponent";
 import SearchPage from "../SearchResultsComponent";
 import { getMessagesSearch } from "../../store/search";
+import { io } from "socket.io-client";
+
+
+let socket;
 
 function ChannelIndex(){
 
@@ -40,8 +44,32 @@ function ChannelIndex(){
     // const [members, setMembers] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
     const [content, setContent] = useState('')
+    const [message, setMessage] = useState([]);
+    const [chatInput, setChatInput] = useState("");
 
     const ulRef = useRef();
+
+    useEffect(() => {
+        dispatch(loadMsgThunk(channelId)).then(
+            setMessage(message => [...message])
+        )
+    },[dispatch,channelId])
+
+    useEffect(() => {
+        socket = io();
+        socket.on("channelMsg", (chat) => {
+            dispatch(loadMsgThunk(channelId)).then(
+                setMessage((message) => [...message, chat]))
+        });
+        socket.on("del", (chat) => {
+            dispatch(loadMsgThunk(channelId)).then(
+            setMessage((message) => [...message, chat]))
+        })
+        return () => {
+            // setMessage([])
+          socket.disconnect();
+        };
+      },[dispatch, channelId]);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -146,24 +174,24 @@ function ChannelIndex(){
     console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeee', chats)
     const ulClassName = (showMenu ? 'channel-droplist' : 'channel-droplist2');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // setErrors([]);
-        const input = {
-            content
-        }
-        await dispatch(createMsgThunk(channelId, input))
-        .then(() => {
-            setContent('')
-        })
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // setErrors([]);
+    //     const input = {
+    //         content
+    //     }
+        // await dispatch(createMsgThunk(channelId, input))
+        // .then(() => {
+        //     setContent('')
+        // })
         // await dispatch(fetchChannels(serverId));
         // await dispatch(fetchOneChannel(channelId))
         // // dispatch(getAllServersThunk())
         // await dispatch(getOneServerThunk(serverId))
         // // setMembers(serverObj.members)
-        await dispatch(loadMsgThunk(channelId))
+        // await dispatch(loadMsgThunk(channelId))
         // closeModal()
-    }
+    // }
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
         // setErrors([]);
@@ -173,6 +201,24 @@ function ChannelIndex(){
 
     }
 
+
+    const updateChatInput = (e) => {
+        setChatInput(e.target.value);
+    };
+
+    const sendChat = (e) => {
+    e.preventDefault();
+    socket.emit("channelMsg", {
+        user_id:  userObj.id,
+        channel_id: channelId,
+        message: chatInput,
+        server: serverId
+    });
+        setChatInput("");
+    };
+    const deleteMsg = (messageId) => {
+        socket.emit("del", {messageId: messageId })
+      } 
 
     return(
         <div className="page-container">
@@ -261,21 +307,29 @@ function ChannelIndex(){
             </div>
             <div className="messages-members-border">
                 <div className="messages-container">
-                    <div className="channel-messages-content-container">
+                    {/* <div className="channel-messages-content-container">
                         {currChannel.message.map(message => (
-                            <MessageIndex message={message} />
-                        ))}
-                    </div>
+                            <MessageIndex message={message} channelId={channelId} />
+                        ))} */}
+                        {Object.values(message).map((messag, ind) => (
+                            <MessageIndex
+                            key={`message-${ind}`}
+                            messag={messag}
+                            userObj={userObj}
+                            deleteMsg={deleteMsg}
+                            />
+                            ))}
+                    {/* </div> */}
                     {/* {chats.length > 0? chats.map(message => (
                         <MessageIndex message={message} />
                     )) : <div>Hello</div>} */}
-                    <form className="create-messages-form" onSubmit={handleSubmit}>
+                    <form className="create-messages-form" onSubmit={sendChat}>
                         <label>
                             <input
                                 type="text"
                                 required
-                                value={content}
-                                onChange = {e => setContent(e.target.value)}
+                                value={chatInput}
+                                onChange = {updateChatInput}
                                 className="create-channel-input"
                                 placeholder="Message"
                             />
