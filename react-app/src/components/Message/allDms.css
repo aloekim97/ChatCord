@@ -153,3 +153,10 @@
     width: 100%;
 }
 
+.butts div{
+    visibility: hidden;
+}
+
+.butts:hover div{
+    visibility: visible;
+}

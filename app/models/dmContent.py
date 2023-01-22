@@ -22,4 +22,5 @@ class DmContent(db.Model):
             'sender_id': self.sender_id,
             'content': self.content,
             'created_at': self.created_at,
+            'userSender': self.userSender.to_dict()
         }

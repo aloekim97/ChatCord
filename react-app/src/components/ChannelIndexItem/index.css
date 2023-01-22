@@ -421,3 +421,8 @@
 .fa-plus {
     font-size: 16px;
 }
+
+.message-content{
+    display: flex;
+}
+
