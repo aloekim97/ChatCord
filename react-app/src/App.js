@@ -96,7 +96,8 @@ function App() {
           <MessageRequest />
         </Route>
 
-        <Route path="*">
+        <Route>
+          <NavBar />
           <PageNotFound />
         </Route>
       </Switch>

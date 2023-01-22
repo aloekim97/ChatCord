@@ -1,11 +1,13 @@
 import { useHistory } from "react-router-dom";
 import "./index.css";
+import errorGif from "../../assets/404gif.gif";
 
 const PageNotFound = () => {
   const history = useHistory();
 
 
   return (
+
     <div className="error-page">
       <div className="error-page-left">
         <h1 className="error-page-title">WRONG TURN?</h1>
@@ -26,7 +28,7 @@ const PageNotFound = () => {
       </div>
       <div className="error-page-right">
         <img
-          src="https://i.imgur.com/rDqvY4K.jpg"
+          src={errorGif}
           alt="error-gif"
           className="error-img"
         />
