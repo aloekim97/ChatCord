@@ -1,5 +1,12 @@
+import { useState } from "react";
+
 
 function DmBox({dm, deleteDm, user}) {
+    const [isHover, setIsHover] = useState(false);
+
+    const toggleIsHover = () => {
+        setIsHover(!isHover);
+      };
     return(
         <div className="message-content">
             <div className="actual-message">
@@ -20,8 +27,11 @@ function DmBox({dm, deleteDm, user}) {
                 </div>
             </div>
                 {user.id === dm.userSender.id && (
-            <div className='butt'>
-                <button className="delete-dm" onClick={() => deleteDm(dm.id)}>Delete</button>
+            <div className='dButt'
+                key={dm.id}
+                onMouseEnter={toggleIsHover}
+                onMouseLeave={toggleIsHover}>
+                <div className="oof">{isHover? <button className="delete-dm" onClick={() => deleteDm(dm.id)}>Delete</button> : null} </div>
             </div>
                 )}
         </div>

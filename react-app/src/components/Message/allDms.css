@@ -153,10 +153,11 @@
     width: 100%;
 }
 
-.butts div{
-    visibility: hidden;
+.dButt{
+    display: none;
 }
 
-.butts:hover div{
-    visibility: visible;
+.message-content + .dButt:hover{
+    display: inline-block;
 }
+
