@@ -13,7 +13,7 @@ import DmBar from "./allDms";
 import dmReducer from "../../store/directMsg";
 import { getDmSearch } from "../../store/search";
 import { io } from "socket.io-client";
-
+import DmBox from "./dmBox";
 let socket;
 
 export default function DmPage() {
@@ -22,12 +22,11 @@ export default function DmPage() {
   const dms = useSelector((state) => state.dm.chatDetails);
   const [content, setContent] = useState("");
   const [senderId, setSenderId] = useState();
-  const [dmId, setDmId] = useState();
-  const [delId, setDelId] = useState();
   const user = useSelector((state) => state.session.user);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
   const [search, setSearch] = useState("");
+  console.log(dms)
 
   useEffect(() => {
     dispatch(loadTheDmsThunk(chatId));
@@ -69,7 +68,7 @@ export default function DmPage() {
     });
     setChatInput("");
   };
-  console.log(chatId, user.id)
+  // console.log(chatId, user.id)
 
   // useEffect(() => {
   //   const func = async () => {
@@ -104,65 +103,28 @@ export default function DmPage() {
   // console.log(dmId)
   // console.log(senderId)
 
-  const deleteDm = () => {
-    socket.emit("delete", {msg_id: delId })
+  const deleteDm = (dmId) => {
+    socket.emit("delete", {msg_id: dmId })
   } 
 //   const butt = document.getElementsByClassName("del")
 //   const clickButt = deleteDm(setDelId(this.id))
+
   
   return (
     <div className="dm-container">
       <DmBar />
       <div className="chat-container">
         <div className="chat-part">
-          {Object.values(dms).map((dm) => {
-            return (
-              <div className="sent-message" key={dm.id}>
-                {/* <img src={}></img> */}
-                <div>{dm.content}{dm.id}{delId}</div>
-                <div className="edit/del">
-                  <button
-                    className="edit"
-                    onClick={function () {
-                      setDmId(dm.id);
-                      setSenderId(dm.sender_id);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="del"
-                    onClick={() => {
-                        setDelId(dm.id);
-                        deleteDm(delId)
-                    }}
-                        
-                  >
-                    Delete
-                  </button>
-                </div>
-                <form className="edit-box">
-                  {dm.id === dmId ? (
-                    <input
-                      className="text-here"
-                      onSubmit={sendChat}
-                      value={chatInput}
-                      onChange={updateChatInput}
-                      placeholder={dm.content}
-                    />
-                  ) : null}
-                </form>
-              </div>
-            );
-          })}
+          {Object.values(dms).map((dm) => (
+            <DmBox 
+            key={dm.id}
+            dm={dm}
+            deleteDm={deleteDm}
+            user={user}
+            /> 
+            ))}
         </div>
-        {/* <form onSubmit={onSub}>
-                        <input className='text-box'
-                        value={content}
-                        onChange={e => setContent(e.target.value)}
-                        />
-                    </form> */}
-        <form onSubmit={sendChat}>
+      <form onSubmit={sendChat}>
           <input value={chatInput} onChange={updateChatInput} />
           <button type="submit">Send</button>
         </form>
@@ -176,15 +138,11 @@ export default function DmPage() {
               placeholder="Search"
             />
           </label>
-        </form>
+        </form> 
       </div>
     </div>
-    // <div>
-    //     <div>
-    //         {messages.map((message, ind) => (
-    //             <div key={ind}>{`${message.user}: ${message.content}`}</div>
-    //         ))}
-    //     </div>
-    // </div>
-  );
+ ) 
 }
+
+      
+

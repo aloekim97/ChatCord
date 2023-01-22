@@ -46,7 +46,7 @@ def handle_channel(data):
         channel_id = data['channel_id'],
         message = data['message'],
         created_at = datetime.now(),
-        id = Server.query.filter(Server.id == data['server'])
+        # id = Server.query.filter(Server.id == data['server'])
         # FROM servers, members_list 
         # WHERE ? = members_list.user_id AND servers.id = members_list.server_id
     )
