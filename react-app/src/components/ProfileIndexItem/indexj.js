@@ -1,9 +1,7 @@
 import "./index.css";
 import LogoutButton from "../auth/LogoutButton";
-import { useHistory } from "react-router";
 
 function ProfileCard({ user }) {
-  const history = useHistory();
 
   return (
     <div className="profile-card-container">
