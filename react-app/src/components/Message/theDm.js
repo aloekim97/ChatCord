@@ -35,8 +35,8 @@ export default function DmPage() {
   useEffect(() => {
     socket = io();
     socket.on("chat", (chat) => {
-        dispatch(loadTheDmsThunk(chatId)).then(
-        setMessages((messages) => [...messages, chat]))
+      dispatch(loadTheDmsThunk(parseInt(chat.chat_id)))
+        setMessages((messages) => [...messages, chat])
     });
     socket.on("delete", (chat) => {
         setMessages((messages) => [...messages, chat])

@@ -58,8 +58,8 @@ function ChannelIndex(){
     useEffect(() => {
         socket = io();
         socket.on("channelMsg", (chat) => {
-            dispatch(loadMsgThunk(channelId)).then(
-                setMessage((message) => [...message, chat]))
+            dispatch(loadMsgThunk(parseInt(chat.chat.id)))
+                setMessage((message) => [...message, chat])
         });
         socket.on("del", (chat) => {
             setMessage((message) => [...message, chat])
