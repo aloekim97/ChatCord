@@ -9,10 +9,10 @@ function ComingSoon(){
             <DmBar />
             <div className="coming-soon-components-container">
                 <h1 className="coming-soon-h1">
-                    Coming Soon
+                <i class="fa-regular fa-calendar"></i> Coming Soon
                 </h1>
                 <div className="coming-soon-components-background">
-                    <div className="coming-soon-components-left" >
+                    <div className="coming-soon-components-container" >
                         <div className="Coming-soon-index-container">
                             <ComingSoonIndexItem name='Roles and Permissions' />
                         </div>
@@ -22,8 +22,8 @@ function ComingSoon(){
                         <div className="Coming-soon-index-container">
                             <ComingSoonIndexItem name='Themes' />
                         </div>
-                    </div>
-                    <div className="coming-soon-components-right">
+                    {/* </div>
+                    <div className="coming-soon-components-right"> */}
                         <div  className="Coming-soon-index-container">
                             <ComingSoonIndexItem name='Friends' />
                         </div>

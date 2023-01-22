@@ -14,52 +14,64 @@
 }
 
 .coming-soon-components-container{
-    background-color: #36393F;
+    background-color: rgb(55,57,63);
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    /* justify-content: center; */
 }
 
 .Coming-soon-index-container{
     background-color: #292B2F;
     height: 284px;
     border: 1px none black;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     padding: 16px;
 }
+
+
 .coming-soon-components-background{
-    /* background-color: red; */
-    margin: 0px 250px;
-    /* width: 100%; */
-    height: auto;
+    height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.coming-soon-components-left{
-    /* background-color: yellow; */
-    height: 100%;
-    width: 49%;
-}
-
-.coming-soon-components-right{
-    /* background-color: green; */
-    width: 49%;
+.coming-soon-components-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* margin-top: 10px; */
 }
 
 .coming-soon-h1{
+    color: rgb(173,187,190);
+    font-size: 20px;
     display: flex;
-    justify-content: center;
-    color: #FFFFFF;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 30px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid rgb(47,49,54);
+    background-color: rgb(55,57,63);
+    padding: 9px
+}
+
+.fa-calendar {
+    font-size: 20px;
+    padding-right: 6px;
+    padding-left: 5px;
+    padding-top: 5px;
 }
 
 .index-item-h2{
-    color: #FFFFFF;
+    color: rgb(173,187,190);
     display: flex;
     justify-content: center;
 }
@@ -67,7 +79,6 @@
 .coming-soon-image-contaiiner{
     display: flex;
     justify-content: center;
-    /* background-color: orange; */
     width: 100%;
     height: 80%;
     object-fit: contain;
