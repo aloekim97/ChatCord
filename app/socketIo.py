@@ -1,7 +1,8 @@
 from flask_socketio import SocketIO, emit
-from app.models import db, DmContent
+from app.models import db, DmContent, Message, Server, Channel
 import os
 from datetime import datetime
+from flask_login import current_user
 
 # create your SocketIO instance
 if os.environ.get("FLASK_ENV") == "production":
@@ -31,7 +32,42 @@ def handle_chat(data):
 
 @socketio.on("delete")
 def handle_delete(data):
-    dm = DmContent.query.get(data['id'])
-    db.session.delete(dm)
-    db.session.commit()
+    print(data)
+    dm = DmContent.query.filter(DmContent.id == data['msg_id'])
+    for o in dm:
+        db.session.delete(o)
+        db.session.commit()
+    emit("delete", data, broadcast=True)
 
+@socketio.on("channelMsg")
+def handle_channel(data):
+    channel=Channel.query.get(data['channel_id'])
+    
+    dm = Message(
+        user_id = current_user.id,
+        channel_id = data['channel_id'],
+        message = data['message'],
+        created_at = datetime.now(),
+        channel=channel
+        # id = Server.query.filter(Server.id == data['server'])
+        # FROM servers, members_list 
+        # WHERE ? = members_list.user_id AND servers.id = members_list.server_id
+    )
+    # ser = Server.query.filter(Server.id == data['server'])
+    print("DFASDFASDFSDAF", dm)
+    db.session.add(dm)
+    # for o in ser:
+    #     db.session.add(o)
+    db.session.commit()
+    print(dm)
+    emit("channelMsg", data, broadcast=True)
+
+
+@socketio.on("del")
+def handle_del(data):
+    print(data)
+    dm = Message.query.filter(Message.id == data['messageId'])
+    for o in dm:
+        db.session.delete(o)
+        db.session.commit()
+    emit("del", data, broadcast=True)

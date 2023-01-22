@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     dmSender = db.relationship("DirectMessage", foreign_keys=('DirectMessage.sender_id'), back_populates="sendUser")
     dmReceiver = db.relationship("DirectMessage", foreign_keys=('DirectMessage.receiver_id'), back_populates="receiveUser")
 
+
     @property
     def password(self):
         return self.hashed_password

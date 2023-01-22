@@ -4,8 +4,8 @@ import session from './session'
 import server from './server';
 import channel from './channel';
 import chats from './chats'
-import chmsgReducer from './channelMsg'
-import dmReducer from './directMsg'
+import channelMsg from './channelMsg'
+import dm from './directMsg'
 import search from './search';
 
 const rootReducer = combineReducers({
@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
   server,
   channel,
   chats,
-  chmsgReducer,
-  dmReducer,
+  channelMsg,
+  dm,
   search,
 });
 

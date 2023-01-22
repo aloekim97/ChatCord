@@ -85,7 +85,7 @@
 
 .chat-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #36393f;
     width: 100%;
     justify-content: space-between;
@@ -131,3 +131,25 @@
 .dm-container {
     display: flex;
 }
+
+
+.lets-chat{
+    color: #A1A3A5;
+}
+
+.message-content{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-part{
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+}
+
+.chat-text{
+    width: 100%;
+}
+

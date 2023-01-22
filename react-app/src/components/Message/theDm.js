@@ -13,21 +13,20 @@ import DmBar from "./allDms";
 import dmReducer from "../../store/directMsg";
 import { getDmSearch } from "../../store/search";
 import { io } from "socket.io-client";
-
+import DmBox from "./dmBox";
 let socket;
 
 export default function DmPage() {
   const dispatch = useDispatch();
   const { chatId } = useParams();
-  const dms = useSelector((state) => state.dmReducer.chatDetails);
+  const dms = useSelector((state) => state.dm.chatDetails);
   const [content, setContent] = useState("");
   const [senderId, setSenderId] = useState();
-  const [dmId, setDmId] = useState();
-  const [newM, setNewM] = useState("");
   const user = useSelector((state) => state.session.user);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
   const [search, setSearch] = useState("");
+  console.log(dms)
 
   useEffect(() => {
     dispatch(loadTheDmsThunk(chatId));
@@ -36,13 +35,18 @@ export default function DmPage() {
   useEffect(() => {
     socket = io();
     socket.on("chat", (chat) => {
-      setMessages((messages) => [...messages, chat]);
-      dispatch(loadTheDmsThunk(chatId));
+      dispatch(loadTheDmsThunk(parseInt(chat.chat_id)))
+        setMessages((messages) => [...messages, chat])
     });
+    socket.on("delete", (chat) => {
+        setMessages((messages) => [...messages, chat])
+        dispatch(loadTheDmsThunk(chatId))
+    })
     return () => {
       socket.disconnect();
     };
   }, []);
+
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
@@ -64,26 +68,27 @@ export default function DmPage() {
     });
     setChatInput("");
   };
+  // console.log(chatId, user.id)
 
-  useEffect(() => {
-    const func = async () => {
-      setMessages([]);
+  // useEffect(() => {
+  //   const func = async () => {
+  //     setMessages([]);
 
-      await dispatch(loadTheDmsThunk(chatId));
-    };
-  });
+  //     await dispatch(loadTheDmsThunk(chatId));
+  //   };
+  // });
 
-  const onSub = async (e) => {
-    e.preventDefault();
+//   const onSub = async (e) => {
+//     e.preventDefault();
 
-    const input = {
-      content,
-    };
-    await dispatch(sendMessageThunk(chatId, input)).then(() => {
-      setContent("");
-    });
-    await dispatch(loadTheDmsThunk(chatId));
-  };
+//     const input = {
+//       content,
+//     };
+//     await dispatch(sendMessageThunk(chatId, input)).then(() => {
+//       setContent("");
+//     });
+//     await dispatch(loadTheDmsThunk(chatId));
+//   };
 
   const updateMessage = async (e) => {
     e.preventDefault();
@@ -98,83 +103,51 @@ export default function DmPage() {
   // console.log(dmId)
   // console.log(senderId)
 
-  // const deleteDm = (messageId)
+  const deleteDm = (dmId) => {
+    socket.emit("delete", {msg_id: dmId })
+  } 
+//   const butt = document.getElementsByClassName("del")
+//   const clickButt = deleteDm(setDelId(this.id))
 
+  
   return (
     <div className="dm-container">
       <DmBar />
       <div className="chat-container">
-        <div className="chat-part">
-          {Object.values(dms).map((dm) => {
-            return (
-              <div className="sent-message" key={dm.id}>
-                {/* <img src={}></img> */}
-                <div>{dm.content}</div>
-                <div className="edit/del">
-                  <button
-                    className="edit"
-                    onClick={function () {
-                      setDmId(dm.id);
-                      setSenderId(dm.sender_id);
-                    }}
-                  >
-                    Edit{" "}
-                  </button>
-                  <button
-                    className="del"
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      await dispatch(deleteMessageThunk(chatId, dm.id));
-                      await dispatch(loadTheDmsThunk(chatId));
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
-                <form className="edit-box">
-                  {dm.id === dmId ? (
-                    <input
-                      className="text-here"
-                      onSubmit={sendChat}
-                      value={chatInput}
-                      onChange={updateChatInput}
-                      placeholder={dm.content}
-                    />
-                  ) : null}
-                </form>
-              </div>
-            );
-          })}
+        <div className="chat-text">
+                  <div className="chat-part">
+          {Object.values(dms).map((dm) => (
+            <DmBox 
+            key={dm.id}
+            dm={dm}
+            deleteDm={deleteDm}
+            user={user}
+            /> 
+            ))}
+          </div>
+            <div>
+              <form onSubmit={sendChat} className="lets-chat">
+                <input value={chatInput} onChange={updateChatInput} />
+              </form>
+          </div>
         </div>
-        {/* <form onSubmit={onSub}>
-                        <input className='text-box'
-                        value={content}
-                        onChange={e => setContent(e.target.value)}
-                        />
-                    </form> */}
-        <form onSubmit={sendChat}>
-          <input value={chatInput} onChange={updateChatInput} />
-          <button type="submit">Send</button>
-        </form>
-        <form className="search-form" onSubmit={handleSearchSubmit}>
-          <label className="search-label">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
-              placeholder="Search"
-            />
-          </label>
-        </form>
+        <div className="search-portion">
+          <form className="search-form" onSubmit={handleSearchSubmit}>
+            <label className="search-label">
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+                placeholder="Search"
+              />
+            </label>
+          </form> 
+        </div>
       </div>
     </div>
-    // <div>
-    //     <div>
-    //         {messages.map((message, ind) => (
-    //             <div key={ind}>{`${message.user}: ${message.content}`}</div>
-    //         ))}
-    //     </div>
-    // </div>
-  );
+ ) 
 }
+
+      
+
