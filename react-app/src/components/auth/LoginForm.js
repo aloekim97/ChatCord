@@ -57,6 +57,7 @@ const LoginForm = () => {
                 className="login-signup-text-box"
                 value={email}
                 onChange={updateEmail}
+                required
               />
             </div>
             <div className="login-signup-input">
@@ -69,6 +70,7 @@ const LoginForm = () => {
                 className="login-signup-text-box"
                 value={password}
                 onChange={updatePassword}
+                required
               />
               <button className="login-signup-form-sub-btn" type="submit">
                 Log In

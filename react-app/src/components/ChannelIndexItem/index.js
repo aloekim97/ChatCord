@@ -228,7 +228,7 @@ function ChannelIndex(){
                 <div className="server-name-section" onClick={toggleServerDropdown}>
                     <div className="server-name-icon">
                         {serverObj.name}
-                        {dropdownOpen ? <i class="fa-solid fa-x"></i>: <i class="fa-solid fa-chevron-down"></i> }
+                        {dropdownOpen ? <i class="fa-solid fa-x dropdown-x"></i>: <i class="fa-solid fa-chevron-down"></i> }
                     </div>
 
 
@@ -237,7 +237,7 @@ function ChannelIndex(){
                 </div>
                 <div className="server-navbar">
                     <div className="navbar-channel-name-icon">
-                        <i class="fa-solid fa-hashtag"></i>
+                        <i class="fa-solid fa-hashtag server-tag"></i>
                         {currChannel?.name}
                     </div>
                     <div className="search-form-container">
