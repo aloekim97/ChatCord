@@ -18,6 +18,12 @@ def seed_channels():
             name='build-support', server_id=6),
         Channel(
             name='Chill-Zone', server_id=7),
+        Channel(
+            name='General', server_id=8),
+        Channel(
+            name='General', server_id=9),
+        Channel(
+            name='General', server_id=10),
     ]
 
     for channel in demo_channels:
