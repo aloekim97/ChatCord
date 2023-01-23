@@ -1,5 +1,7 @@
-from app.models import db, Message, environment, SCHEMA
+from app.models import db, Message, User, environment, SCHEMA, Channel
 from datetime import datetime
+from random import choice
+from .sample_messages import gaming
 
 # Adds a demo user, you can add other users here if you want
 def seed_messages():
@@ -48,9 +50,21 @@ def seed_messages():
             ),
     ]
 
+    users = [user.id for user in User.query.all()]
+    channels = [channel.id for channel in Channel.query.all()]
+
+
+    for i in range(0,101):
+        message = Message(
+            user_id=choice(users),
+            channel_id=choice(channels),
+            message=choice(gaming),
+            created_at=datetime.now(),
+        )
+        demo_messages.append(message)
+
     for message in demo_messages:
         db.session.add(message)
-
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the messages table. SQLAlchemy doesn't

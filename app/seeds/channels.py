@@ -5,19 +5,25 @@ from app.models import db, Channel, environment, SCHEMA
 def seed_channels():
     demo_channels = [
         Channel(
-            name='Coding-Debug', server_id=1),
+            name='General', server_id=1),
         Channel(
-            name='Gamer-Lounge', server_id=2),
+            name='General', server_id=2),
         Channel(
-            name='Must-Watch', server_id=3),
+            name='General', server_id=3),
         Channel(
-            name='Best-Hike-Trails', server_id=4),
+            name='General', server_id=4),
         Channel(
-            name='Discussion', server_id=5),
+            name='General', server_id=5),
         Channel(
-            name='build-support', server_id=6),
+            name='General', server_id=6),
         Channel(
-            name='Chill-Zone', server_id=7),
+            name='General', server_id=7),
+        Channel(
+            name='General', server_id=8),
+        Channel(
+            name='General', server_id=9),
+        Channel(
+            name='General', server_id=10),
     ]
 
     for channel in demo_channels:

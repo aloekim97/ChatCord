@@ -11,7 +11,7 @@ function About() {
       <div className="about-us-container">
         <div className="about-card-container">
           <img
-            src="https://media.istockphoto.com/id/1214428300/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=vftMdLhldDx9houN4V-g3C9k0xl6YeBcoB_Rk6Trce0="
+            src="https://media.licdn.com/dms/image/C5603AQGDyI-FgvFARQ/profile-displayphoto-shrink_800_800/0/1555221896845?e=1680134400&v=beta&t=Mt9HycXLxtGOD-EiL9UF1kMX9KedDsFGOPCoI0Drp64"
             alt="profile-pic"
             className="about-img"
           ></img>
@@ -38,7 +38,7 @@ function About() {
         </div>
         <div className="about-card-container">
           <img
-            src="https://media.istockphoto.com/id/1214428300/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=vftMdLhldDx9houN4V-g3C9k0xl6YeBcoB_Rk6Trce0="
+            src="https://cdn.discordapp.com/attachments/1062151905742176367/1066976296233619546/IMG_3408.jpg"
             alt="profile-pic"
             className="about-img"
           ></img>
