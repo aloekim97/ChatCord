@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding-left: 80px;
-    width: 235px;
+    width: 236.5px;
     height: 100vh;
     background-color: rgb(47, 49, 54);
     margin: 0;
@@ -175,7 +175,8 @@
 
 .delete-dm{
     background-color: #36393f;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-width: 0;
     border-radius: 5px;
     color: rgb(255,255,255);
 }
