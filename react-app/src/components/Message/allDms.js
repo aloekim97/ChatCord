@@ -10,6 +10,14 @@ import "./allDms.css";
 function DmBar() {
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chats);
+  const [isOpen, setIsOpen] = useState(false)
+  const userObj = useSelector(state => state.session.user)
+
+  const ulRef = useRef();
+
+  const toggleProfileOpen = () => {
+    setIsOpen(!isOpen)
+}
 
 
   useEffect(() => {
@@ -57,7 +65,7 @@ function DmBar() {
         })}
       </div>
 
-      {/* <div className="channels-profile-container">
+      <div className="channels-profile-container">
                     <div className='profile-container me-profile-bottom' onClick={toggleProfileOpen} ref={ulRef}>
                         <img className="profile-pic dm-profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
@@ -76,7 +84,7 @@ function DmBar() {
                     />
                 </button>
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
-        </div> */}
+        </div>
         </div>
     </div>
   );
