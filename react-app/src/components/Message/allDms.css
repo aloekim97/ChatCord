@@ -136,6 +136,12 @@
 
 .lets-chat{
     color: #A1A3A5;
+    width: 100%;
+
+}
+
+.message-here{
+    width: 90%;
 }
 
 .message-content{
@@ -166,3 +172,19 @@
 .dm-profile-pic {
     margin-left: 7px;
 }
+
+.butt{
+    width: 5px;
+}
+
+.delete-dm{
+    background-color: #36393f;
+    border: solid black;
+    border-radius: 5px;
+    color: rgb(255,255,255);
+}
+
+.delete-dm:hover{
+    cursor: pointer;
+}
+
