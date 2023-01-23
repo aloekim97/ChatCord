@@ -1,4 +1,4 @@
-from app.models import db, Server, environment, SCHEMA
+from app.models import db, Server, User, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
@@ -27,12 +27,21 @@ def seed_servers():
             ),
         Server(
             name='Valorant', owner_id=8, server_img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoYNRUt4AApmSYdfcXAxr_-OKztgHFGZ7bzA&usqp=CAU"),
+        Server(
+            name='APEX LEGENDS', owner_id=8, server_img='https://logos-world.net/wp-content/uploads/2020/11/Apex-Legends-Emblem.png'),
+        Server(
+            name='Counter Strike', owner_id=8, server_img='https://cdn.akamai.steamstatic.com/steam/apps/730/capsule_616x353.jpg?t=1641233427'),
     ]
 
+    users = User.query.all()
     for server in demo_servers:
+        for user in users:
+            user.servers.append(server)
         db.session.add(server)
 
+
     db.session.commit()
+
 
 # Uses a raw SQL query to TRUNCATE or DELETE the servers table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
@@ -46,7 +55,10 @@ def undo_servers():
     if environment == "production":
         db.session.execute(
             f"TRUNCATE table {SCHEMA}.servers RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.members_list RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM servers")
+        db.session.execute("DELETE FROM members_list")
 
     db.session.commit()
