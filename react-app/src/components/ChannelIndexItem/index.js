@@ -263,7 +263,7 @@ function ChannelIndex(){
                     <div className="channel-buttons">
                         <div className="channel-buttons2">
                             <button className="channel-button-container" onClick={toggleMenu}>
-                                {showMenu ? <i class="fa-solid fa-sort-down"></i> : <i class="fa-solid fa-caret-right"></i> }
+                                {showMenu ? <i class="fa-solid fa-chevron-down down-arrow"></i> : <i class="fa-solid fa-angle-right"></i> }
                                 TEXT CHANNELS
                             </button>
                             <button className="create-channel-button">

@@ -20,6 +20,7 @@ import ComingSoon from "./components/ComingSoonComponent";
 import PageNotFound from "./components/ErrorPage";
 import MessageIndex from "./components/ChannelMessageIndexItem";
 import MessageRequest from "./components/MessageRequestPage";
+import Footer from "./components/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,6 +67,7 @@ function App() {
         <Route path="/" exact={true}>
           <NavBar />
           <SplashPage />
+          <Footer />
         </Route>
         <Route path="/@me" exact={true}>
           <ServerPage />

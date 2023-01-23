@@ -454,3 +454,11 @@
     display: flex;
 }
 
+.down-arrow {
+    margin-left: 5px;
+}
+
+.fa-angle-right {
+    margin-left: 5px;
+    margin-top: 2.5px;
+}
