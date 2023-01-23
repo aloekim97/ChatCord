@@ -9,6 +9,7 @@
     height: 375px;
     background-color: #292B2F;
     border-radius: 10px;
+    z-index: 1;
 }
 
 .profile-card-img{

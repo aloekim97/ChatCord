@@ -72,13 +72,14 @@
     background-color: #2F3136;
     color: #8D989D;
     cursor:pointer;
+    margin-left: 5px;
 }
 
 .channel-border-icon-name{
     display: flex;
     width: 234px;
     justify-content: space-between;
-    padding-left: 7px;
+    /* margin-left: 7px; */
 }
 
 .channel-border-icon-name:hover{
