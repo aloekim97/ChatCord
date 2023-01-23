@@ -1,5 +1,69 @@
-.main-container{
-    background-color: #36393F;
+.message-request-page {
     display: flex;
+    height: 100vh;
+    background-color: rgb(55,57,63);
+}
+
+.friend-request-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
+
+.friend-request-title {
+    color: rgb(173,187,190);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid rgb(47,49,54);
+    background-color: rgb(55,57,63);
+}
+
+.fa-user-group {
+    font-size: 20px;
+    padding-right: 6px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.nof-img-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(55,57,63);
+
+}
+
+.nofriends-img {
+    height: 410px;
+    padding-left: 90px;
+    padding-right: 90px;
+}
+
+.activeU{
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    background-color: #2F3136;
+    height: 93vh;
+    color: rgb(173,187,190);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.ative{
+    font-size: 20px;
+    font-weight: 800;
+    padding-left: 10px;
+}
+.loner{
+    display: flex;
+    align-items: center;
+    height: 80%;
+    justify-content: center;
+    font-size: 15px;
 }

@@ -1,7 +1,12 @@
+import { useState } from "react"
 
 function DmBox({dm, deleteDm, user}) {
+    const [isHover, setIsHover] = useState(false)
+    const buttonTheme = isHover ? "delete-dm2" : "delete-dm"
     return(
-        <div className="message-content">
+        <div className="message-content"
+        onMouseEnter={() => setIsHover(!isHover)} 
+        onMouseLeave={() => setIsHover(!isHover)}>
             <div className="actual-message">
                 <img className="message-profile-pic" src={user.profileImg}>
                 </img>
@@ -20,8 +25,8 @@ function DmBox({dm, deleteDm, user}) {
                 </div>
             </div>
                 {user.id === dm.userSender.id && (
-            <div className='butt'>
-                <button className="delete-dm" onClick={() => deleteDm(dm.id)}>Delete</button>
+            <div className='buttoon'>
+                <button className={buttonTheme} onClick={() => deleteDm(dm.id)}><i class="fa-solid fa-trash-can"></i>Delete Message</button>
             </div>
                 )}
         </div>

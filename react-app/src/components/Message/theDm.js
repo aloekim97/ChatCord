@@ -25,8 +25,10 @@ export default function DmPage() {
   const user = useSelector((state) => state.session.user);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
-  const [search, setSearch] = useState("");
-  console.log(dms)
+  const [search, setSearch] = useState(false);
+  const chat = useSelector(state => state.chats)
+  console.log(chat[chatId])
+  // const [isHover, setIsHover] = useState(false)
 
   useEffect(() => {
     dispatch(loadTheDmsThunk(chatId));
@@ -54,6 +56,7 @@ export default function DmPage() {
     const body = await dispatch(getDmSearch(chatId, search));
     // setIsSearch(true)
     console.log("it submitted the message");
+    setSearch(true)
   };
 
   const updateChatInput = (e) => {
@@ -114,24 +117,8 @@ export default function DmPage() {
     <div className="dm-container">
       <DmBar />
       <div className="chat-container">
-        <div className="chat-text">
-                  <div className="chat-part">
-          {Object.values(dms).map((dm) => (
-            <DmBox 
-            key={dm.id}
-            dm={dm}
-            deleteDm={deleteDm}
-            user={user}
-            /> 
-            ))}
-          </div>
-            <div>
-              <form onSubmit={sendChat} className="lets-chat">
-                <input className="message-here" value={chatInput} onChange={updateChatInput} />
-              </form>
-          </div>
-        </div>
-        <div className="search-portion">
+      <div className="search-portion">
+        <div className="receiver">{chat[chatId]?.receiveUser.username}</div>
           <form className="search-form" onSubmit={handleSearchSubmit}>
             <label className="search-label">
               <input
@@ -144,6 +131,23 @@ export default function DmPage() {
             </label>
           </form> 
         </div>
+        <div className="chat-text">
+          <div className="chat-part">
+            {Object.values(dms).map((dm) => (
+              <DmBox 
+              key={dm.id}
+              dm={dm}
+              deleteDm={deleteDm}
+              user={user}
+              /> 
+              ))}
+            </div>
+              <div className="lets-chat">
+                <form onSubmit={sendChat} className="chat-b">
+                  <input className="message-here" value={chatInput} onChange={updateChatInput} placeholder="Message"/>
+                </form>
+            </div>
+          </div>
       </div>
     </div>
  ) 
