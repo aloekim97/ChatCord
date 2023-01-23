@@ -52,7 +52,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #2F3136;
-    height: 95vh;
+    height: 100%;
     color: rgb(173,187,190);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -45,7 +45,7 @@ function ServerDropdown({ server, channelId, channel }) {
               <EditModal
                 serverObj={server}
                 channel={channel}
-                channelId={channel.id}
+                channelId={channel?.id}
               />
             }
           />
