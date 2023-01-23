@@ -38,7 +38,7 @@ function ServerDropdown({ server, channelId, channel }) {
             modalComponent={<CreateChannelModal serverId={server.id} />}
           />
         </button>
-        <button className="server-drop-button">
+        {/* <button className="server-drop-button">
           <OpenModalMenuItem
             itemText="Edit Channel"
             modalComponent={
@@ -49,7 +49,7 @@ function ServerDropdown({ server, channelId, channel }) {
               />
             }
           />
-        </button>
+        </button> */}
       </div>
       <div className="dropdown-delete-button-container">
         {userId === ownerId && (
