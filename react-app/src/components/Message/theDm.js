@@ -127,7 +127,7 @@ export default function DmPage() {
           </div>
             <div>
               <form onSubmit={sendChat} className="lets-chat">
-                <input value={chatInput} onChange={updateChatInput} />
+                <input className="message-here" value={chatInput} onChange={updateChatInput} />
               </form>
           </div>
         </div>
