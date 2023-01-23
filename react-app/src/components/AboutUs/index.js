@@ -38,7 +38,7 @@ function About() {
         </div>
         <div className="about-card-container">
           <img
-            src="https://cdn.discordapp.com/attachments/1062151905742176367/1066972582932385813/C68CFE92-4B01-4EC0-9D3A-F2D40C903471.jpg"
+            src="https://cdn.discordapp.com/attachments/1062151905742176367/1066976296233619546/IMG_3408.jpg"
             alt="profile-pic"
             className="about-img"
           ></img>
