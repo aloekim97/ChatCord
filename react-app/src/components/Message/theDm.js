@@ -119,7 +119,7 @@ export default function DmPage() {
       <div className="chat-container">
       <div className="search-portion">
         <div className="receiver">{chat[chatId]?.receiveUser.username}</div>
-          <form className="search-form" onSubmit={handleSearchSubmit}>
+          {/* <form className="search-form" onSubmit={handleSearchSubmit}>
             <label className="search-label">
               <input
                 type="text"
@@ -129,7 +129,7 @@ export default function DmPage() {
                 placeholder="Search"
               />
             </label>
-          </form> 
+          </form>  */}
         </div>
         <div className="chat-text">
           <div className="chat-part">
