@@ -164,7 +164,7 @@
 }
 
 .message-content{
-    width: 70%;
+    width: 90.8%;
     display: flex;
     justify-content: space-between;
     padding: 10px, 10px, 10px, 0px;
@@ -177,14 +177,14 @@
     color: rgb(255,255,255);
     background-color: rgb(66,70,77);
     border-radius: 5px;
-}  
+}
 
 .chat-part{
     display: flex;
     flex-direction: column;
     height: 84vh;
     overflow-y: auto;
-    
+
 }
 
 .chat-text{
@@ -217,16 +217,21 @@
     border-radius: 5px;
     color: rgb(173,187,190);
     border: solid black 1px;
-    color: red
+    color: black;
+    border-style: none;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
 }
 
 .delete-dm2:hover{
     cursor: pointer;
-
+    /* background-color: blue; */
+    color: rgb(255,255,255);
+    background-color: #36393f;
+    font-weight: 600;
 }
 
 .fa-trash-can{
-    color: red;
     padding-right: 6px;
 }
 

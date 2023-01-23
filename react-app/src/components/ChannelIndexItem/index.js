@@ -105,7 +105,7 @@ function ChannelIndex(){
         if (!dropdownOpen) return;
 
         const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
+            if (!ulRef.current?.contains(e.target)) {
                 setDropdownOpen(false);
             }
         };
