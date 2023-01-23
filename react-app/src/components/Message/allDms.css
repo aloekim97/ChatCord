@@ -173,18 +173,15 @@
     margin-left: 7px;
 }
 
-.butt{
-    width: 5px;
-}
-
 .delete-dm{
     background-color: #36393f;
-    border: solid black;
+    border: 1px solid black;
     border-radius: 5px;
     color: rgb(255,255,255);
 }
 
 .delete-dm:hover{
     cursor: pointer;
+    background-color: rgb(255,255,255);
+    color: black;
 }
-
