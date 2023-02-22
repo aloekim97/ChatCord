@@ -3,11 +3,10 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ServerNameCard from "./serverhovercard";
 import { fetchChannels } from "../../store/channel";
-import { getOneServerThunk } from "../../store/server";
+import defaultImg from "../../assets/discord-default.png"
 import "./index.css";
 
 function ServerIndex({ server }) {
-  // console.log(server.channels);
   const dispatch = useDispatch();
   const [isHover, setIsHover] = useState(false);
   const firstChan = server.channels[0];
@@ -15,9 +14,12 @@ function ServerIndex({ server }) {
     setIsHover(!isHover);
   };
 
+  function addDefaultSrc(e) {
+    e.target.src = defaultImg;
+  }
+
   useEffect(() => {
     dispatch(fetchChannels(server.id));
-    // dispatch(getOneServerThunk(server.id))
   }, [dispatch])
 
 
@@ -25,7 +27,6 @@ function ServerIndex({ server }) {
     return null;
   }
 
-  // console.log(firstChan);
   return (
 
     <NavLink key={server.id} to={`/servers/${server.id}/${firstChan.id}`}>
@@ -36,6 +37,7 @@ function ServerIndex({ server }) {
         onMouseLeave={toggleIsHover}
       >
         <img
+          onError={addDefaultSrc}
           className="server-img"
           src={server.serverImg}
           alt="server img"

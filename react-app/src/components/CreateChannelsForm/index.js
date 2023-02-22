@@ -18,7 +18,7 @@ function CreateChannelModal({serverId}){
     useEffect(() => {
         let newErrors = []
 
-        if (name.length < 1) newErrors.push('Name must be atleast 1 character')
+        if (name.length < 1) newErrors.push('Name must be at least 1 character')
         else if (name.length > 30) newErrors.push("Name must be less than 30 characters")
 
         setErrors(newErrors)
