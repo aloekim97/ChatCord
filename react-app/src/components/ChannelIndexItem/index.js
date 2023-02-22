@@ -288,7 +288,7 @@ function ChannelIndex(){
                 </div>
                 <div className="channels-profile-container">
                     <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
+                        <img className="profile-pic" src="../assets/default_profile.png" alt="img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}></img>
                         <div className="profile-data-container">
                             <div className="prof-username">
                                 {userObj.username}

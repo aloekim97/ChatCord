@@ -5,6 +5,16 @@
     flex-direction: column;
 }
 
+.search-no-results{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
 .search-header{
     background-color: #202225;
     padding: 16px;

@@ -58,7 +58,7 @@ function DmBar() {
               to={`/@me/${chat.id}`}
               key={chat.id}
             >
-              <img className="dm-img" src={chat.receiveUser.profileImg} />
+              <img className="dm-img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}} src={chat.receiveUser.profileImg} />
               <div className="chat-username">{chat.receiveUser.username}</div>
             </NavLink>
           );
@@ -67,7 +67,7 @@ function DmBar() {
 
       <div className="channels-profile-container">
                     <div className='profile-container me-profile-bottom' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic dm-profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
+                        <img className="profile-pic dm-profile-pic" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
                         <div className="profile-data-container">
                             <div className="prof-username">
                                 {userObj.username}
