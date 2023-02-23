@@ -4,48 +4,41 @@ import { useModal } from "../../context/Modal";
 import './index.css';
 import { createChannel } from "../../store/channel";
 import { updateChannel, removeChannel } from "../../store/channel";
+import EditProfileIndex from "./EditProfileIndex";
 
 
 function EditProfileModal({channelId, channel}){
+    const userObj = useSelector(state => state.session.user)
     const dispatch = useDispatch();
-
+    const [page, setPage] = useState('My Account')
     const { closeModal } = useModal();
     useEffect(() => {
 
     }, )
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // setErrors([]);
 
-
-        closeModal()
-    }
 
     return(
-        <>
-            <div className="create-form-header">
-                <h1 className="edit-prof-title">
-                    Edit Profile
-                </h1>
-            </div>
-            <form className="edit-channel" onSubmit={handleSubmit} >
-
-                <label className="edit-channel-label">
-                    Profile Username
-                    <input
-                        type="text"
-                        required
-                        className="edit-channel-input"
-                        placeholder="New Name"
-                    />
-                </label>
-                <div className="form-footer">
-                    <button className="edit-submitButton" type="submit">Update</button>
-                    {/* <button className="deleteButton" type="button" >Delete Channel</button> */}
+        <div className="edit-profile-modal-container">
+            <div className="edit-profile-navbar">
+                <div className="edit-profile-modal-nav-section">
+                    <h3 style={{color: '#989AA2', fontSize: '14px'}}>
+                        USER SETTINGS
+                    </h3>
+                    <button onClick={() => setPage('My Account')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'My Account' ? '#3F4248' : ''}}>My Account</button>
+                    <button onClick={() => setPage('Profile')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'Profile' ? '#3F4248' : '' }}>Profile</button>
                 </div>
-            </form>
-        </>
+            </div>
+            <div className="edit-profile-pages-container">
+                <div className="edit-profile-page-actual-page">
+                    {
+                        page === 'My Account' ? <EditProfileIndex user={userObj} setPage={setPage} /> : <></>
+                    }
+                </div>
+                <button onClick={closeModal} className="close-modal-button"><i class="fa-regular fa-circle-xmark fa-2xl"></i></button>
+            </div>
+
+        </div>
     )
 }
 

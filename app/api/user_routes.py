@@ -1,6 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from ..models import db, Server, Channel
 from app.models import User
+from ..forms import UpdateForm
+from .auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
 
@@ -31,3 +34,17 @@ def get_user_channels(userId):
     print('this is the user', user.servers)
     servers = user.servers
     return {"Servers": [server.to_dict() for server in servers]}
+
+@user_routes.route('/<int:id>', methods=["PUT"])
+def update_user(id):
+    user = User.query.get(id)
+    form = UpdateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user.email = form.data['email']
+        user.username = form.data['username']
+        db.session.commit()
+        print('something')
+        return user.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400

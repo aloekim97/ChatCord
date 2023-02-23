@@ -66,7 +66,7 @@ export function Modal2() {
     return ReactDOM.createPortal(
       <div id="modal2">
         <div id="modal-background2" onClick={closeModal} />
-        <div id="modal-content">
+        <div id="modal-content2">
           {modalContent}
         </div>
       </div>,
