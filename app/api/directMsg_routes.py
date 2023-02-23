@@ -27,6 +27,7 @@ def get_one_chat(chat_id):
     chat = DirectMessage.query.get(chat_id)
     return {"chat_id": chat.to_dict()}
 
+
 #see all message in dm chat
 @dm_routes.route('/<int:chat_id>/msg')
 @login_required

@@ -222,6 +222,7 @@ function ChannelIndex(){
         socket.emit("del", {messageId: messageId })
       }
 
+
     return(
         <div className="page-container">
             <div className="server-name-container">
@@ -344,7 +345,7 @@ function ChannelIndex(){
                     <div className="members-online-status">Members - {members.length}</div>
                     {
                         members && members.map(member => (
-                            <MembersDisplay member={member} server={serverObj} />
+                            <MembersDisplay member={member} server={serverObj}/>
                         ))
                     }
                 </div> }
