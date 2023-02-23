@@ -27,12 +27,27 @@ function EditProfileModal({channelId, channel}){
                     </h3>
                     <button onClick={() => setPage('My Account')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'My Account' ? '#3F4248' : ''}}>My Account</button>
                     <button onClick={() => setPage('Profile')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'Profile' ? '#3F4248' : '' }}>Profile</button>
+                    <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>
+                        Privacy & Security
+                    </button>
+                    <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>
+                        Devices
+                    </button>
+                    <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>
+                        Connections
+                    </button>
+                    <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>
+                        Friend Requests
+                    </button>
                 </div>
             </div>
             <div className="edit-profile-pages-container">
                 <div className="edit-profile-page-actual-page">
                     {
                         page === 'My Account' ? <EditProfileIndex user={userObj} setPage={setPage} /> : <></>
+                    }
+                    {
+                        page === 'Profile' ? <EditUserProfile user={userObj} setPage={setPage} /> : <></>
                     }
                 </div>
                 <button onClick={closeModal} className="close-modal-button"><i class="fa-regular fa-circle-xmark fa-2xl"></i></button>
@@ -42,4 +57,61 @@ function EditProfileModal({channelId, channel}){
     )
 }
 
+
+export function EditUserProfile({user, setPage}){
+    return(
+        <div style={{width: '100%'}}>
+            <div>Profile</div>
+            <div style={{display: 'flex'}}>
+                <div style={{display: 'flex' , width: '50%', flexDirection: 'column'}}>
+                    <div>
+                        <div>AVATAR</div>
+                        <button>Change Avatar</button>
+                    </div>
+                    <div>
+                        <div>BANNER COLOR</div>
+                        <button>Change color</button>
+                    </div>
+                    <div>
+                        <div>ABOUT ME</div>
+                        <textarea />
+                    </div>
+                </div>
+                <div style={{position: 'relative', width: '50%'}}>
+                    <div>
+                        PREVIEW
+                    </div>
+                    <img className='edit-profile-card-img' src={user.profileImg} onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}></img>
+                    <div className='edit-profile-card-banner'>
+                    </div>
+                    <div className='edit-profile-card-info-container'>
+                        <div style={{width: '100%', height: '60px'}}>
+
+                        </div>
+                        <div className="edit-profile-options-container">
+                            <div className="edit-profile-options-index">
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <div style={{color: '#B3B9BF'}}>
+                                        USERNAME
+                                    </div>
+                                    <div>
+                                        {`${user.username}#00${user.id}`}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="edit-profile-options-index">
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <div style={{color: '#B3B9BF'}}>
+                                        EMAIL
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 export default EditProfileModal
