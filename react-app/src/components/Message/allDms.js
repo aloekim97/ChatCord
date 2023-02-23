@@ -18,6 +18,19 @@ function DmBar() {
   const toggleProfileOpen = () => {
     setIsOpen(!isOpen)
 }
+useEffect(() => {
+  if (!isOpen) return;
+
+  const closeMenu = (e) => {
+      if (!ulRef.current?.contains(e.target)) {
+          setIsOpen(false);
+      }
+  };
+
+  document.addEventListener('click', closeMenu);
+
+  return () => document.removeEventListener("click", closeMenu);
+}, [isOpen]);
 
 
   useEffect(() => {
@@ -77,12 +90,12 @@ function DmBar() {
                             </div>
                         </div>
                     </div>
-                    {/* <button className='channel-edit-button2'>
+                    <button className='channel-edit-button2'>
                     <OpenModalMenuItem
                                 itemText={<i class="fa-solid fa-gear edit-gear-icon"></i>}
                                 modalComponent={<EditProfileModal />}
                     />
-                </button> */}
+                </button>
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
         </div>
         </div>
