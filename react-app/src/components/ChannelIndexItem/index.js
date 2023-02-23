@@ -50,6 +50,7 @@ function ChannelIndex(){
     const [chatInput, setChatInput] = useState("");
 
     const ulRef = useRef();
+    const profileRef = useRef();
 
     useEffect(() => {
         console.log('are u the problem?')
@@ -87,19 +88,19 @@ function ChannelIndex(){
         setDropdownOpen(true);
     }
 
-    // useEffect(() => {
-    //     if (!isOpen) return;
+    useEffect(() => {
+        if (!isOpen) return;
 
-    //     const closeMenu = (e) => {
-    //         if (!ulRef.current.contains(e.target)) {
-    //             setIsOpen(false);
-    //         }
-    //     };
+        const closeMenu = (e) => {
+            if (!profileRef.current?.contains(e.target)) {
+                setIsOpen(false);
+            }
+        };
 
-    //     document.addEventListener('click', closeMenu);
+        document.addEventListener('click', closeMenu);
 
-    //     return () => document.removeEventListener("click", closeMenu);
-    // }, [isOpen]);
+        return () => document.removeEventListener("click", closeMenu);
+    }, [isOpen]);
 
     useEffect(() => {
         if (!dropdownOpen) return;
@@ -287,8 +288,8 @@ function ChannelIndex(){
 
                 </div>
                 <div className="channels-profile-container">
-                    <div className='profile-container' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic" src="../assets/default_profile.png" alt="img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}></img>
+                    <div className='profile-container' onClick={toggleProfileOpen} ref={profileRef}>
+                        <img className="profile-pic" src={userObj.profileImg} alt="img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}></img>
                         <div className="profile-data-container">
                             <div className="prof-username">
                                 {userObj.username}

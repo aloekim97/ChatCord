@@ -11,6 +11,7 @@ function EditProfileIndex({user, setPage}){
     const [isHiddenEmail, setIsHiddenEmail] = useState(false)
     const [changeUsername, setChangeUsername] = useState(false)
     const [changeEmail, setChangeEmail] = useState(false)
+    const [changePic, setChangePic] = useState(false)
     const dispatch = useDispatch()
     let emailCheck = user.email.split('@')
     console.log(emailCheck)
@@ -44,8 +45,8 @@ function EditProfileIndex({user, setPage}){
                 <div className='edit-profile-card-info-container'>
                     <div className='edit-profile-card-info'>
                         {`${user.username}#00${user.id}`}
-                        <button onClick={() => setPage('Profile')} style={{cursor: 'pointer', padding: '5px 10px', color: '#FFFFFF',
-                        backgroundColor: '#5865F2', borderStyle: 'none'}}>Edit User Profile</button>
+                        <button disabled={true} style={{cursor: 'pointer', padding: '5px 10px', color: '#FFFFFF',
+                        backgroundColor: '#5865F2', borderStyle: 'none', cursor: 'not-allowed'}}>Edit User Profile</button>
                     </div>
                     <div className="edit-profile-options-container">
                         <div className="edit-profile-options-index">
@@ -53,7 +54,7 @@ function EditProfileIndex({user, setPage}){
                                 <div style={{color: '#B3B9BF'}}>
                                     USERNAME
                                 </div>
-                                <div>
+                                <div style={{color: '#F3F4F5'}}>
                                     {`${user.username}#00${user.id}`}
                                 </div>
                             </div>
@@ -68,7 +69,7 @@ function EditProfileIndex({user, setPage}){
                                 <div style={{color: '#B3B9BF'}}>
                                     EMAIL
                                 </div>
-                                <div>
+                                <div style={{color: '#F3F4F5'}}>
                                     { isHiddenEmail ? user.email : hiddenEmail }
                                     <button onClick={toggleHiddenEmail} className="reveal-button" style={{ fontSize: '12px', color: '#218EFC'}}>
                                        { isHiddenEmail ? 'Hide' : 'Reveal'}
@@ -81,6 +82,21 @@ function EditProfileIndex({user, setPage}){
                                 {changeEmail ? 'Cancel' : 'Edit'}
                             </button>
                         </div>
+                        <div className="edit-profile-options-index">
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <div style={{color: '#B3B9BF'}}>
+                                    AVATAR
+                                </div>
+                                <div style={{color: '#F3F4F5'}}>
+                                    Change your profile picture
+                                </div>
+                            </div>
+                            <button onClick={() => {
+                                setChangePic(!changePic)
+                            }} className="edit-profile-modal-account-buttons" style={{width: '65px', color: '#FFFFFF', backgroundColor:'#4E5058', borderStyle: 'none'}}>
+                                {changePic ? 'Cancel' : 'Edit'}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -90,6 +106,9 @@ function EditProfileIndex({user, setPage}){
             </div> : <></>}
             {changeEmail ? <div>
                 <EditUserDetails user={user} detail={user.email} tag={'Email'} close={setChangeEmail}/>
+            </div> : <></>}
+            {changePic ? <div>
+                <EditUserDetails user={user} detail={user.profileImg} tag={'Profile Image'} close={setChangePic}/>
             </div> : <></>}
         </div>
     )

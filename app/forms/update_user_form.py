@@ -28,3 +28,4 @@ class UpdateForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired(), check_password])
+    profile_img = StringField('profile_img')

@@ -69,7 +69,7 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-export const updateInfo = (email, password, username, id) => async (dispatch) => {
+export const updateInfo = (email, password, username, id, profile_img) => async (dispatch) => {
   const res = await fetch(`/api/users/${id}`,{
     method: 'PUT',
     headers: {
@@ -78,7 +78,8 @@ export const updateInfo = (email, password, username, id) => async (dispatch) =>
     body: JSON.stringify({
       username,
       email,
-      password
+      password,
+      profile_img
     }),
   })
 

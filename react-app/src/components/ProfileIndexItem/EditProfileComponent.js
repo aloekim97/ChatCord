@@ -25,8 +25,8 @@ function EditProfileModal({channelId, channel}){
                     <h3 style={{color: '#989AA2', fontSize: '14px'}}>
                         USER SETTINGS
                     </h3>
-                    <button onClick={() => setPage('My Account')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'My Account' ? '#3F4248' : ''}}>My Account</button>
-                    <button onClick={() => setPage('Profile')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'Profile' ? '#3F4248' : '' }}>Profile</button>
+                    <button onClick={() => setPage('My Account')} className="edit-profile-nav-buttons" style={{display: 'flex', backgroundColor: page === 'My Account' ? '#3F4248' : '', color: '#F3F4F5' }}>My Account</button>
+                    <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>Profile</button>
                     <button disabled={true} className="edit-profile-nav-buttons" style={{display: 'flex', cursor: 'not-allowed' }}>
                         Privacy & Security
                     </button>
@@ -47,7 +47,7 @@ function EditProfileModal({channelId, channel}){
                         page === 'My Account' ? <EditProfileIndex user={userObj} setPage={setPage} /> : <></>
                     }
                     {
-                        page === 'Profile' ? <EditUserProfile user={userObj} setPage={setPage} /> : <></>
+                        page === 'Profile ' ? <EditUserProfile user={userObj} setPage={setPage} /> : <></>
                     }
                 </div>
                 <button onClick={closeModal} className="close-modal-button"><i class="fa-regular fa-circle-xmark fa-2xl"></i></button>

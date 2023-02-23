@@ -15,7 +15,7 @@ function MessageIndex({messag, userObj, deleteMsg}){
         <div className="message-content"
         onMouseEnter={() => setIsHover(!isHover)}
         onMouseLeave={() => setIsHover(!isHover)}>
-            <img className="message-profile-pic" src={userObj.profileImg} onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}>
+            <img className="message-profile-pic" src={messag.user.profileImg} onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}>
             </img>
             <div className="message-content-container">
                 <div className="message-profile-name">

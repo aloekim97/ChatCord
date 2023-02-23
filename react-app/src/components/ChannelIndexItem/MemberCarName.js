@@ -4,10 +4,13 @@ import LogoutButton from "../auth/LogoutButton";
 
 function MemberNameCard({member}){
     const history = useHistory();
+    console.log('what memebrer aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', member)
     return (
         <div className="member-cardname-container" >
             <div className="member-card-container">
-                <img className='member-profile-card-img' src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
+                <img className='member-profile-card-img'
+                onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}
+                src={member.profileImg} alt="img"></img>
                 <div className='member-card-banner'>
                 </div>
                 <div className='member-card-info-container'>

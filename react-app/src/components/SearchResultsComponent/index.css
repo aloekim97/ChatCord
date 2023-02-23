@@ -50,6 +50,9 @@
 .search-profile-pic{
     height: auto;
     width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
     position: absolute;
     top: 20%;
     left: 5%;

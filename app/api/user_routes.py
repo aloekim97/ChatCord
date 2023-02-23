@@ -43,8 +43,8 @@ def update_user(id):
     if form.validate_on_submit():
         user.email = form.data['email']
         user.username = form.data['username']
+        user.profile_img = form.data['profile_img']
         db.session.commit()
-        print('something')
         return user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400

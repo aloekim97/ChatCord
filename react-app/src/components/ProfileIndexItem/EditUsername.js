@@ -13,7 +13,9 @@ function EditUserDetails({user, detail, tag, close}){
         e.preventDefault();
         let username = tag === 'Username'? value : user.username
         let email = tag === 'Email'? value : user.email
-        const body = await dispatch(updateInfo(email, password, username, user.id))
+        let profileImg = tag === 'Profile Image' ? value : user.profileImg
+        console.log('what is the profile img', profileImg)
+        const body = await dispatch(updateInfo(email, password, username, user.id, profileImg))
         if (body){
             console.log('what is the body', body)
             return setErrors(body)
