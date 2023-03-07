@@ -18,6 +18,19 @@ function DmBar() {
   const toggleProfileOpen = () => {
     setIsOpen(!isOpen)
 }
+useEffect(() => {
+  if (!isOpen) return;
+
+  const closeMenu = (e) => {
+      if (!ulRef.current?.contains(e.target)) {
+          setIsOpen(false);
+      }
+  };
+
+  document.addEventListener('click', closeMenu);
+
+  return () => document.removeEventListener("click", closeMenu);
+}, [isOpen]);
 
 
   useEffect(() => {
@@ -58,7 +71,7 @@ function DmBar() {
               to={`/@me/${chat.id}`}
               key={chat.id}
             >
-              <img className="dm-img" src={chat.receiveUser.profileImg} />
+              <img className="dm-img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}} src={chat.receiveUser.profileImg} />
               <div className="chat-username">{chat.receiveUser.username}</div>
             </NavLink>
           );
@@ -67,7 +80,7 @@ function DmBar() {
 
       <div className="channels-profile-container">
                     <div className='profile-container me-profile-bottom' onClick={toggleProfileOpen} ref={ulRef}>
-                        <img className="profile-pic dm-profile-pic" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
+                        <img className="profile-pic dm-profile-pic" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}src={userObj.profileImg} alt="img"></img>
                         <div className="profile-data-container">
                             <div className="prof-username">
                                 {userObj.username}
@@ -77,12 +90,12 @@ function DmBar() {
                             </div>
                         </div>
                     </div>
-                    {/* <button className='channel-edit-button2'>
+                    <button className='channel-edit-button2'>
                     <OpenModalMenuItem
                                 itemText={<i class="fa-solid fa-gear edit-gear-icon"></i>}
                                 modalComponent={<EditProfileModal />}
                     />
-                </button> */}
+                </button>
                 {isOpen ? <ProfileCard user={userObj} /> : <></> }
         </div>
         </div>

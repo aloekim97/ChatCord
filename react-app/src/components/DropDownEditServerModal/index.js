@@ -13,17 +13,43 @@ function NewEditServerModal({ serverId }) {
   const { closeModal } = useModal();
   const id = serverId;
 
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   useEffect(() => {
-    let newErrors = [];
+    (async () => {
+      let errors = [];
+      const btn = await document.getElementById("edit-server-btn-id")
 
-    if (name.length < 1)
-      newErrors.push("Server name must be at least 1 character");
-    else if (name.length > 30)
-      newErrors.push("Server name must be less than 30 characters");
+      if (name.length < 1) {
+        errors.push("Server name must be at least 1 character");
+        btn.disabled = true;
+        btn.className = "errors-btn"
+      } else if (name.length > 30) {
+        errors.push("Server name must be less than 30 characters");
+        btn.disabled = true;
+        btn.className = "errors-btn"
+      }
 
-    if (server_img.length < 5) newErrors.push("Please input valid image url");
+      if (!isValidUrl(server_img)) {
+        errors.push("Photo image url must start with https:// or http://")
+        btn.disabled = true
+        btn.className = "errors-btn"
+      }
 
-    setErrors(newErrors);
+      if (isValidUrl(server_img) && (name.length > 1 && name.length < 30)) {
+        btn.disabled = false
+        btn.className = "create-server-btn"
+      }
+
+      await setErrors(errors)
+    })();
   }, [name, server_img]);
 
   const handleSubmit = async (e) => {
@@ -92,7 +118,7 @@ function NewEditServerModal({ serverId }) {
               <div className="create-server-cancel" onClick={closeModal}>
                 Cancel
               </div>
-              <button className="create-server-btn" type="submit">
+              <button id="edit-server-btn-id" className="create-server-btn" type="submit">
                 Save
               </button>
             </div>

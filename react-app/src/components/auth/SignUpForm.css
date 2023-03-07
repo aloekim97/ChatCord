@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 500px;
-    height: 650px;
+    height: 680px;
     margin-top: 260px;
     border: 1px solid black;
     border-radius: 3%;
@@ -20,4 +20,28 @@
 .signup-form-title {
     color: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.signup-errors {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 400px;
+    height: 50px;
+}
+
+.signup-form-sub-btn-errors {
+    margin-top: 29px;
+    width: 404px;
+    height: 42px;
+    background-color: rgba(150, 150, 150, 0.459);
+    border-width: 0;
+    color: white;
+    font-size: 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: not-allowed;
 }

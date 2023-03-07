@@ -5,10 +5,10 @@ function DmBox({dm, deleteDm, user}) {
     const buttonTheme = isHover ? "delete-dm2" : "delete-dm"
     return(
         <div className="message-content"
-        onMouseEnter={() => setIsHover(!isHover)} 
+        onMouseEnter={() => setIsHover(!isHover)}
         onMouseLeave={() => setIsHover(!isHover)}>
             <div className="actual-message">
-                <img className="message-profile-pic" src={user.profileImg}>
+                <img className="message-profile-pic" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}src={user.profileImg}>
                 </img>
                 <div className="message-content-container">
                     <div className="message-profile-name">
@@ -55,7 +55,7 @@ export default DmBox
             //             setDelId(dm.id);
             //             deleteDm(delId)
             //         }}
-                        
+
             //       >
             //         Delete
             //       </button>

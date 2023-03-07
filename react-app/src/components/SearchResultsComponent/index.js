@@ -14,10 +14,11 @@ function SearchPage(){
             <div className="search-header">
                 Results
             </div>
-            <div className="search-body">
+            {
+                Object?.values(messages?.search).length < 1 ? <div className="search-no-results"> No results found</div> : <div className="search-body">
                 {Object.values(messages.search).map(item => (
                     <div className="search-message-content-container">
-                        <img className="search-profile-pic" src={item.user.profileImg}></img>
+                        <img className="search-profile-pic" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}} src={item.user.profileImg}></img>
                         <div className="search-message-name-date-container">
                             <div className="message-profile-name">
                                 <h3 className="message-content-name">
@@ -34,6 +35,8 @@ function SearchPage(){
                     </div>
                 ))}
             </div>
+            }
+
 
         </div>
     )
