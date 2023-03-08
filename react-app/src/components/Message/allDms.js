@@ -64,15 +64,15 @@ useEffect(() => {
       <div className="dm">
         {" "}
         Direct Messages
-        {Object.values(chats).map((chat) => {
+        {Object.values(chats).sort().reverse().map((chat) => {
           return (
             <NavLink
               className="single-chat"
               to={`/@me/${chat.id}`}
               key={chat.id}
             >
-              <img className="dm-img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}} src={chat.receiveUser.profileImg} />
-              <div className="chat-username">{chat.receiveUser.username}</div>
+              <img className="dm-img" onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}} src={chat.receiveUser?.profileImg} />
+              <div className="chat-username">{chat.receiveUser?.username}</div>
             </NavLink>
           );
         })}

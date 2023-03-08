@@ -6,3 +6,4 @@ from .dm_form import DmForm
 from .message_form import MessageForm
 from .search_form import SearchForm
 from .update_user_form import UpdateForm
+

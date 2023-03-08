@@ -27,10 +27,14 @@ export default function DmPage() {
   const [chatInput, setChatInput] = useState("");
   const [search, setSearch] = useState(false);
   const chat = useSelector(state => state.chats)
-  console.log(chat[chatId])
+  const chatRoom = chat[chatId]
+  const people = [chatRoom?.receiveUser.username, chatRoom?.sendUser.username]
+  const whoGets = people.filter(name => name !== user.username)
+
   // const [isHover, setIsHover] = useState(false)
 
   useEffect(() => {
+    dispatch(getChats())
     dispatch(loadTheDmsThunk(chatId));
   }, [dispatch, chatId]);
 
@@ -118,7 +122,7 @@ export default function DmPage() {
       <DmBar />
       <div className="chat-container">
       <div className="search-portion">
-        <div className="receiver">{chat[chatId]?.receiveUser.username}</div>
+        <div className="receiver">{whoGets}</div>
           {/* <form className="search-form" onSubmit={handleSearchSubmit}>
             <label className="search-label">
               <input

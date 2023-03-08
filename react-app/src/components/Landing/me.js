@@ -6,35 +6,49 @@ import noFriends from "../../assets/message-requests-img.png"
 
 import MessageRequest from '../MessageRequestPage'
 import { useEffect, useState } from 'react'
-import { NavLink, Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { getChats, newChat } from '../../store/chats'
 
 function MainPage() {
     const dispatch = useDispatch()
     const [users, setUsers] = useState([]);
     const [roomId, setRoomId] = useState(0)
+    const rooms = useSelector(state => state.chats)
+    const history = useHistory()
+    const me = useSelector(state => state.session.user.id)
+    const chats = useSelector(state => state.chats)
+    const newMade = Object.values(chats).sort().reverse()[0]?.id + 1
+    
 
     useEffect(() => {
       async function fetchData() {
         const response = await fetch('/api/users/');
         const responseData = await response.json();
-        setUsers(responseData.users);
+        const uList = responseData.users.filter(name => name.id !== me)
+        setUsers(uList);
       }
       fetchData();
     }, []);
+
   
     const getId = async (userId, e)=> {
         e.preventDefault()
-        const rooms = await fetch('/api/dm')
-        const roomsData = await rooms.json()
-        const chatArr = roomsData.chats
-        console.log(chatArr)
-        for (let i = 0; i < chatArr.length - 1; i++) {
-            if(chatArr[i].receiveUser.id === userId || chatArr[i].sendUser.id === userId) {
-                console.log(chatArr[i].id)
-                {<Redirect to={`/@me/${chatArr[i].id}`} />}
-            }                              
+        
+        const userRooms= Object.values(rooms).filter(room => room.receiver_id === userId || room.sender_id === userId)[0]
+        if (userRooms) {
+            history.push(`/@me/${userRooms.id}`) 
+        } else {
+            const info = {
+                sender_id: me,
+                receiver_id: userId
+            }
+            await dispatch(newChat(info))
+            await dispatch(getChats())
+            history.push(`/@me/${newMade}`)
         }
     }
+
+    
    
 
     const userComponents = users.map((user) => {
