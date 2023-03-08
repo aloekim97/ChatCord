@@ -76,11 +76,12 @@
     padding: 10px 0;
     color: white;
     border-top: 1px solid rgb(47,49,54);
+    align-items: center;
 }
 
 .send-msg-link{
     background-color: transparent;
-    color: wheat;
+    color: rgb(173,187,190);
     border: none
 }
 

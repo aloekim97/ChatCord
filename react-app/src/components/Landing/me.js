@@ -56,7 +56,7 @@ function MainPage() {
         <div key={user.id}>
             <div className='friend-msg'>
                 <div>{user.username}</div>
-                <button className='send-msg-link' onClick={async (e) => getId(user.id, e)}>Message</button>
+                <button className='send-msg-link' onClick={async (e) => getId(user.id, e)}><i class="fa-regular fa-envelope"></i></button>
             </div>
 
         </div>
