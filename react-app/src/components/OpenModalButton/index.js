@@ -1,5 +1,6 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
+import "./index.css";
 
 function OpenModalMenuItem({
   modalComponent, // component to render inside the modal
@@ -21,4 +22,3 @@ function OpenModalMenuItem({
 }
 
 export default OpenModalMenuItem;
-

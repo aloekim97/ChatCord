@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -12,6 +12,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.[a-zA-Z]{2,3})+$/;
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ const SignUpForm = () => {
       }
     } else if (password !== repeatPassword) {
       let errors = [];
-      errors.push("Passwords do not match. Please try again.")
+      errors.push("Passwords do not match. Please try again.");
       return setErrors(errors);
     }
   };
@@ -43,6 +44,36 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  useEffect(() => {
+    (async () => {
+      let errors = [];
+      let validUser = username.trim();
+
+      const btn = await document.getElementById("signup-form-btn-id");
+
+      if (validUser.length < 5 || validUser.length > 10)
+        errors.push("Username must be between 5 and 10 characters");
+      if (!email.match(emailFormat))
+        errors.push("Please enter a invalid email address");
+      if (password.length < 6 || password.length > 15)
+        errors.push("Password must be between 6 and 15 characters");
+      if (password !== repeatPassword)
+        errors.push("Passwords must match")
+
+      await setErrors(errors);
+
+      if (errors.length >= 1) {
+        btn.disabled = true;
+        btn.className = "signup-form-sub-btn-errors";
+      }
+
+      if (errors.length === 0) {
+        btn.disabled = false;
+        btn.className = "login-signup-form-sub-btn";
+      }
+    })();
+  }, [username, email, password, repeatPassword]);
+
   if (user) {
     return <Redirect to="/@me" />;
   }
@@ -55,7 +86,7 @@ const SignUpForm = () => {
             <h2 className="signup-form-title">Welcome to ChatCord!</h2>
             <h2 className="signup-form-title">Create an Account</h2>
           </div>
-          <div className="login-signup-errors">
+          <div className="signup-errors">
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -75,7 +106,7 @@ const SignUpForm = () => {
             <div className="login-signup-input">
               <label className="login-signup-label">EMAIL</label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 className="login-signup-text-box"
                 onChange={updateEmail}
@@ -105,7 +136,11 @@ const SignUpForm = () => {
                 required={true}
               ></input>
             </div>
-            <button className="login-signup-form-sub-btn" type="submit">
+            <button
+              id="signup-form-btn-id"
+              className="login-signup-form-sub-btn"
+              type="submit"
+            >
               Sign Up
             </button>
             <div className="login-form-register">

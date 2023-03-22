@@ -5,7 +5,9 @@ function ProfileCard({ user }) {
 
   return (
     <div className="profile-card-container">
-      <img className="profile-card-img" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-Circle-1024x1024.png" alt="img"></img>
+      <img className="profile-card-img"
+      onError={e => { e.currentTarget.src = "https://i.imgur.com/Nf1arcX.png"}}
+      src={user.profileImg} alt="img"></img>
       <div className="profile-card-banner"></div>
       <div className="profile-card-info-container">
         <div className="profile-card-info">

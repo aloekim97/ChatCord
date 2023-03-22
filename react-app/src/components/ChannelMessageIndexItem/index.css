@@ -29,10 +29,10 @@
     left: 16px;
     top: 5px;
     width: 36px;
-    height: auto;
+    height: 36px;
     cursor:pointer;
     object-fit: cover;
-    border-radius: 100px;
+    border-radius: 50%;
 }
 
 .message-content-date{

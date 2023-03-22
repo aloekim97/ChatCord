@@ -23,3 +23,25 @@
 .confirm-del-statement {
     margin-top: 5px;
 }
+
+.delete-server-btn {
+    border-radius: 4px;
+    border-width: 0;
+    color: white;
+    height: 40px;
+    width: 100px;
+    background-color: rgb(199, 197, 197);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.confirm-del-msg {
+    color: red;
+}
+
+.del-server-message {
+    display: flex;
+    flex-direction: row;
+}

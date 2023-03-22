@@ -22,9 +22,9 @@
 #modal-content {
     position: absolute;
     background-color: rgb(54,57,63);
-    width: 23%;
+    /* width: 23%; */
     /* padding: 10px; */
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 

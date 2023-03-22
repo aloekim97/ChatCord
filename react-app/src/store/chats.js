@@ -22,7 +22,7 @@ export const deleteChat = (chatId) => ({
 
 //THUNKS
 export const getChats = () => async (dispatch) => {
-    const res = await fetch('/api/dm')
+    const res = await fetch('/api/dm/')
 
     if (res.ok) {
         const chats = await res.json()
@@ -30,15 +30,11 @@ export const getChats = () => async (dispatch) => {
     }
 }
 
-export const newChat = (chatData) => async (dispatch) => {
-    const {sender_id, receiver_id} = chatData
-    const res = await fetch('/api/dm', {
+export const newChat = (info) => async (dispatch) => {
+    const res = await fetch('/api/dm/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            sender_id,
-            receiver_id
-        })
+        body: JSON.stringify(info)
     })
     if (res.ok) {
         const chat = await res.json()
@@ -70,7 +66,6 @@ const chatReducer = (state = {}, action) => {
             return newState
         }
         case CREATE_CHATS: {
-            newState = {...state}
             newState[action.newChat.id] = action.newChat
             return newState
         }
